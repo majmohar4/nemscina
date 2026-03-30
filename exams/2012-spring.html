@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Spomladanski izpitni rok 2012</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Spomladanski izpitni rok 2012
+</nav>
+
+<h1>Spomladanski izpitni rok 2012</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Spomladanski izpitni rok 2012 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>den folgenden Text. – Willkommen in Amerika</h3>
+<p><em>Lesen Sie bitte</em></p>
+<p>Alexandra Maria Lara</p>
+<p>Premiere bei 007: Marc Foster hat als erster Deutscher einen James-Bond-Film gedreht. Der Mann</p>
+<p>aus der Nähe von Ulm ist nur einer von vielen deutschsprachigen Filmleuten, die in Hollywood ihr</p>
+<p>Glück versuchen: CHRISTIANE KEDERS erzählt von Erfolgen und Misserfolgen.</p>
+<p>Die Bregenzer finden Trubel normal: Mehr als 18 000 Menschen kommen jedes Jahr zu den</p>
+<p>Bregenzer Festspielen an den Bodensee, um spektakuläre Operninszenierungen zu sehen. Im Mai</p>
+<p>2008 war die österreichische Kleinstadt aber zehn Tage lang Kulisse für ein Spektakel ganz anderer</p>
+<p>Art: die Dreharbeiten des 22. James Bond-Films, Ein Quantum Trost. Auf der großen Seebühne und</p>
+<p>im Festspielhaus jagte Daniel Craigh alias James Bond Verbrecher. Großes Kino in einer kleinen</p>
+<p>Stadt. Zahlreiche Musiker und rund 300 Filmleute kamen für die Dreharbeiten an den Bodensee. Einer</p>
+<p>der wichtigsten von ihnen: Regisseur MARC FOSTER. Der 38-Jährige ist der erste Deutsche, der</p>
+<p>einen James-Bond-Film inszeniert.</p>
+<p>Forster, der inzwischen einen Schweizer Pass besitzt, gehört zu einer neuen Generation junger</p>
+<p>Filmemacher, die aus Deutschland weggehen und den Erfolg in Hollywood suchen. Größere Budgets,</p>
+<p>höhere Gagen und ein internationales Publikum locken sie.</p>
+<p>Aber nicht alle haben so viel Erfolg wie Foster. Oliver Hirschbiegel (51) wurde als Regisseur von Der</p>
+<p>Untergang (2004) gefeiert. Der deutsche Film, der vom 12. August bis zum 8. November in</p>
+<p>St. Petersburg und München gedreht wurde, kam am 16. September 2004 in die deutschen Kinos. Für</p>
+<p>Hirschbiegel war er der Türöffner für Hollywood. 2007 drehte er mit Nicole Kidman und Daniel Craigh</p>
+<p>in den Hauptrollen seinen Film Invasion in den USA. Der Film war aber ein Misserfolg. Und</p>
+<p>Hirschbiegel? Er wollte sich nicht der Meinung der Studios unterordnen – und deshalb wollten diese</p>
+<p>nicht mehr mit ihm zusammenarbeiten.</p>
+<p>Auf den deutsch-türkischen Regisseur Mennan Yapo (42) wurden US-Produzenten durch seinen Film</p>
+<p>Lautlos aufmerksam. Er wurde eingeladen, 2007 das US-Drama Die Vorahnung mit Sandra Bullock zu</p>
+<p>drehen. Die Studio-Chefs: „Du hast mit Lautlos für drei Millionen einen Film gemacht, der wie einer für</p>
+<p>20 Millionen aussah. Nun geben wir dir 20 Millionen und erwarten einen Film, der nach 50 Millionen</p>
+<p>aussieht.“</p>
+<p>Attraktiv ist Hollywood auch für die deutschen Schauspieler. Zu der jungen Generation der in</p>
+<p>Hollywood arbeitenden deutschen Schauspieler gehört ALEXANDRA MARIA LARA. Sie ist</p>
+<p>Deutschlands neuester und umstrittenster Hollywood-Export. Kritiker meinen, sie hat keine</p>
+<p>Ausstrahlung, aber ihre Fans sind begeistert von ihrem Charme und Talent. Seit ihrer Rolle als Traudl</p>
+<p>Junge in Hirschbiegels Untergang wollen amerikanische Regisseure die schöne Berlinerin haben. „Es</p>
+<p>ist gerade eine gute, chancenreiche Zeit für deutsche Schauspieler“, meint die 29-Jährige. Sie vertraut</p>
+<p>auf das Leben: „Es lässt sich nicht planen, ob man weiterhin international Glück hat oder nicht.“</p>
+<p>Planen lässt sich in Hollywood wenig. Das hat schon Bodybuilder und Ex-Terminator Arnold</p>
+<p>Schwarzenegger gezeigt. Seine Hollywood-Karriere endete in Sacramento: Der Österreicher wurde</p>
+<p>Gouverneur von Kalifornien.</p>
+<p>(Nach Deutsch perfekt, 11/2008)</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+<p class="aufgabe-instruction">Markieren Sie den Buchstaben der richtigen Antwort.</p>
+<div class="question-item"><span class="q-num">1.</span> Der 22. James-Bond-Film wurde A wie eine spektakuläre Oper gedreht. B in Bregenz gedreht. C in weniger als zehn Tagen gedreht.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Der Regisseur Marc Foster kommt aus A Bregenz. B Deutschland. C Hollywood.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Marc Foster will in Hollywood A interessante Filme machen. B junge deutsche Filmemacher treffen. C mehr Geld mit Filmen verdienen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Nach dem Film Invasion war Hirschbiegel in Hollywood A ein gefragter deutscher Regisseur. B ein nicht sehr gefragter deutscher Regisseur. C mit der Meinung der Studios einverstanden.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Alexandra Maria Lara meint, dass deutsche Schauspieler A international sehr erfolgreich sind. B nicht so viele Möglichkeiten haben. C zurzeit viele Möglichkeiten haben.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Alexandra Maria Lara hat A eine schöne Berlinerin gespielt. B in Untergang Traudl Junge gespielt. C vor vielen Jahren in Hollywood gespielt.</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2012-Spo-0">
+    <h4>Rešitve – Aufgabe 1</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">B</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">B</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">C</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">B</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">C</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">B</span></div>
+  </div>
+</div>
+</div>
+<div class="text-block">
+<h3>den folgenden Text. – Deutschlandreise</h3>
+<p><em>Lesen Sie bitte</em></p>
+<p>Die schönsten Reiseziele im Süden</p>
+<p>Deutschlands</p>
+<p>München</p>
+<p>Für ihre Freude am Reisen sind die deutschen Herrenchiemsee, auf der König Ludwig II. 1878</p>
+<p>berühmt. Jetzt entdecken viele das eigene sein Schloss Herrenchiemsee nach dem</p>
+<p>Land wieder neu: Das Meer im Norden, die Vorbild von Versailles bauen ließ. Bei einer</p>
+<p>Berge im Süden und viele interessante Ziele Besichtigung sieht man die prunkvollen Räume</p>
+<p>dazwischen. Wir präsentieren die liebsten des Königs und den berühmten Spiegelsaal.</p>
+<p>Reiseziele der Deutschen. Vielleicht sind Das bekannteste der Ludwig-Schlösser liegt im</p>
+<p>manche davon auch bald ihre Lieblingsziele? Südwesten Bayerns: Schloss Neuschwanstein</p>
+<p>im Allgäu ist ein Muss für jeden Besucher der</p>
+<p>Bayern ist das Top-Reiseziel der Deutschen. Region.</p>
+<p>Wenn sie im eigenen Land Urlaub machen,</p>
+<p>dann am liebsten im Südosten. Kein Wunder, Tipp für Familien: Ferien auf dem Bauernhof</p>
+<p>denn Bayern hat eine besondere Landschaft im Allgäu. Auf 570 Bauernhöfen in der Region</p>
+<p>zu bieten: Wiesen und Wälder, kleine Hügel, können die Kinder mit Tieren und im Heu</p>
+<p>große Berge und viele Seen. Die Region spielen und Traktor fahren lernen, während die</p>
+<p>eignet sich deshalb besonders für Bergfreunde Eltern die Landschaft genießen und sich</p>
+<p>und Wassersportler. erholen.</p>
+<p>Der berühmteste See ist der Königssee mit Aber auch ein Ausflug in eine der bayerischen</p>
+<p>seinem Wahrzeichen, der kleinen Kirche Städte lohnt sich. Auf keinen Fall sollten Sie</p>
+<p>Bartolomä. Der See liegt im 210 die Landeshauptstadt München auslassen. Sie</p>
+<p>Quadratkilometer großen Nationalpark bietet Attraktionen wie den Viktualienmarkt, die</p>
+<p>Berchtesgaden, wo die Natur besonders Frauenkirche, viele bekannte Museen und</p>
+<p>geschützt wird. Von Mai bis Oktober werden Sportgeschichte im Olympiapark. Eine</p>
+<p>Wanderungen angeboten, auf denen man bayerische Besonderheit sind die Biergärten –</p>
+<p>seltene Vogelarten und Pflanzen entdecken in München gibt es mehr als 30 und natürlich</p>
+<p>kann. Wer höher hinauf will, steigt auf den das Hofbräuhaus, wo Touristen, aber auch</p>
+<p>2713 Meter hohen Watzmann. Ein gut viele Münchener gerne gemütlich beim Bier</p>
+<p>ausgebautes Netz von Wanderwegen bietet sitzen. Die weltweit größte Orgel in einer</p>
+<p>aber auch weniger ambitionierten Wanderern katholischen Kirche kann man in Passau</p>
+<p>viele Möglichkeiten. Wer sich gar nicht sehen und hören, noch schöner als Passau</p>
+<p>anstrengen will, fährt mit der Seilbahn auf den sind jedoch die historischen Stadtzentren von</p>
+<p>Jenner (1874 Meter) und hat oben eine Regensburg und Bamberg.</p>
+<p>grandiose Aussicht auf den Königssee und die</p>
+<p>Berge. Viele sehen in den bayerischen Traditionen</p>
+<p>das Klischeebild Deutschlands. Wer aber nach</p>
+<p>Luftmatratzen und Schlauchboote sind im Bayern reist, um sein Deutsch zu verbessern,</p>
+<p>Königssee verboten. Anders als im muss wissen: Besonders auf dem Land</p>
+<p>Starnberger See und in dem kleinen sprechen die meisten Menschen Dialekt – und</p>
+<p>Wörthersee, die zum Baden und Paddeln der ist auch für Menschen aus dem Rest</p>
+<p>einladen. Der Chiemsee, auch „das bayerische Deutschlands schwer zu verstehen.</p>
+<p>Meer“ genannt, ist der größte See in Bayern.</p>
+<p>Bei gutem Wind, und den gibt es oft, ist er voll (Nach Deutsch perfekt, 4/2010)</p>
+<p>von Segelbooten. Mitten im See liegt die Insel</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die folgenden Fragen. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Für welche Touristen ist die bayerische Landschaft besonders geeignet? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Was ist das Symbol vom Königssee? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Wie kann man auf den Jenner fahren? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Was kann man vom Jenner sehen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Warum sind Ferien auf dem Bauernhof für Erwachsene empfehlenswert? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Welche bayerische Stadt sollte man sich unbedingt ansehen? ___</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2012-Spo-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">für Bergfreunde und Wassersportler</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">die (kleine) Kirche Bartolomä</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">mit der Seilbahn</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">den Königssee (und die Berge)</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">Sie können die Landschaft genießen (und sich</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">München</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Ergänzen Sie die Sätze. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Auf den Wanderungen im Nationalpark Berchtesgaden kann man nicht sehr häufige ___ sehen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Auf den überall gelegenen ___ können auch nicht sehr gute Wanderer Ausflüge machen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Wenn es windig ist, fahren im Chiemsee viele ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Beim Bau des Schlosses Herrenchiemsee orientierte sich König Ludwig II nach ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Besonders bekannt und sehenswert im Schloss ist der ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Sowohl die Touristen als auch die Deutschen haben Schwierigkeiten mit dem bayerischen ___.</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2012-Spo-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">Vogelarten (und Pflanzen)</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">Wanderwegen</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">Segelboote</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">(dem Vorbild von) Versailles</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">Spiegelsaal</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">Dialekt</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

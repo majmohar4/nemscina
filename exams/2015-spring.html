@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Spomladanski izpitni rok 2015</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Spomladanski izpitni rok 2015
+</nav>
+
+<h1>Spomladanski izpitni rok 2015</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Spomladanski izpitni rok 2015 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>Leipzig: die unbekannte Schönheit</h3>
+<p><em>Lesen Sie.</em></p>
+<p>In den letzten Jahren sind kulturelle Tradition und pulsierendes Nachtleben in Leipzig zu einem</p>
+<p>spannenden Mix verschmolzen.</p>
+<p>Trotz der Größe der Stadt und den mehr als einer halben</p>
+<p>Million Einwohnern gibt es in Leipzig nur eine offizielle</p>
+<p>Jugendherberge: Die Jugendherberge Leipzig International</p>
+<p>befindet sich, rund vier Kilometer vom Hauptbahnhof</p>
+<p>entfernt, im Nordosten der Stadt. Wer sich den Fußweg</p>
+<p>sparen möchte, steigt einfach in die Straßenbahn 1 oder</p>
+<p>1E bis zur Löbauer Straße und ist in etwas mehr als zehn</p>
+<p>Minuten am Ziel. Von dort aus kann der Leipzig-Trip gleich</p>
+<p>richtig losgehen.</p>
+<p>Das Erlebnis Leipzig fängt – zumindest für Bahnreisende –</p>
+<p>schon am beeindruckenden Hauptbahnhof an. Der</p>
+<p>Bahnhof ist nämlich weniger ein Verkehrsknotenpunkt mit verschiedenen Geschäften, wie man es aus</p>
+<p>vielen anderen Städten kennt, sondern mehr ein modernes Einkaufszentrum mit Gleisen. Das macht</p>
+<p>den Leipziger Bahnhof nicht nur zum größten Kopfbahnhof Europas, sondern auch zu einem der</p>
+<p>schönsten in ganz Deutschland.</p>
+<p>Was man in Leipzig auf alle Fälle gesehen haben sollte, ist das Wahrzeichen der Stadt und</p>
+<p>gleichzeitig auch eine der ältesten Sehenswürdigkeiten. Es handelt sich um das</p>
+<p>Völkerschlachtdenkmal, ein imposantes Monument, das in der Prager Straße liegt und an die erste</p>
+<p>große Massenschlacht der Menschheitsgeschichte, in deren Folge über 100.000 Menschen ihr Leben</p>
+<p>verloren, erinnert. 2013 feiert das Völkerschlachtdenkmal sein 100-jähriges Bestehen und gehört</p>
+<p>längst zu den wichtigsten Touristen-Magneten.</p>
+<p>Ein weiterer faszinierender Ort ist das Panometer: Von einer Plattform in etwa sechs Metern Höhe</p>
+<p>erlebt man inmitten eines 360-Grad-Panoramas einen ganzen Tag im Regenwald Amazoniens – und</p>
+<p>zwar in wenigen Minuten. Vom Sonnenaufgang mit morgendlichem Vogelgezwitscher bis in die späten</p>
+<p>Abendstunden mit dem passenden Tropengewitter inklusive ist das Panometer ein Abenteuer für alle</p>
+<p>Sinne. Übrigens: Mit einer Höhe von 30 Metern sowie einer Länge von über 100 Metern gehört das</p>
+<p>Panoramabild in Originalgröße zu den größten Installationen der Welt.</p>
+<p>Wer es kultureller mag...</p>
+<p>...wird Leipzig lieben (lernen). Die bekannteste Gaststätte der Stadt, Auerbachs Keller, verdankt ihren</p>
+<p>Ruhm keinem geringeren als Johann Wolfgang von Goethe. Während seines Studiums verweilte der</p>
+<p>junge Dichter oft hier und widmete Auerbachs Keller sogar die gleichnamige Szene in seinem</p>
+<p>berühmten Werk „Faust”. Doch nicht nur Goethe hinterließ seine Spuren in Leipzig: Fast 30 Jahre lang</p>
+<p>– bis zu seinem Tode 1750 – lebte hier der Komponist Johann Sebastian Bach. Daher ist ihm nicht</p>
+<p>nur das Denkmal vor der Thomaskirche gewidmet, sondern auch das jährliche Bachfest sowie das</p>
+<p>Bach-Museum. Wer sich mehr für die Geschichte der Stadt begeistert, sollte ins Stadtgeschichtliche</p>
+<p>Museum gehen. Das im Alten Rathaus untergebrachte Archiv widmet sich der Stadtwerdung Leipzigs</p>
+<p>vom frühen Mittelalter bis zur Gegenwart. Bücherwürmer werden sich in der Deutschen</p>
+<p>Nationalbibliothek wohlfühlen, denn das nationalbibliografische Zentrum ist Nationalbücherei und</p>
+<p>größte deutsche Universalbibliothek in einem.</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+<p class="aufgabe-instruction">Entscheiden Sie, ob folgende Behauptungen richtig (R) oder falsch (F) sind, und markieren Sie
+jeweils den entsprechenden Buchstaben ().</p>
+<div class="question-item"><span class="q-num">1.</span> Die Jugendherberge Leipzig liegt direkt am Hauptbahnhof.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Die Jugendherberge ist nur zu Fuß erreichbar.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Der Leipziger Hauptbahnhof gehört zu den schönsten in Deutschland.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Das Wahrzeichen der Stadt ist ein imposantes historisches Gebäude.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Im Panometer kann man in kurzer Zeit einen Tag im Regenwald erleben.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Als Goethe jung war, war er oft zu Gast im Auerbachs Keller. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2015-Spo-0">
+    <h4>Rešitve – Aufgabe 1</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">R</span></div>
+  </div>
+</div>
+</div>
+<div class="text-block">
+<h3>Elena Peter kommt ursprünglich aus Russland und ist seit kurzem mit einem</h3>
+<p><em>Lesen Sie.</em></p>
+<p>Deutschen in der Nähe von Stuttgart verheiratet. In einem Brief an ihre russische</p>
+<p>Freundin Irina erzählt sie über das Leben in Deutschland.</p>
+<p>Immer diese Werbung!</p>
+<p>Liebe Irina,</p>
+<p>ich habe mich sehr gefreut, von dir zu hören! Als ich heute die Post aus meinem Briefkasten holte, war</p>
+<p>viel Werbung dabei, und ich habe deinen Brief nicht gleich gefunden. Kein Wunder! Heute ist doch</p>
+<p>Donnerstag und an diesem Tag bekommen wir immer viel Reklame und kostenlose Zeitungen. Die</p>
+<p>Firmen versuchen auf diese Weise, ihre Produkte besser zu verkaufen. Eine noch größere „Werbeflut&quot;</p>
+<p>kommt am Wochenende. So verbringen wir manche Abende damit, diese Zettel durchzusehen und die</p>
+<p>Preise zu vergleichen. Ich habe einmal die Werbung von einer Woche gesammelt und dann gewogen.</p>
+<p>Stell dir vor, es kamen mehr als zwei Kilo Papier zusammen! Die meisten Menschen finden das lästig</p>
+<p>und kleben auf ihre Briefkästen ein Schild: „Bitte keine Werbung&quot;. Das wird jedoch nicht immer</p>
+<p>beachtet. In Deutschland tragen viele Schüler Werbung aus, um mehr Taschengeld zu haben. Die</p>
+<p>Firmen bezahlen dann für jedes in den Briefkasten gesteckte Werbeblatt. Wie du dir vorstellen kannst,</p>
+<p>wollen die Austräger so viel wie möglich in die Briefkästen stecken!</p>
+<p>Es wundert dich vielleicht, aber der Briefkasten ist bei uns jeden Tag voll, auch wenn wir keine</p>
+<p>persönlichen Briefe erhalten. Es kommt oft Post von Banken, Versicherungen und Behörden.</p>
+<p>Es gibt auch viel Betrug. Von den Firmen werden alle möglichen Tricks angewandt, um neue Kunden</p>
+<p>zu werben. Gestern kam ein Brief von der Lotterie. Dort stand, dass nur ich in meiner Stadt</p>
+<p>ausgewählt wurde, an einem Gewinnspiel teilzunehmen. Zuerst fühlte ich mich sehr geehrt, bis ich</p>
+<p>erfuhr, dass auch unsere Nachbarn im Haus diese „seltene&quot; Möglichkeit hatten.</p>
+<p>Irina, ich bin sehr traurig, dass die Karte zu Deinem Geburtstag nicht angekommen ist. Aber das</p>
+<p>dürfte nicht an der Deutschen Post gelegen haben. In Deutschland gehen Briefe selten verloren. Die</p>
+<p>Deutsche Post verspricht sogar, dass fast alle Briefe, die innerhalb von Deutschland verschickt</p>
+<p>werden, schon am nächsten Tag ankommen.</p>
+<p>Dieses Jahr wurde das Porto für Briefe ein wenig günstiger. Ich finde es auch interessant, dass ich für</p>
+<p>einen Standardbrief per Luftpost nach Sankt Petersburg dasselbe Porto bezahle wie für einen Brief</p>
+<p>nach Stuttgart. Ansonsten gilt: Je schwerer und größer eine Sendung ist, desto höher ist das Porto.</p>
+<p>In fast jedem Ort gibt es ein Postamt. In kleinen Orten ist die Post oft in einem Lebensmittel- oder</p>
+<p>Schreibwarengeschäft untergebracht. So spart die Post Personalkosten. Wenn die Kunden Briefe,</p>
+<p>Pakete, Päckchen oder Telegramme aufgeben oder Briefmarken kaufen, können sie gleichzeitig</p>
+<p>andere Einkäufe erledigen. Irina, ich freue mich sehr auf deinen nächsten Brief und bin gespannt, wie</p>
+<p>es dir geht.</p>
+<p>Herzliche Grüße,</p>
+<p>deine Elena</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die folgenden Fragen. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Wann bekommt Elena die meiste Werbung in den Briefkasten? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Wie kann man verhindern, so viel Werbung zu bekommen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Warum beschäftigen sich die deutschen Schüler mit dem Austragen von Zeitungen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Was geschah mit Irinas Geburtstagskarte? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Welche Briefe liefert die Deutsche Post bereits am kommenden Tag? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Was passierte dieses Jahr mit den Preisen für Briefsendungen? ___ (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2015-Spo-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">Am Wochenende.</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">Man klebt ein besonderes Schild auf den</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">Um mehr Taschengeld zu verdienen.</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">Sie ist nicht angekommen.</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">Briefe, die innerhalb von Deutschland</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">Sie wurden (ein wenig) günstiger.</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Ergänzen Sie die Sätze. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Aufgrund der Werbung können sich die Deutschen über die Preise informieren und sie auch ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Wöchentlich bekommen die Deutschen Werbematerial im Gewicht von ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Elena bekommt in den Briefkasten sowohl ___ Briefe als auch Post von verschiedenen Institutionen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Die Lotterie forderte Elena auf, bei einem ___ mitzumachen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Bei der Deutschen Bundespost passiert es nicht sehr oft, dass Briefe ___ werden.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Wenn der Ort sehr klein ist, kann es sein, dass sich die Post in einem ___ befindet. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2015-Spo-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">vergleichen</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">mehr als zwei Kilo</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">persönliche</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">Gewinnspiel</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">verloren</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans"> Lebensmittel- oder Schreibwarengeschäft</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

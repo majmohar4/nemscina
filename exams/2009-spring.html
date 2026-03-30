@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Spomladanski izpitni rok 2009</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Spomladanski izpitni rok 2009
+</nav>
+
+<h1>Spomladanski izpitni rok 2009</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Spomladanski izpitni rok 2009 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>Integration gelungen? – Deutschkurse in Deutschland</h3>
+<p><em>Lesen Sie bitte.</em></p>
+<p>Seit zwei Jahren gibt es in Deutschland Integrationskurse. Die Integrationskurse richten sich an neue</p>
+<p>Immigranten, Flüchtlinge ebenso wie an Ausländer, die schon länger legal in Deutschland leben und</p>
+<p>nicht gut genug Deutsch sprechen. Diese Leute haben ein Recht auf – und in bestimmten Fällen auch</p>
+<p>die Pflicht zur – Teilnahme am Kurs. Damit wurde ein völlig neues Modell staatlicher Integration</p>
+<p>eingeführt. Der Kurs besteht aus 600 Stunden Deutschunterricht und 30 Stunden, in denen die</p>
+<p>Teilnehmer das Wichtigste über die deutsche Geschichte, Kultur und Rechtsordnung lernen.</p>
+<p>Der Teilnehmer bezahlt in der Regel 1 Euro pro Stunde. Die Schulen bekommen 2,5 Euro pro Stunde</p>
+<p>und pro Teilnehmer, weil auch der Staat finanzielle Hilfe leistet.</p>
+<p>Albert Schmidt ist Vorsitzender des Bundesamts für Migration und Flüchtlinge. Das Amt ist</p>
+<p>verantwortlich für die Inhalte und die Koordination der Integrationskurse.</p>
+<p>Albert Schmidt: &quot;Aus unserer Sicht sind die Kurse ein voller Erfolg. Inzwischen haben sich mehr als</p>
+<p>300 000 Personen angemeldet. Dabei sind zwei Aspekte besonders positiv. Zum einen hat sich die</p>
+<p>Mehrheit der Teilnehmer freiwillig angemeldet. Zum anderen sind 63 Prozent der Teilnehmer Frauen.</p>
+<p>Dies ist eine wichtige Gruppe, die wir erreichen wollten – und erreicht haben. Der Unterricht wird an</p>
+<p>Schulen organisiert, es werden Gruppen mit bis zu 25 Schülern gebildet.&quot;</p>
+<p>Nach 600 Stunden Deutschunterricht sind die Absolventen in der Lage, sich auf Deutsch verständlich</p>
+<p>zu machen und sich im Alltag selbstständig zurechtzufinden. Der Kurs endet mit einer Prüfung, die</p>
+<p>jedoch nicht Pflicht ist. 71 Prozent der Prüfungsteilnehmer haben bisher bestanden und das Zertifikat</p>
+<p>Deutsch erreicht. Positive Erfahrungen haben wir auch damit gemacht, dass Menschen</p>
+<p>unterschiedlicher Herkunft gemeinsam Deutsch lernen.</p>
+<p>Ernst Küchler ist Vorsitzender des Deutschen Volkshochschul-Verbands. Diese Organisation bietet</p>
+<p>jeden dritten Integrationskurs an.</p>
+<p>Ernst Küchler: &quot;Die Schulen bekommen für jeden Teilnehmer 2,05 Euro pro Unterrichtsstunde. Davon</p>
+<p>müssen sie die Lehrer bezahlen, die Räume, die Ausstattung (zum Beispiel Kassettenrekorder) und</p>
+<p>die Verwaltung der Kurse. Bis zu 25 Teilnehmer dürfen in einer Gruppe sein, das ist zu viel für guten</p>
+<p>Unterricht. Trotzdem reicht das Geld nicht aus. Natürlich ist es gut, dass es jetzt in Deutschland</p>
+<p>Integrationskurse gibt. Wir haben gute Ergebnisse damit erzielt. Sehr viele Kursteilnehmer haben</p>
+<p>ausgezeichnet Deutsch gelernt, aber für einige ist das wieder nicht so leicht. Sie sollen in 600</p>
+<p>Unterrichtsstunden so viel Deutsch lernen, dass sie die Prüfung zum Zertifikat Deutsch bestehen</p>
+<p>können. Viele Teilnehmer, die in ihrer Heimat nicht so lange zur Schule gegangen sind und Deutsch</p>
+<p>nicht als Fremdsprache gelernt haben, schaffen das nicht. Auch diejenigen, die zuerst lesen und</p>
+<p>schreiben lernen müssen, schaffen das Ziel nicht.&quot;</p>
+<p>Die Integrationskurse könnten eine wirklich gute Sache werden, wenn die Teilnehmer bei Bedarf mehr</p>
+<p>Stunden zum Deutschlernen bekommen würden und die Schulen mehr Geld.</p>
+<p>Albert Schmidt: &quot;Sicherlich lässt sich das System noch verbessern. Deshalb werden die Kurse von</p>
+<p>einer unabhängigen Firma untersucht. Alle Beteiligten können sich zu Wort melden. Danach</p>
+<p>entscheiden wir, wie es weitergeht.&quot;</p>
+<p>(Nach DEUTSCH perfekt, Januar 2007)</p>
+<p>M091-251-1-1 3</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+<p class="aufgabe-instruction">Markieren Sie den Buchstaben mit der richtigen Lösung.</p>
+<div class="question-item"><span class="q-num">1.</span> Die Intergrationskurse sind für (1) a) Immigranten und Flüchtlinge. b) Immigranten, Flüchtlinge und Ausländer. c) Deutsche.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Die Integrationskurse (1) a) sind für die Teilnehmer kostenlos. b) werden von Teilnehmern und vom Staat finanziert. c) bekommen Geld von den Schulen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Die meisten Teilnehmer (1) a) sind Männer. b) sind verpflichtet, am Kurs teilzunehmen. c) haben sich freiwillig angemeldet.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Der Unterricht verläuft in Gruppen von (1) a) genau 25 Schülern. b) mehr als 25 Schülern. c) nicht mehr als 25 Schülern.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Am Ende des Kurses (1) a) muss man eine Prüfung machen. b) kann man eine Prüfung machen. c) können 71 Prozent der Teilnehmer nicht gut Deutsch sprechen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Ernst Küchler sagt, (1) a) dass die Kurse ein voller Erfolg sind. b) dass es bei der Organisation der Kurse Geldschwierigkeiten gibt. c) dass die Kurse keine positiven Resultate gebracht haben.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">7.</span> Viele Teilnehmer schaffen die Prüfung Zertifikat Deutsch nicht, (1) a) weil sie zuerst noch lesen und schreiben lernen müssen. b) weil sie in ihrer Heimat noch keine Fremdsprache gelernt haben. c) weil sie lange in ihrer Heimat zur Schule gegangen sind.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">8.</span> Die Kursveranstalter wollen in Zukunft (1) a) noch mehr Kursteilnehmer. b) ähnliche Kurse in anderen Firmen untersuchen. c) die Organisation verbessern. 4 M091-251-1-1</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2009-Spo-0">
+    <h4>Rešitve – Aufgabe 1</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">B</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">B</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">C</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">C</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">B</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">B</span></div>
+<div class="solution-row"><span class="sol-num">7.</span><span class="sol-ans">A</span></div>
+<div class="solution-row"><span class="sol-num">8.</span><span class="sol-ans">C</span></div>
+  </div>
+</div>
+</div>
+<div class="text-block">
+<h3>Singen wie die Popstars – Musikunterricht in Dortmund</h3>
+<p><em>Lesen Sie bitte.</em></p>
+<p>Freitag 12.45 Uhr, Anne-Frank-Gesamtschule in Dortmund. Wir sind in einem großen Musikraum, am</p>
+<p>Zimmerende befindet sich die große Bühne, auf der ein riesiges Schlagzeug aufgebaut ist. Davor</p>
+<p>steht ein großes Klavier und in der Ecke eine Musikanlage. Die Musiklehrerin Antje Rupert ist gerade</p>
+<p>dabei, einen passenden Song für ihre vier Schülerinnen herauszusuchen. Hier singen die Mädchen</p>
+<p>bekannte Songs der ganz großen Popstars. Das Repertoire geht von The Pussycat Dolls über</p>
+<p>Christina Aguilera, Destiny&#x27;s Child bis zu Justin Timberlake.</p>
+<p>Die Mädchen sind ganz aufgeregt und tanzen beim ersten Takt mit. Alle Mädchen kommen freiwillig</p>
+<p>hierher, aber mit einem Hintergedanken: Sie wollen alle ein Star werden. Lehrerin Antje Rupert sieht</p>
+<p>das mit dem großen Erfolg sehr realistisch: &quot;Also, die Mädchen singen für ihr Leben gern, das merkt</p>
+<p>man. Das Problem ist nur, dass ihnen durch Sendungen wie zum Beispiel Popstars suggeriert wird,</p>
+<p>sie müssten nur gut aussehen und ein bisschen singen können und dann sind sie direkt Stars. Und</p>
+<p>das ist auch alles ganz einfach und das Leben als Star macht großen Spaß. Die Mädchen haben</p>
+<p>überhaupt keine Vorstellung davon, wie hart die Arbeit eines Popstars ist.&quot;</p>
+<p>Singen heißt hart trainieren</p>
+<p>Die Lehrerin bemüht sich, das Beste aus den Mädchen herauszuholen. Aber hier wird nicht einfach</p>
+<p>losgesungen, sondern trainiert – und zwar die Stimme, denn eine gute und kraftvolle Stimme ist die</p>
+<p>Basis für ein gutes Singen. &quot;Das klappt auch sehr gut,&quot; erzählt Antje Rupert, &quot;was aber immer noch</p>
+<p>schwierig ist, sind die As, Es und Cs. Die bereiten den Mädchen Probleme und auch bei der</p>
+<p>Atemtechnik schalten sie schnell ab, deshalb machen wir das immer am Ende. Was aber immer gut</p>
+<p>funktioniert, ist das Singen eines konkreten Liedes.&quot; Los geht der Gesangunterricht mit Say My Name</p>
+<p>von Destiny&#x27;s Child. Weil das kein Problem für die Schülerinnen ist, muss ihnen die Lehrerin etwas</p>
+<p>Schwierigeres geben: Fallin&#x27; von Alicia Keys.</p>
+<p>Musik macht stark</p>
+<p>Den Song hat die 14-jährige Katharina vor 800 Leuten auf dem Schulfest gesungen. Sie ist sehr stolz</p>
+<p>darauf, dass sie auch die hohen Töne getroffen hat. Bei Jutta, 14, leuchten die Augen, als sie von</p>
+<p>ihrem Auftritt erzählt. Sie hat den Titanic-Song von Celine Dion gesungen und bevor sie fertig war,</p>
+<p>begann das Publikum zu klatschen.</p>
+<p>Marie, 14, ist die Schüchternste. Auch sie ist aufgetreten und ist seitdem selbstbewusster und</p>
+<p>motivierter geworden. &quot;Ich bin jetzt offener geworden und rede mit mehr Mitschülern und Lehrern.</p>
+<p>Außerdem bin ich in den anderen Fächern jetzt motivierter als vorher.&quot; Patricia ist mit ihren zwölf</p>
+<p>Jahren die Jüngste in der Gruppe. Der Auftritt vor 800 Leuten fiel ihr schwer, weil sie noch nicht von</p>
+<p>sich überzeugt war. Sie zweifelt, ob alle begeistert von ihrer Gesangsleistung gewesen sind: &quot;Das ist</p>
+<p>aber nicht schlimm,&quot; sagt Patricia, &quot;das gehört ja dazu, dass manche es toll finden und andere</p>
+<p>weniger gut. Ich mache auf jeden Fall weiter!&quot; Antje Rupert erzählt, dass Musik an der Schule enorm</p>
+<p>wichtig ist. Sie sagt: &quot;Der Musikunterricht ist eine wichtige Alternative zum Unterricht, wo man sitzen</p>
+<p>und zuhören muss und alles über den Kopf läuft.&quot;</p>
+<p>An der Anne-Frank-Gesamtschule ist Musik das Gesprächsthema Nummer eins. Die Schüler können</p>
+<p>hier ihre Persönlichkeit zeigen, sie sind auf einmal viel ehrgeiziger als sonst. Hier ist eigene Motivation</p>
+<p>da und durch die Auftritte sammeln sie Erfolgserlebnisse, die wichtig für ihr Selbstbewusstsein sind.</p>
+<p>Durch Performance auf dem Schulfest sind alle über sich selbst hinausgewachsen. Und es gibt</p>
+<p>demnächst noch mehr an der Anne-Frank-Gesamtschule: Das nächste große Projekt steht schon an:</p>
+<p>ein Video.</p>
+<p>(Nach www.einslive.de, Januar 2007)</p>
+<p>M091-251-1-1 5</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die folgenden Fragen. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">9.</span> Was für Lieder singt man im Musikunterricht an der Anne-Frank-Gesamtschule? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">10.</span> Warum kommen die vier Mädchen zum Musikunterricht? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">11.</span> Welche Vorstellung haben die Mädchen von einem großen Musik-Star? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">12.</span> Was macht den Mädchen bei den Singübungen Schwierigkeiten? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">13.</span> Womit haben sie beim Gesangunterricht keine Probleme? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">14.</span> Welche Wirkung hat das Singen auf den Charakter der Mädchen? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">15.</span> Wie hat das Singen die Schulleistungen von Marie verändert? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">16.</span> Welche Pläne im Zusammenhang mit dem Singen hat Patricia für die Zukunft? (1) ___ 6 M091-251-1-1</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2009-Spo-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">9.</span><span class="sol-ans">bekannte Songs/Lieder (der ganz großen Popstars)</span></div>
+<div class="solution-row"><span class="sol-num">10.</span><span class="sol-ans">Sie wollen ein Star werden.</span></div>
+<div class="solution-row"><span class="sol-num">11.</span><span class="sol-ans">Er muss gut aussehen und ein bisschen singen können.</span></div>
+<div class="solution-row"><span class="sol-num">12.</span><span class="sol-ans">die As, Es uns Cs / die Atemtechnik</span></div>
+<div class="solution-row"><span class="sol-num">13.</span><span class="sol-ans">mit dem Singen eines konkreten Liedes</span></div>
+<div class="solution-row"><span class="sol-num">14.</span><span class="sol-ans">Sie sind selbstbewusster/offener/ehrgeiziger geworden. /</span></div>
+<div class="solution-row"><span class="sol-num">15.</span><span class="sol-ans">Sie ist in anderen Fächern motivierter geworden.</span></div>
+<div class="solution-row"><span class="sol-num">16.</span><span class="sol-ans">Sie macht weiter.</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Ergänzen Sie die Sätze. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">17.</span> An der Anne-Frank-___ in Dortmund ist der Musikunterricht (1) anders.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">18.</span> Die Lehrerin, Frau Antje Rupert, steht vor dem großen Klavier im Musikzimmer und (1) ___ ein passendes Lied für ihre Schülerinnen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">19.</span> Die Lehrerin ist realistischer als die Mädchen. Sie meint: &quot;Das Leben eines Popstars ist (1) nicht nur großer Spaß, es kann auch sehr ___ sein&quot;.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">20.</span> Wer gut singen will, muss zuerst seine ___ trainieren. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">21.</span> Vor dem großen Auftritt war Marie als Person sehr ___. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">22.</span> Für Patricia, 12, war es nicht einfach, dass sie vor ___ (1) Menschen auftreten musste.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">23.</span> Als Patricia gesungen hat, waren vielleicht nicht alle begeistert, aber sie findet das (1) nicht sehr ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">24.</span> Der Musikunterricht mit der Musiklehrerin Antje Rupert ist nicht nur interessant sondern (1) auch ___. M091-251-1-1 7</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2009-Spo-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">17.</span><span class="sol-ans">Gesamtschule</span></div>
+<div class="solution-row"><span class="sol-num">18.</span><span class="sol-ans">sucht</span></div>
+<div class="solution-row"><span class="sol-num">19.</span><span class="sol-ans">hart</span></div>
+<div class="solution-row"><span class="sol-num">20.</span><span class="sol-ans">Stimme</span></div>
+<div class="solution-row"><span class="sol-num">21.</span><span class="sol-ans">schüchtern</span></div>
+<div class="solution-row"><span class="sol-num">22.</span><span class="sol-ans">00</span></div>
+<div class="solution-row"><span class="sol-num">23.</span><span class="sol-ans">schlimm</span></div>
+<div class="solution-row"><span class="sol-num">24.</span><span class="sol-ans">wichtig / ein wichtiges Gesprächsthema</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

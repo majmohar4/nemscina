@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Spomladanski izpitni rok 2018</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Spomladanski izpitni rok 2018
+</nav>
+
+<h1>Spomladanski izpitni rok 2018</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Spomladanski izpitni rok 2018 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>Ein schönes Geschäft – Sie wurde die „Kaiserin der Kosmetik“ genannt</h3>
+<p><em>Lesen Sie.</em></p>
+<p>– die Polin Helena Rubinstein. Ihr Erfolg</p>
+<p>beginnt mit einer einfachen Gesichtscreme.</p>
+<p>Als Helena Rubinstein ihre Karriere in der</p>
+<p>Kosmetik startet, gelten zwei Grundsätze:</p>
+<p>Frauen sind nicht berufstätig und Frauen</p>
+<p>schminken sich nicht. Zumindest nicht</p>
+<p>diejenigen, die Wert auf einen guten Ruf legen.</p>
+<p>Das ist jetzt etwa 120 Jahre her.</p>
+<p>Damals ist die Polin Helena gerade zu ihrem</p>
+<p>Onkel nach Australien ausgewandert, wo die</p>
+<p>heiße Sonne der Damenwelt gar keine Freude</p>
+<p>romantischen Fassade verbirgt sich ein straff</p>
+<p>machte. Die 18-jährige wird wegen ihrer</p>
+<p>organisiertes Unternehmen. Noch 1964</p>
+<p>weißen Haut beneidet und oft nach ihrem</p>
+<p>werden sämtliche Cremes und Wässerchen für</p>
+<p>Geheimnis gefragt.</p>
+<p>Frankreich, Skandinavien und Beneluxländer</p>
+<p>von nur vier Mitarbeitern hergestellt.</p>
+<p>Und weil Geheimnisse viel Geld einbringen</p>
+<p>können, wenn man sie verrät, tut sie genau</p>
+<p>Ihr größter Erfolg gelingt ihr aber schon 1929.</p>
+<p>das. Es ist eine einfache Pflegecreme aus Öl,</p>
+<p>Da gibt es eine schwere Wirtschaftskrise,</p>
+<p>Kräutern und Rinderfett, die sie aus Polen</p>
+<p>ähnlich wie die in den letzten Jahren, nur mit</p>
+<p>mitgebracht hat. Die beginnt sie nun zu</p>
+<p>wesentlich schlimmeren Auswirkungen. Viele</p>
+<p>verkaufen, zunächst nur in ihrem Umfeld, dann</p>
+<p>Unternehmen machen Bankrott, Millionen</p>
+<p>in einem Beauty-Salon, den sie in Melbourne</p>
+<p>Menschen verlieren ihre Arbeit.</p>
+<p>eröffnet. Nach einigen Jahren zieht es Helena</p>
+<p>wieder nach Europa – sie überlässt ihren</p>
+<p>Helena profitiert, denn sie hat noch vor der</p>
+<p>beiden Schwestern die Führung des</p>
+<p>Krise einen großen Teil ihrer Firma für 7,3</p>
+<p>Unternehmens in Australien und eröffnet im</p>
+<p>Millionen Dollar an eine Bank verkauft. Als</p>
+<p>Abstand von wenigen Jahren Filialen in</p>
+<p>diese Bank in finanzielle Schwierigkeiten gerät,</p>
+<p>London, Paris und New York. Helena</p>
+<p>kauft sie ihr eigenes Unternehmen wieder</p>
+<p>Rubinstein ist jetzt eine Weltmarke. Sie wirbt</p>
+<p>zurück – für 1,5 Millionen.</p>
+<p>als Erste mit ihrem wissenschaftlich-</p>
+<p>medizinischen Image – Kosmetik ist jetzt nicht Helena liebt auch die Kunst. Durch ihren</p>
+<p>mehr nur eine weibliche Eitelkeit, sondern eine geschäftlichen Erfolg kann sie es sich leisten,</p>
+<p>Wissenschaft. Kunst und Künstler großzügig zu fördern. Sie</p>
+<p>gründet Helena-Rubinstein-Foundation und</p>
+<p>Helena – die selbst angeblich einst ein vergibt Stipendien.</p>
+<p>Medizinstudium begonnen hat – konsultiert bei</p>
+<p>der Entwicklung ihrer Produkte Hautärzte, Aber auch die Kunst nutzt sie für sich selbst</p>
+<p>Ernährungswissenschaftler und beschäftigt und lässt sich von berühmten Malern auf</p>
+<p>sich sogar mit Gesichtschirurgie. Helenas Leinwand verewigen. Eine Eitelkeit, die man</p>
+<p>Auftreten in das einer Dame von Welt und ihr verzeihen wird – immerhin hat sie es zur</p>
+<p>Schönheit ist ihr höchstes Gut. Doch hinter der Kunst erhoben, schön zu sein.</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+<p class="aufgabe-instruction">Entscheiden Sie, ob folgende Behauptungen richtig (R) oder falsch (F) sind, und markieren Sie
+jeweils den entsprechenden Buchstaben ().</p>
+<div class="question-item"><span class="q-num">1.</span> Als Helena jung war, waren Frauen meist geschminkt.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Die erste Creme von Helena enthielt keine Tiersubstanzen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Das australische Unternehmen blieb in den Händen der Familie.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Schon in den siebziger Jahren hatte Helena vier Firmen in Europa.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Wegen der Wirtschaftskrise musste Helena die Firma verkaufen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Mit einer finanziellen Unterstützung versuchte Helena den Künstlern zu helfen. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2018-Spo-0">
+    <h4>Rešitve – Aufgabe 1</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">R</span></div>
+  </div>
+</div>
+</div>
+<div class="text-block">
+<h3>„Eine Dusche kann das totale Glück werden“</h3>
+<p><em>Lesen Sie.</em></p>
+<p>Was tun, wenn plötzlich der Job weg ist? Manche Menschen werden depressiv. Anders Christine</p>
+<p>Thürmer: Sie wurde zum „Outdoor-Junkie“ – und ist seit 2007 so viel gewandert wie kaum eine andere</p>
+<p>Frau.</p>
+<p>Christine Thürmer (49) verlor vor Jahren ihren Job als Managerin – und fing an, zu wandern. Bis</p>
+<p>heute ist die Berlinerin mehr als 33.000 Kilometer gelaufen. Über diesen deutschen Rekord hat sie ein</p>
+<p>Buch geschrieben: „Laufen. Essen. Schlafen“.</p>
+<p>Frau Thürmer, Sie machen seit ein paar Monaten eine Wanderpause, weil Sie Ihr erstes Buch</p>
+<p>publiziert haben. Fehlt Ihnen das Laufen schon?</p>
+<p>Ich freue mich immer total, wenn ich in Berlin bin. Hier gibt es so viel Luxus: warmes Wasser, die</p>
+<p>Möglichkeit, zu duschen und zu kochen. Außerdem treffe ich Freunde, gehe ins Theater und ins</p>
+<p>Museum. Normalerweise wandere ich neun bis zehn Monate im Jahr. Die aktuelle Pause ist länger,</p>
+<p>weil ich mit meinem Buch viel zu tun hatte und auf Lesereise durch Deutschland war. Aber nächste</p>
+<p>Woche gehe ich endlich wieder wandern. Abwechslung muss sein.</p>
+<p>Sie nennen warmes Wasser Luxus. Hat das Wandern Sie bescheiden gemacht?</p>
+<p>Ich habe früher als Unternehmenssaniererin gearbeitet und viel Geld verdient. Aber ich habe nie viel</p>
+<p>gebraucht und ausgegeben. Beim Wandern habe ich extrem wenig Gepäck dabei: Wasser, Essen, ein</p>
+<p>Zelt und warme Kleidung. Das reduziert die Ansprüche natürlich noch viel mehr. Eine Dusche kann</p>
+<p>dann schon das totale Glück werden.</p>
+<p>Wie kam es, dass Sie mit dem Wandern anfingen?</p>
+<p>Ich habe das manchmal im Urlaub gemacht und konnte mir gut vorstellen, auch lange Strecken zu</p>
+<p>wandern. Aber ich hatte ja meinen Job. Dann hat mir meine Firma im Jahr 2003 plötzlich gekündigt.</p>
+<p>Man gab mir zehn Minuten, um meine Sachen zu packen. Das war wenige Tage vor Weihnachten.</p>
+<p>Kurze Zeit später ist ein guter Freund von mir sehr krank geworden und gestorben. Diese Ereignisse</p>
+<p>haben mich zum Nachdenken gebracht. Mit dem Resultat, dass ich einen Flug in die USA gebucht</p>
+<p>habe! Ich bin den Pacific Crest Trail von Mexiko nach Kanada gewandert. Bis heute bin ich mehr als</p>
+<p>33.000 Kilometer gelaufen. Ich war unter anderem noch in Australien und viel in Europa. Deutschland</p>
+<p>ist übrigens ein super Wanderland.</p>
+<p>Wie haben Sie sich auf die erste Langstreckenwanderung vorbereitet?</p>
+<p>Ich war früher überhaupt nicht sportlich. Also habe ich die Kenntnisse aus meinem Beruf benutzt: Ich</p>
+<p>habe die Wanderung geplant wie ein Businessprojekt. Elementar ist das leichte Gepäck. Außerdem</p>
+<p>gab ich mir pro Monat ein Budget von 1000 Euro. Da ist alles inklusive, auch die Flugkosten. Deshalb</p>
+<p>macht es Sinn, lange unterwegs zu sein. Ich wandere eigentlich keine Strecken, die kürzer sind als</p>
+<p>1000 Kilometer.</p>
+<p>Wie finanzieren Sie das?</p>
+<p>Ich habe während meiner Zeit als Unternehmenssaniererin viel Geld gespart. 2008 habe ich meine</p>
+<p>Wohnung gekündigt. Wenn ich in Berlin bin, miete ich meistens nur ein billiges Zimmer. Mit dem Buch</p>
+<p>verdiene ich jetzt auch Geld. Finanziell kann das ungefähr bis zu meinem 90. Geburtstag</p>
+<p>funktionieren.</p>
+<p>Was ist so toll am Wandern?</p>
+<p>Es macht mich glücklich. Ein bis zweimal am Tag habe ich diesen ganz intensiven Glücksmoment.</p>
+<p>Und es ist wirklich wunderbar, wenn man abends müde und zufrieden im Zelt liegt.</p>
+<p>Fühlen Sie sich manchmal einsam?</p>
+<p>Nein. Ich habe auch keine Angst. Das fragen nämlich immer alle. Ich komme gut mit mir selbst</p>
+<p>zurecht. Das ist sehr wichtig, wenn man lange allein unterwegs ist. Von der Idee, sich beim Wandern</p>
+<p>selbst zu finden, halte ich nicht viel. Man sollte sich vor so einer Aktion schon gut kennen.</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Entscheiden Sie, ob folgende Behauptungen richtig (R) oder falsch (F) sind, und markieren Sie
+jeweils den entsprechenden Buchstaben ().</p>
+<div class="question-item"><span class="q-num">1.</span> Momentan macht Christine eine Lesereise durch Deutschland.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Beim Wandern hat Christine immer ihr Handy dabei.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Ihre erste Wanderung führte Christine nach Australien.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> In Deutschland ist es langweilig zu wandern.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Christine hat keine Eigentumswohnung.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Das Wandern bedeutet für Christine sich selbst zu finden. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2018-Spo-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans"> R</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">M181-251-1-4</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">F</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Ergänzen Sie die Sätze. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Christine wandert fast über ___ Jahr.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Wegen des Buches macht Christine jetzt ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Für das Wandern packt sie eine ___ Menge ein.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Die ___ in ihrem Leben haben sie zum Wandern bewegt.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Auf der Reise hat sie eine ___ Geldsumme zur Verfügung.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Das Wandern erweckt bei Christine ___. (6 Punkte) Prazna stran OBRNITE LIST.</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2018-Spo-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans"> das ganze</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans"> Wanderpause</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans"> kleine</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans"> Ereignisse</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans"> begrenzte</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans"> Zufriedenheit</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

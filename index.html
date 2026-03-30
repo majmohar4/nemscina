@@ -3,844 +3,297 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nemščina – Splošna matura – Bralno razumevanje (Vadba)</title>
+<title>Nemščina – Matura – Bralno razumevanje</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
 
-  :root {
-    --bg: #faf9f6;
-    --text: #1a1a1a;
-    --accent: #2d5a8e;
-    --border: #c4c4c4;
-    --light-bg: #f0eeea;
-    --answer-bg: #fff;
-    --solution-bg: #e8f0e8;
-    --task-label: #6b4c2a;
-  }
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    font-family: 'Source Serif 4', Georgia, serif;
-    color: var(--text);
-    background: var(--bg);
-    line-height: 1.65;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-  }
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
 
-  h1 {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--accent);
-    border-bottom: 3px solid var(--accent);
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
 
-  .subtitle {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 0.95rem;
-    color: #666;
-    margin-bottom: 2.5rem;
-  }
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
 
-  .exam-section {
-    margin-bottom: 3rem;
-    page-break-before: always;
-  }
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
 
-  .exam-section:first-of-type {
-    page-break-before: auto;
-  }
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
 
-  .exam-header {
-    font-family: 'Source Sans 3', sans-serif;
-    background: var(--accent);
-    color: #fff;
-    padding: 0.8rem 1.2rem;
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    border-radius: 4px;
-  }
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
 
-  .text-block {
-    background: var(--light-bg);
-    border-left: 4px solid var(--accent);
-    padding: 1.2rem 1.5rem;
-    margin-bottom: 1.5rem;
-    border-radius: 0 4px 4px 0;
-  }
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
 
-  .text-block h3 {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: var(--accent);
-  }
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
 
-  .text-block p {
-    margin-bottom: 0.6rem;
-    font-size: 0.95rem;
-  }
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
 
-  .text-block .source {
-    font-size: 0.75rem;
-    color: #888;
-    margin-top: 0.5rem;
-    font-style: italic;
-  }
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
 
-  .text-block .numbered {
-    margin-bottom: 0.5rem;
-  }
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
 
-  .text-block .numbered strong {
-    color: var(--task-label);
-    font-weight: 700;
-  }
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
 
-  .aufgabe {
-    margin-bottom: 2rem;
-  }
-
-  .aufgabe-title {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--task-label);
-    margin-bottom: 0.5rem;
-    padding: 0.3rem 0.6rem;
-    background: #f5efe8;
-    border-radius: 3px;
-    display: inline-block;
-  }
-
-  .aufgabe-instruction {
-    font-size: 0.9rem;
-    font-style: italic;
-    color: #555;
-    margin-bottom: 0.8rem;
-  }
-
-  .answer-line {
-    border-bottom: 1.5px solid var(--border);
-    min-height: 2rem;
-    margin: 0.4rem 0;
-    padding: 0.2rem 0;
-  }
-
-  .question-item {
-    margin-bottom: 0.8rem;
-    font-size: 0.95rem;
-  }
-
-  .question-item .q-num {
-    font-weight: 700;
-    color: var(--accent);
-    margin-right: 0.3rem;
-  }
-
-  table.matching {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0.8rem 0;
-    font-size: 0.95rem;
-  }
-
-  table.matching th, table.matching td {
-    border: 1px solid var(--border);
-    padding: 0.4rem 0.8rem;
-    text-align: center;
-  }
-
-  table.matching th {
-    background: var(--light-bg);
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 600;
-  }
-
-  table.matching td.answer-cell {
-    background: var(--answer-bg);
-    min-width: 2.5rem;
-  }
-
-  .example-row td {
-    background: #f0f0f0 !important;
-    color: #888;
-  }
-
-  .options-list {
-    margin: 0.5rem 0 1rem 1rem;
-    font-size: 0.93rem;
-  }
-
-  .options-list div {
-    margin-bottom: 0.2rem;
-  }
-
-  table.rf {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0.8rem 0;
-    font-size: 0.93rem;
-  }
-
-  table.rf th, table.rf td {
-    border: 1px solid var(--border);
-    padding: 0.4rem 0.6rem;
-  }
-
-  table.rf th {
-    background: var(--light-bg);
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 600;
-    width: 3rem;
-    text-align: center;
-  }
-
-  table.rf td.check-cell {
-    text-align: center;
-    width: 3rem;
-    background: var(--answer-bg);
-  }
-
-  .fill-blank {
-    display: inline-block;
-    border-bottom: 1.5px solid var(--border);
-    min-width: 18rem;
-    margin: 0 0.2rem;
-    height: 1.3rem;
-  }
-
-  .abc-options {
-    margin: 0.5rem 0 0.5rem 2rem;
-    font-size: 0.93rem;
-  }
-
-  .abc-options span {
-    margin-right: 2rem;
-  }
-
-  /* Solutions */
-  .solutions-section {
-    margin-top: 4rem;
-    page-break-before: always;
-  }
-
-  .solutions-section h2 {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 1.3rem;
-    color: var(--accent);
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 0.3rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .solution-exam {
-    margin-bottom: 2rem;
-  }
-
-  .solution-exam h3 {
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--task-label);
-    margin-bottom: 0.5rem;
-  }
-
-  .solution-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-  }
-
-  .solution-table th, .solution-table td {
-    border: 1px solid var(--border);
-    padding: 0.3rem 0.6rem;
-  }
-
-  .solution-table th {
-    background: var(--solution-bg);
-    font-family: 'Source Sans 3', sans-serif;
-    font-weight: 600;
-    text-align: left;
-  }
-
-  .solution-table td:first-child {
-    width: 3rem;
-    text-align: center;
-    font-weight: 600;
-  }
-
-  .points-note {
-    font-size: 0.85rem;
-    color: #888;
-    text-align: right;
-    margin-top: -0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  hr.section-break {
-    border: none;
-    border-top: 2px dashed var(--border);
-    margin: 2rem 0;
-  }
-
-  @media print {
-    body { padding: 1cm; max-width: 100%; font-size: 11pt; }
-    .exam-section { page-break-before: always; }
-    .solutions-section { page-break-before: always; }
-  }
-
-  .toc {
-    background: var(--light-bg);
-    padding: 1rem 1.5rem;
-    margin-bottom: 2rem;
-    border-radius: 4px;
-    font-family: 'Source Sans 3', sans-serif;
-    font-size: 0.9rem;
-  }
-  .toc h2 { font-size: 1rem; margin-bottom: 0.5rem; color: var(--accent); }
-  .toc ul { list-style: none; padding-left: 0; }
-  .toc li { margin-bottom: 0.3rem; }
-  .toc a { color: var(--accent); text-decoration: none; }
-  .toc a:hover { text-decoration: underline; }
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
 </style>
 </head>
 <body>
-
-<h1>Nemščina – Splošna matura</h1>
-<p class="subtitle">Izpitna pola 1A – Bralno razumevanje (Osnovna raven) · Vadba<br>
-Vir: RIC – Državni izpitni center · Rešitve na koncu dokumenta</p>
-
-<nav class="toc">
-  <h2>Vsebina</h2>
-  <ul>
-    <li><a href="#2025s">1. Spomladanski izpitni rok 2025</a></li>
-    <li><a href="#2024s">2. Spomladanski izpitni rok 2024</a></li>
-    <li><a href="#2023s">3. Spomladanski izpitni rok 2023</a></li>
-    <li><a href="#2022s">4. Spomladanski izpitni rok 2022</a></li>
-    <li><a href="#2021s">5. Spomladanski izpitni rok 2021</a></li>
-    <li><a href="#resitve">Rešitve</a></li>
-  </ul>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  
 </nav>
 
-<section class="exam-section" id="2025s">
-<div class="exam-header">Spomladanski izpitni rok 2025 · Izpitna pola 1A · Osnovna raven</div>
+<h1>Nemščina – Splošna matura</h1>
+<p class="subtitle">Izpitna pola 1A – Bralno razumevanje (Osnovna raven)<br>
+Vir: RIC – Državni izpitni center · 29 izpitnih rokov (2009–2023)</p>
 
-<div class="text-block">
-<h3>Unter unseren Füßen</h3>
-<p><em>In einer Handvoll Erde tummeln sich mehr Lebewesen als es Menschen auf der Welt gibt! Doch der Untergrund ist in Gefahr, erklärt der Bodenforscher Steffen Schlüter im Interview.</em></p>
-<p class="numbered"><strong>0.</strong> Mich interessiert, wie es unter der Erde aussieht: Sind da Gänge von Regenwürmern oder Maulwürfen? Wie breiten sich die Wurzeln von Pflanzen aus? Das ist gar nicht so leicht zu beantworten, denn, wenn ich einfach anfange von oben zu graben, dann mache ich die Bodenstruktur ja kaputt.</p>
-<p class="numbered"><strong>1.</strong> Wir schneiden stattdessen ein Stück Boden aus. Dazu schieben wir ein langes Rohr in die Erde und ziehen es danach wieder nach oben. Im Rohr steckt dann ein vollständiger Bodenkern, den wir mit einem Computertomografen durchleuchten können.</p>
-<p class="numbered"><strong>2.</strong> Das hat viele Gründe. Einer ist, dass die oberste, fruchtbarste Bodenschicht immer dünner wird. Das passiert, weil der Wind trockene Erde wegweht oder Regen den Boden fortspült. Das nennt man Erosion.</p>
-<p class="numbered"><strong>3.</strong> Wenn die fruchtbare Schicht verloren geht, können wir weniger Getreide, Gemüse und Obst anbauen. Und auch weniger Futterpflanzen für Schweine, Kühe oder Hühner. Dann werden also auch Fleisch, Milch und Eier knapp.</p>
-<p class="numbered"><strong>4.</strong> Doch, aber sehr langsam. Durch die Erosion verlieren wir etwa einen Millimeter Boden jedes Jahr, bis diese Schicht erneuert ist, braucht es mindestens zehn Jahre. Da kommt die Natur nicht hinterher. Der Klimawandel kann das Problem verstärken, denn durch die Erderwärmung trocknen die Böden häufiger aus.</p>
-<p class="numbered"><strong>5.</strong> Das Wichtigste ist, dass der Boden von Pflanzen bedeckt ist. In Wäldern zum Beispiel federn Moose und Gräser selbst starke Regengüsse ab und leiten das Wasser in den Boden. Auf Maisfeldern dagegen stehen die Pflanzen in Reihen, dazwischen ist der Boden meist nackt.</p>
-<p class="numbered"><strong>6.</strong> Ganz klar den Regenwurm. Er hält den Boden gesund. In seinen Gängen versickert viel Wasser, das hält die Erde schön feucht und schützt vor Erosion. Außerdem räumt er auf, frisst abgestorbene Blätter und hinten raus kommt feinster, krümeliger Humus.</p>
-<p class="source">Vir: forscher-online.de, 2020</p>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 1 (6 Punkte)</div>
-<p class="aufgabe-instruction">Lesen Sie die Antworten von 1 bis 6, dann die Fragen von A bis J. Welche Frage passt zu welcher Antwort? Drei Fragen sind zu viel.</p>
-<div class="options-list">
-  <div>A Warum ist das schlimm?</div>
-  <div>B Welches Bodenlebewesen mögen Sie am liebsten?</div>
-  <div>C Wächst der Boden denn nicht nach?</div>
-  <div>D Wie sieht der Tag eines Bodenforschers aus?</div>
-  <div>E Was kann man tun, um den Boden zu schützen?</div>
-  <div>F Wie vermeiden Sie das?</div>
-  <div>G Wie bauen Sie Getreide an?</div>
-  <div>H Unser Boden sei in Gefahr. Warum?</div>
-  <div>I Warum entsteht Geosmin?</div>
-  <div>J Was erforschen Sie genau?</div>
-</div>
-<p><em>Beispiel: 0 → J</em></p>
-<table class="matching"><tr><th></th><th>0.</th><th>1.</th><th>2.</th><th>3.</th><th>4.</th><th>5.</th><th>6.</th></tr><tr><td>→</td><td style="color:#aaa">J</td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td></tr></table>
-</div>
-<hr class="section-break">
+<div class="year-grid"><a class="year-card" href="exams/2023-autumn.html"><div class="year">2023</div><div class="session">Jesenski</div></a>
+<a class="year-card" href="exams/2023-spring.html"><div class="year">2023</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2022-autumn.html"><div class="year">2022</div><div class="session">Jesenski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2022-spring.html"><div class="year">2022</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2021-autumn.html"><div class="year">2021</div><div class="session">Jesenski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2021-spring.html"><div class="year">2021</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2020-autumn.html"><div class="year">2020</div><div class="session">Jesenski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2020-spring.html"><div class="year">2020</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2019-autumn.html"><div class="year">2019</div><div class="session">Jesenski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2019-spring.html"><div class="year">2019</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2018-autumn.html"><div class="year">2018</div><div class="session">Jesenski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2018-spring.html"><div class="year">2018</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2017-autumn.html"><div class="year">2017</div><div class="session">Jesenski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2017-spring.html"><div class="year">2017</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2016-autumn.html"><div class="year">2016</div><div class="session">Jesenski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2016-spring.html"><div class="year">2016</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2015-autumn.html"><div class="year">2015</div><div class="session">Jesenski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2015-spring.html"><div class="year">2015</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2014-autumn.html"><div class="year">2014</div><div class="session">Jesenski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2014-spring.html"><div class="year">2014</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2013-autumn.html"><div class="year">2013</div><div class="session">Jesenski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2013-spring.html"><div class="year">2013</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2012-spring.html"><div class="year">2012</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2011-autumn.html"><div class="year">2011</div><div class="session">Jesenski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2011-spring.html"><div class="year">2011</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2010-autumn.html"><div class="year">2010</div><div class="session">Jesenski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2010-spring.html"><div class="year">2010</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2009-autumn.html"><div class="year">2009</div><div class="session">Jesenski</div><span class="badge">✓ z rešitvami</span></a>
+<a class="year-card" href="exams/2009-spring.html"><div class="year">2009</div><div class="session">Spomladanski</div><span class="badge">✓ z rešitvami</span></a></div>
 
-<div class="text-block">
-<h3>Vor 125 Jahren: Erste Kinovorführung der Brüder Lumière</h3>
-<p><em>1895 erfanden die Brüder Lumière in Paris das Kino. Im Jahr 2020 kämpften Lichtspielhäuser weltweit aufgrund der Corona-Pandemie ums Überleben.</em></p>
-<p>Es war nicht weniger als eine Sensation, als die Brüder Lumière am 28. Dezember 1895 zu ihrer ersten öffentlichen Kinovorführung einluden. Zwanzig Minuten dauerte die Vorstellung im Keller des Pariser Grand Café. Zum ersten Mal hatten die Zuschauer bewegte Bilder gesehen.</p>
-<p>Ihren Kinematographen hatten sich Auguste und Louis Lumière bereits am 13. Februar 1895 patentieren lassen. Auch in Großbritannien, den USA und in Deutschland wurde unabhängig von den französischen Brüdern an einem Gerät geforscht. Bereits am 1.11.1895 luden die deutschen Brüder Skladanowsky zu einer öffentlichen Filmvorführung im Berliner Wintergarten ein, jedoch war ihr Projektionsgerät technisch weniger entwickelt.</p>
-<p>125 Jahre später gab es keinen Grund zum Feiern. Wegen der Pandemie fanden keine Werkschauen und Festivals statt. Überall auf der Welt wurden Kinos geschlossen. Mehr als die Hälfte aller teilnehmenden Kinos schätzte, nur noch zwei bis drei Monate durchhalten zu können. Der zweite Lockdown machte die Situation noch schwieriger. Selbst als die Kinos im Sommer aufmachen durften, fehlten die großen Blockbuster und damit wichtige Einnahmequellen.</p>
-<p class="source">Vir: dw.com, 2021</p>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 2 (6 Punkte)</div>
-<p class="aufgabe-instruction">Beantworten Sie kurz die Fragen.</p>
-<div class="question-item"><span class="q-num">1.</span> Welches Problem hatten die Kinos 125 Jahre nach ihrer Erfindung?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">2.</span> Wie lange konnten die Zuschauer die erste öffentliche Kinovorführung genießen?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">3.</span> Wo fand die allererste Filmvorführung statt?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">4.</span> Wessen Projektionsgerät war technisch besser?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">5.</span> Warum gab es 2020 keine Jubiläumsfeier?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">6.</span> Wie viele Kinobetreiber sahen laut der Umfrage von HDF ihre Zukunft sehr pessimistisch?</div>
-<div class="answer-line"></div>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 3 (6 Punkte)</div>
-<p class="aufgabe-instruction">Ergänzen Sie sinngemäß.</p>
-<div class="question-item"><span class="q-num">1.</span> Auch in anderen Ländern wurde an einem Kinogerät geforscht, aber <span class="fill-blank"></span> von den Brüdern Lumière.</div>
-<div class="question-item"><span class="q-num">2.</span> Im Jahr 2020 hatten die Kinobetreiber wegen Corona keine Lust zum <span class="fill-blank"></span>.</div>
-<div class="question-item"><span class="q-num">3.</span> Die Lage der Kinos wurde <span class="fill-blank"></span> verschlechtert.</div>
-<div class="question-item"><span class="q-num">4.</span> Kinobesitzer glaubten, sie müssen mit finanziellem Schaden von <span class="fill-blank"></span> rechnen.</div>
-<div class="question-item"><span class="q-num">5.</span> Obwohl im Sommer die Kinos aufmachen durften, fehlten ihnen wichtige <span class="fill-blank"></span>, die die großen Blockbuster normalerweise bringen.</div>
-<div class="question-item"><span class="q-num">6.</span> Wegen der <span class="fill-blank"></span> hatten Kinos finanzielle Schwierigkeiten in der Corona-Zeit.</div>
-</div>
-</section>
+<p style="font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem; color: #888; margin-top: 2rem;">
 
-<section class="exam-section" id="2024s">
-<div class="exam-header">Spomladanski izpitni rok 2024 · Izpitna pola 1A · Osnovna raven</div>
+<p style="font-family: 'Source Sans 3', sans-serif; margin-bottom: 1rem;"><a href="frequent_words.html" style="color: var(--accent); font-weight: 600; text-decoration: none;">📚 Najpogostejše besede in besedne zveze →</a></p>
+<p style="font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem; color: #888; margin-top: 0.5rem;">Kliknite na kartici za posamezni izpitni rok. Rešitve so prikazane s klikom na gumb pod vsako nalogo.
+</p>
 
-<div class="text-block">
-<h3>Thekengespräche per Telefon</h3>
-<p><em>Dennis Pomplitz ist Barkeeper in der Goldenen Krone in Darmstadt. Seit dem Lockdown telefoniert er jeden Freitagabend mit seinen Gästen.</em></p>
-<p class="numbered"><strong>0.</strong> In den ersten Wochen saß ich tatsächlich allein mit dem Rücken zur Theke und starrte auf die staubigen Gläser. Inzwischen sitze ich mit einem Kollegen in einer Lounge.</p>
-<p class="numbered"><strong>1.</strong> Eigentlich war das die Idee meiner Chefin. Unsere Gäste sollten uns nicht vergessen. Dann aber hörte das Telefon nicht mehr auf zu klingeln.</p>
-<p class="numbered"><strong>2.</strong> Eine Lehrerin wusste nicht weiter, weil sich die Eltern einer Schülerin getrennt haben. Ein junger Mann hatte ein Date. Ein älterer Mann trinkt jeden Freitag ein Bier mit mir.</p>
-<p class="numbered"><strong>3.</strong> Wenn ich das Problem kenne, erzähle ich ihnen, was mir hilft. Wenn ich keine Ahnung habe, halte ich mich mit Ratschlägen zurück. Meistens muss ich gar nicht viel sagen.</p>
-<p class="numbered"><strong>4.</strong> In der Kneipe kommt zumindest ein bisschen Atmosphäre auf. Da habe ich auch mehr Gefühl der Normalität.</p>
-<p class="numbered"><strong>5.</strong> Es war nur einmal, als mich ein Stammgast in der Kneipe sah. Seine Mutter starb im Altenheim, er konnte sich nicht verabschieden. Mit den anderen habe ich kein Mitleid. Sonst müsste ich auch mit mir Mitleid haben.</p>
-<p class="numbered"><strong>6.</strong> Im Gegenteil: Die Sprechstunde ist das Highlight meiner Woche. Am Ende sind wir beide froh: der Anrufer und ich. Depressiv schließe ich die Kneipe nie zu.</p>
-<p class="source">Vir: spiegel.de, 2021</p>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 1 (6 Punkte)</div>
-<p class="aufgabe-instruction">Welche Frage passt am besten zu welchem Textteil? Zwei Fragen sind zu viel.</p>
-<div class="options-list">
-  <div>A Warum telefonieren Sie nicht von zu Hause aus?</div>
-  <div>B Sind Sie am Ende des Tages nicht trauriger?</div>
-  <div>C Fühlen Sie mit den Leuten mit?</div>
-  <div>D Wie fühlen Sie sich am Ende des Arbeitstages?</div>
-  <div>E Trinken Sie mit den Anrufern?</div>
-  <div>F Warum rufen die Leute an?</div>
-  <div>G Was sagen Sie dann den Anrufern?</div>
-  <div>H Wie sind Sie auf die Barkeeper-Sprechstunde gekommen?</div>
-  <div>I Hocken Sie allein am Tresen?</div>
-</div>
-<p><em>Beispiel: 0 → I</em></p>
-<table class="matching"><tr><th></th><th>0.</th><th>1.</th><th>2.</th><th>3.</th><th>4.</th><th>5.</th><th>6.</th></tr><tr><td>→</td><td style="color:#aaa">I</td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td></tr></table>
-</div>
-<hr class="section-break">
-
-<div class="text-block">
-<h3>Deine Freunde – die beste Kinderband der Welt?</h3>
-<p><em>Zwei HipHopper, ein DJ – und ab geht die Post: Konzerte der Band Deine Freunde haben wenig mit klassischer Kinderlala zu tun.</em></p>
-<p>Eltern sind meistens glücklich, wenn ihre Kinder es auch sind. Als Deine Freunde mischen die drei Hamburger die Kindermusikszene auf. Weil die drei mit ihrer HipHop-Attitüde so wenig von Rolf Zuckowski haben, erobern sie auch die Herzen vieler Eltern.</p>
-<p>DJ Pauli und Melodiesänger Lukas (der Einzige der drei, der singen kann) sind HipHop-Produzenten, Flo tritt auch solo als HipHopper auf. Vor der Bühne ist ein Bereich abgesperrt, zu dem nur die Kleinen Zutritt haben. Die Texte der Band haben in der Regel zwei Ebenen: eine aus Sicht der Kinder, eine aus jener der Eltern.</p>
-<p>Im Hauptberuf ist Sump allerdings Erzieher in einem Hamburger Kindergarten, und dort hatte er die Idee, für seine Gruppe einen Song aufzunehmen. Gemeinsam mit Markus Pauli entstand Schokolade. Die zwei holten sich noch den Moderator Nimscheck hinzu, und schon waren Deine Freunde komplett. Von Anfang an hatten die meisten Songs zwei Bedeutungen.</p>
-<p class="source">Vir: magazin-schule.de, 2023</p>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 2 (6 Punkte)</div>
-<p class="aufgabe-instruction">Markieren Sie, ob die Behauptungen richtig (R) oder falsch (F) sind.</p>
-<table class="rf"><tr><th></th><th>R</th><th>F</th><th style="text-align:left">Behauptung</th></tr>
-<tr><td>1.</td><td class="check-cell"></td><td class="check-cell"></td><td>Deine Freunde ist eine Kinderband, deren Songs nicht nur Kinder gerne hören.</td></tr>
-<tr><td>2.</td><td class="check-cell"></td><td class="check-cell"></td><td>Während die Kinder im Konzert sind, warten die Eltern auf sie draußen vor der Halle.</td></tr>
-<tr><td>3.</td><td class="check-cell"></td><td class="check-cell"></td><td>Deine Freunde produzieren ähnliche Songs wie Rolf Zuckowski.</td></tr>
-<tr><td>4.</td><td class="check-cell"></td><td class="check-cell"></td><td>Alle drei Mitglieder der Gruppe können singen.</td></tr>
-<tr><td>5.</td><td class="check-cell"></td><td class="check-cell"></td><td>Die Band spielt in Orten, wo früher schon Alternative- und HipHop-Konzerte stattgefunden haben.</td></tr>
-<tr><td>6.</td><td class="check-cell"></td><td class="check-cell"></td><td>Das Lied Schokolade wurde geschrieben, noch bevor die Band komplett war.</td></tr>
-</table>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 3 (6 Punkte)</div>
-<p class="aufgabe-instruction">Ergänzen Sie sinngemäß.</p>
-<div class="question-item"><span class="q-num">1.</span> Deine Freunde sind <span class="fill-blank"></span> klassische Kinderband.</div>
-<div class="question-item"><span class="q-num">2.</span> Die Lieder dieser Band machen Spaß und haben auch eine wichtige <span class="fill-blank"></span> Bedeutung.</div>
-<div class="question-item"><span class="q-num">3.</span> Das Mitglied der Gruppe Florian ist <span class="fill-blank"></span> von Beruf.</div>
-<div class="question-item"><span class="q-num">4.</span> Die Idee für den Song Schokolade bekam er im <span class="fill-blank"></span>.</div>
-<div class="question-item"><span class="q-num">5.</span> Die meisten Songs der Band versteht man aus <span class="fill-blank"></span> verschiedenen Perspektiven.</div>
-<div class="question-item"><span class="q-num">6.</span> Beim Hören dieser Band haben die Eltern und ihre Kinder den <span class="fill-blank"></span> Geschmack.</div>
-</div>
-</section>
-
-<section class="exam-section" id="2023s">
-<div class="exam-header">Spomladanski izpitni rok 2023 · Izpitna pola 1A · Osnovna raven</div>
-
-<div class="text-block">
-<h3>Tipps bei Müdigkeit und Erschöpfung</h3>
-<p><em>Kaum etwas ist schwerer als Gewohnheiten zu ändern. Wenn wir aber feststellen, dass wir uns andauernd müde und schlapp fühlen, sollten wir etwas dagegen tun.</em></p>
-<p class="numbered"><strong>0.</strong> Kaum etwas ist schwerer als Gewohnheiten und eingefahrene Verhaltensweisen zu ändern. Wenn wir aber feststellen, dass wir unter unserem Alltag zu leiden beginnen, dann sollten wir etwas dagegen tun.</p>
-<p class="numbered"><strong>1.</strong> Auch wenn es sich banal anhört, ist das der erste Schritt. Der Körper sendet natürliche Signale. Wir sollten akzeptieren, dass wir uns total müde und abgeschlagen fühlen.</p>
-<p class="numbered"><strong>2.</strong> Werden wir egoistischer! Schaffen wir uns Freiräume, um einem Hobby nachzugehen.</p>
-<p class="numbered"><strong>3.</strong> Was wir eher üben müssen, ist, wie uns zu entspannen. Man soll Rituale gleichmäßig über die Zeit verteilen, dass sie den Alltag in regelmäßigen Abständen unterbrechen. Solche kurzen Pausen sind eine tolle Hilfe für Regeneration von Körper und Geist.</p>
-<p class="numbered"><strong>4.</strong> Ein Bad, ein gutes Buch, bewusstes Musikhören – einfache Mittel, um nach einem langen Tag herunterzukommen. Yoga, autogenes Training und viele andere Techniken bringen tiefe Entspannung.</p>
-<p class="numbered"><strong>5.</strong> Wer Sport treibt, dem geht es einfach besser! Förderlicher als der einmalige Marathon sind gemäßigtes Radfahren, Spazierengehen oder Walken an zwei bis drei Tagen in der Woche.</p>
-<p class="numbered"><strong>6.</strong> Was wir essen, ist ein zentraler Baustein für das Wohlbefinden. Wer seine Mahlzeiten überlegt anzugehen und bewusst zu genießen schafft, profitiert dreifach: von der Vorfreude, der Ablenkung und einem schönen Geschmackserlebnis.</p>
-<p class="source">Vir: orthomol.com, 2021</p>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 1 (6 Punkte)</div>
-<p class="aufgabe-instruction">Welcher Tipp passt am besten zu welchem Textteil? Zwei Tipps sind zu viel.</p>
-<div class="options-list">
-  <div>A Sorgfältig zubereitete Mahlzeiten</div>
-  <div>B Regeneration durch kurze Auszeiten</div>
-  <div>C Ungesunde Essgewohnheiten</div>
-  <div>D Bewegung als Mittel gegen Müdigkeit</div>
-  <div>E Es ist gesund, auch an sich zu denken</div>
-  <div>F Relaxing als Baustein für mehr Vitalität</div>
-  <div>G Erschöpfung erst einmal erkennen</div>
-  <div>H Mit dem Marathon zum besseren Wohlgefühl</div>
-  <div>I Feste Gewohnheiten in unserem Alltag</div>
-</div>
-<p><em>Beispiel: 0 → I</em></p>
-<table class="matching"><tr><th></th><th>0.</th><th>1.</th><th>2.</th><th>3.</th><th>4.</th><th>5.</th><th>6.</th></tr><tr><td>→</td><td style="color:#aaa">I</td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td></tr></table>
-</div>
-<hr class="section-break">
-
-<div class="text-block">
-<h3>Auf den Tellern von morgen</h3>
-<p><em>Fast 2.000 Insekten-Arten auf der Welt sind essbar. Und aus dem Labor kommt auch immer mehr Kunstfleisch.</em></p>
-<p>Im Supermarkt gibt es einen neuen Fitness-Riegel mit Grillenpulver. In vielen Ländern stehen Insekten schon immer auf dem Speiseplan. Insekten enthalten viel Eiweiß. Um ein Kilogramm Rindfleisch zu produzieren, braucht es 25 Kilogramm Futter. Für Insekten nur zwei Kilogramm! Insekten werden häufig getrocknet, zu Pulver zermahlen und kommen als Zutat in ein anderes Nahrungsmittel.</p>
-<p>Immer mehr Menschen ernähren sich vegetarisch oder vegan. Vegetarier essen häufig Fleischersatzprodukte – Tofu oder Seitan. In manchen Fast-Food-Restaurants gibt es vegane Hamburger, die fast genauso aussehen, riechen und schmecken wie Burger aus Rindfleisch.</p>
-<p>Der niederländische Forscher Mark Post lässt Muskelzellen einer echten Kuh in einem Gefäß mit spezieller Nährflüssigkeit wachsen. Momentan ist das noch zu teuer, weil es noch entwickelt wird. Auch Milch lässt sich ohne Tiere produzieren: Bakterien und Pilze wurden mit Hilfe der Gentechnik umprogrammiert, sodass sie aus Zucker Milch produzieren.</p>
-<p class="source">Vir: forscher-online.de, 2021</p>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 2 (6 Punkte)</div>
-<p class="aufgabe-instruction">Ergänzen Sie sinngemäß.</p>
-<div class="question-item"><span class="q-num">1.</span> Im neuen Fitness-Riegel findet man die Zutat namens <span class="fill-blank"></span>.</div>
-<div class="question-item"><span class="q-num">2.</span> In vielen Ländern der Welt kann man Insekten regelmäßig <span class="fill-blank"></span>.</div>
-<div class="question-item"><span class="q-num">3.</span> Statt Fleisch werden immer häufiger <span class="fill-blank"></span> gegessen.</div>
-<div class="question-item"><span class="q-num">4.</span> Der Geschmack der veganen Hamburger ist <span class="fill-blank"></span> der Geschmack der Burger aus Rindfleisch.</div>
-<div class="question-item"><span class="q-num">5.</span> In Restaurants könnte man schon bald <span class="fill-blank"></span> bestellen.</div>
-<div class="question-item"><span class="q-num">6.</span> Milch kann man auch ohne Tiere aus <span class="fill-blank"></span> herstellen.</div>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 3 (6 Punkte)</div>
-<p class="aufgabe-instruction">Beantworten Sie kurz die Fragen.</p>
-<div class="question-item"><span class="q-num">1.</span> Warum sind Eiweiße für unseren Körper wichtig?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">2.</span> Warum brauchen Insekten weniger Futter als Rind?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">3.</span> Warum werden Insekten meistens als Pulver bei der Zubereitung verwendet?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">4.</span> Was brauchen die Muskelzellen einer Kuh im Labor, um Muskelfleisch zu bilden?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">5.</span> Warum sind die Kosten für die Laborzucht vom Fleisch so hoch?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">6.</span> Was wurde mit Bakterien und Pilzen gemacht, um sie bei der Milchproduktion zu verwenden?</div>
-<div class="answer-line"></div>
-</div>
-</section>
-
-<section class="exam-section" id="2022s">
-<div class="exam-header">Spomladanski izpitni rok 2022 · Izpitna pola 1A · Osnovna raven</div>
-
-<div class="text-block">
-<h3>An die Spitze getanzt (TikTok)</h3>
-<p><em>Für einige Politiker ist TikTok ein chinesisches Spionagewerkzeug. Für hunderte Millionen junge Menschen bedeutet die App etwas Anderes.</em></p>
-<p class="numbered"><strong>0.</strong> Für einige Politiker ist TikTok ein chinesisches Spionagewerkzeug. Für Facebook ist es ein Konkurrent. Für hunderte Millionen junge Menschen bedeutet die App etwas Anderes.</p>
-<p class="numbered"><strong>1.</strong> Für viele junge Menschen ist die App zu einer digitalen Heimat geworden. Hier treffen sie ihre Freunde und informieren sich über politische Ereignisse.</p>
-<p class="numbered"><strong>2.</strong> In knapp vier Jahren hat TikTok sämtliche Download-Rekorde gebrochen. 800 Millionen Menschen nutzen sie regelmäßig.</p>
-<p class="numbered"><strong>3.</strong> Diesen Siegeszug verdankt TikTok seinen aggressiven Werbestrategien, seinen Nutzern und seinem Algorithmus. Bytedance investierte rund eine Milliarde Dollar in Anzeigen bei der direkten Konkurrenz.</p>
-<p class="numbered"><strong>4.</strong> Der Erfolg steht und fällt mit der Kreativität seiner Nutzer. Die Videos sind oft kurz und subversiv. Die Musikindustrie castet auf TikTok die Stars von morgen.</p>
-<p class="numbered"><strong>5.</strong> Programmierer haben einen Algorithmus entwickelt, der Nutzern Inhalte anbietet. Die Empfehlungen werden personalisiert, ohne dass man anderen Accounts folgt.</p>
-<p class="numbered"><strong>6.</strong> Immer mehr bringt der Algorithmus auch politische Inhalte. Jugendliche informieren sich über den Klimawandel, organisieren Proteste.</p>
-<p class="source">Vir: Süddeutsche Zeitung, 2020</p>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 1 (6 Punkte)</div>
-<p class="aufgabe-instruction">Welche Überschrift passt am besten zu welchem Textteil? Zwei Überschriften sind zu viel.</p>
-<div class="options-list">
-  <div>A In wenigen Jahren wurde TikTok sehr erfolgreich</div>
-  <div>B Die Vorschläge basieren auf gleichen Kriterien wie bei Facebook</div>
-  <div>C Mit der App engagieren sich Jugendliche politisch</div>
-  <div>D Die Nutzer können ihre Talente zeigen</div>
-  <div>E Die Nutzer fühlen sich bei TikTok wie zu Hause</div>
-  <div>F Es lohnte sich, bei den Rivalen zu werben</div>
-  <div>G Die Nutzer allein machen die App erfolgreich</div>
-  <div>H Die App empfiehlt Inhalte aufgrund der Tätigkeit</div>
-  <div>I Einige fühlen sich von der App bedroht</div>
-</div>
-<p><em>Beispiel: 0 → I</em></p>
-<table class="matching"><tr><th></th><th>0.</th><th>1.</th><th>2.</th><th>3.</th><th>4.</th><th>5.</th><th>6.</th></tr><tr><td>→</td><td style="color:#aaa">I</td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td><td class="answer-cell"></td></tr></table>
-</div>
-<hr class="section-break">
-
-<div class="text-block">
-<h3>Gleichberechtigte Modewelt</h3>
-<p><em>Bisher wurden kleinwüchsige Menschen von der Modeindustrie kaum berücksichtigt. Ein Label aus Berlin will das ändern.</em></p>
-<p>In Deutschland leben etwa 100.000 kleinwüchsige Menschen. Als kleinwüchsig gilt, wer nicht größer als 1,40 Meter ist. Kleinwuchs zählt offiziell zu den Behinderungen. Die meisten Kleinwüchsigen müssen sich passende Kleidung in der Kinderabteilung suchen. Ihre Körpergröße ähnelt zwar der eines Kindes, aber die Maße unterscheiden sich sehr. Maßgeschneiderte Kleidung kostet viel mehr Geld.</p>
-<p>Die Designerin Sema Gedik aus Berlin hat 2017 das Modelabel „Auf Augenhöhe" gegründet und produziert seitdem Mode für Kleinwüchsige. Sie hat viele Menschen vermessen und eigene Konfektionsgrößen erstellt. Erstmals ist es Kleinwüchsigen möglich, passende modische Klamotten im Online-Shop zu bestellen. Ihre Kollektion konnte sie sogar auf der Berliner Modewoche präsentieren.</p>
-<p class="source">Vir: Presse und Sprache, 2020</p>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 2 (6 Punkte)</div>
-<p class="aufgabe-instruction">Ergänzen Sie sinngemäß.</p>
-<div class="question-item"><span class="q-num">1.</span> Kleinwüchsige sind alle, die höchstens <span class="fill-blank"></span> sind.</div>
-<div class="question-item"><span class="q-num">2.</span> Kleinwuchs gehört zu <span class="fill-blank"></span>.</div>
-<div class="question-item"><span class="q-num">3.</span> Häufig werden Kleinwüchsige wegen ihrer Größe <span class="fill-blank"></span>.</div>
-<div class="question-item"><span class="q-num">4.</span> Obwohl Kleinwüchsige so groß wie Kinder sind, haben sie <span class="fill-blank"></span> Maße.</div>
-<div class="question-item"><span class="q-num">5.</span> Kleinwüchsige könnten ihre Kleider nähen lassen, aber das ist <span class="fill-blank"></span>.</div>
-<div class="question-item"><span class="q-num">6.</span> Sema Gediks Firma spielt eine große Rolle bei der <span class="fill-blank"></span> der Kleinwüchsigen in die Gesellschaft.</div>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 3 (6 Punkte)</div>
-<p class="aufgabe-instruction">Beantworten Sie kurz die Fragen.</p>
-<div class="question-item"><span class="q-num">1.</span> Wo suchten Kleinwüchsige oft nach Kleidungsstücken?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">2.</span> Was wollte Sema Gedik mit ihrer Modemarke erreichen?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">3.</span> Was musste Sema Gedik tun, um ihre Maßtabellen zu erstellen?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">4.</span> Wer hilft ihr, die Kollektion zu entwickeln?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">5.</span> Wo kann man Sema Gediks Kleider kaufen?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">6.</span> Wo haben Models Sema Gediks Mode zur Schau gestellt?</div>
-<div class="answer-line"></div>
-</div>
-</section>
-
-<section class="exam-section" id="2021s">
-<div class="exam-header">Spomladanski izpitni rok 2021 · Izpitna pola 1A · Osnovna raven</div>
-
-<div class="text-block">
-<h3>Die neuen Foodtrends</h3>
-<p><em>Nachhaltiges Essen, selbstgemachte Lebensmittel, ultra-lokale Produkte werden wichtig.</em></p>
-<p>Deutschland liegt auf Platz 5 der Länder weltweit mit dem höchsten Anteil an Vegetariern. Sie verzichten auf tierische Produkte und benutzen Alternativen wie Wolfsbohnen statt Fleisch. Jeder zehnte ernährte sich 2015 vegetarisch, jeder Hundertste vegan.</p>
-<p>Nachhaltiges Essen – auch Spiritual Food – gewinnt an Bedeutung. Dazu gehört der Trend der Komplettverarbeitung: „vom Blatt bis zur Wurzel" essen. Immer mehr Köche nutzen auch den Trend des „von Kopf bis Schwanz" für Fisch und Fleisch. Der Spitzenkoch Ludwig Maurer bietet Kurse an, in denen man ein Tier komplett verarbeitet. Für Maurer ist das ein Zeichen von Respekt gegenüber Lebewesen. Wer etwas selbst herstellt, weiß definitiv, was drin ist, obwohl die Herstellung oft viel teurer ist.</p>
-<p>Als Reaktion auf die Globalisierung greifen viele Konsumenten auf regionale Produkte zurück. Hyper- oder Ultra-Lokalität heißt das. Das Berliner Start-up Infarm nutzt den Supermarkt direkt als Anbaufläche.</p>
-<p class="source">Vir: deutschland.de, 2017</p>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 1 (6 Punkte)</div>
-<p class="aufgabe-instruction">Richtig (R) oder falsch (F)?</p>
-<table class="rf"><tr><th></th><th>R</th><th>F</th><th style="text-align:left">Behauptung</th></tr>
-<tr><td>1.</td><td class="check-cell"></td><td class="check-cell"></td><td>Deutschland überholte fünf Länder bezüglich der Zahl an Vegetariern.</td></tr>
-<tr><td>2.</td><td class="check-cell"></td><td class="check-cell"></td><td>Wegen der neuen Trends entstehen mehr Küchenabfälle.</td></tr>
-<tr><td>3.</td><td class="check-cell"></td><td class="check-cell"></td><td>Ludwig Maurer bringt den Kursteilnehmern bei, wie man das ganze Tier verarbeitet.</td></tr>
-<tr><td>4.</td><td class="check-cell"></td><td class="check-cell"></td><td>Maurer meint, dass die komplette Tierverarbeitung verantwortungslos ist.</td></tr>
-<tr><td>5.</td><td class="check-cell"></td><td class="check-cell"></td><td>Trotz höherer Kosten stellen viele Leute selber Lebensmittel her.</td></tr>
-<tr><td>6.</td><td class="check-cell"></td><td class="check-cell"></td><td>Die Firma Infarm baut ihre Produkte im Supermarkt selbst an.</td></tr>
-</table>
-</div>
-<hr class="section-break">
-
-<div class="text-block">
-<h3>Ich will nicht auf Hilfe warten</h3>
-<p><em>Silija Korn ist im Alter von 17 Jahren komplett erblindet. Heute gibt sie Malkurse und hat ein Kinderbuch geschrieben.</em></p>
-<p>Frau Korn erinnert sich bewusst an das Aussehen der Farben. In ihren Kursen zeigt sie Techniken: Die Farben stehen in einer Reihe von hell nach dunkel, und sie mischt Materialien wie Eierschalen, Sand und Sägespäne unter die Farben. Um sich auf der Leinwand zu orientieren, hält sie den Finger darauf.</p>
-<p>Nach ihrer Erblindung hörte sie auf zu malen – aus Angst. Erst ein Bericht über blinde malende Kinder ermutigte sie. Frau Korn arbeitet als Erzieherin – die staatliche Anerkennung musste sie erkämpfen. Die Kinder respektieren sie, weil sie sehr gut hören kann. Sie hat eine Stiftung für Blinde gegründet und ist in sozialen Medien aktiv. Sie sagt: „Ich bin ein selbstständiger Mensch geworden."</p>
-<p class="source">Vir: Deutsch perfekt, 2017</p>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 2 (6 Punkte)</div>
-<p class="aufgabe-instruction">Beantworten Sie kurz die Fragen.</p>
-<div class="question-item"><span class="q-num">1.</span> Was für Kurse bietet Frau Korn an?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">2.</span> Womit mixt Frau Korn die Farben?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">3.</span> Wie orientiert sich Frau Korn auf der Leinwand?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">4.</span> Was hinderte Frau Korn nach der Erblindung, wieder zu malen?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">5.</span> Wie erlebt Frau Korn den Umgang mit Berlinern?</div>
-<div class="answer-line"></div>
-<div class="question-item"><span class="q-num">6.</span> Wofür kämpfte Frau Korn mit dem Senat?</div>
-<div class="answer-line"></div>
-</div>
-<div class="aufgabe">
-<div class="aufgabe-title">Aufgabe 3 (6 Punkte)</div>
-<p class="aufgabe-instruction">Ergänzen Sie die Sätze.</p>
-<div class="question-item"><span class="q-num">1.</span> An das Aussehen der Farben muss sich Frau Korn bewusst <span class="fill-blank"></span>.</div>
-<div class="question-item"><span class="q-num">2.</span> Frau Korn stellt die Farben in die Reihe, damit sie sie voneinander <span class="fill-blank"></span>.</div>
-<div class="question-item"><span class="q-num">3.</span> <span class="fill-blank"></span> über blinde malende Kinder ermutigte Frau Korn wieder zum Malen.</div>
-<div class="question-item"><span class="q-num">4.</span> Als blinde Erzieherin wird sie von den Kindern respektiert, denn sie kann gut <span class="fill-blank"></span>.</div>
-<div class="question-item"><span class="q-num">5.</span> Frau Korn informiert Mitmenschen durch soziale Medien und ihre <span class="fill-blank"></span>.</div>
-<div class="question-item"><span class="q-num">6.</span> Trotz ihrer Blindheit ist Frau Korn heute <span class="fill-blank"></span>.</div>
-</div>
-</section>
-
-<section class="solutions-section" id="resitve">
-<h2>Rešitve / Lösungen</h2>
-<div class="solution-exam">
-<h3>Spomladanski izpitni rok 2025</h3>
-<p><strong>Aufgabe 1</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>F</td></tr>
-<tr><td>2</td><td>H</td></tr>
-<tr><td>3</td><td>A</td></tr>
-<tr><td>4</td><td>C</td></tr>
-<tr><td>5</td><td>E</td></tr>
-<tr><td>6</td><td>B</td></tr>
-</table>
-<p><strong>Aufgabe 2</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>Sie kämpften ums Überleben / Die Corona-Pandemie</td></tr>
-<tr><td>2</td><td>20 Minuten</td></tr>
-<tr><td>3</td><td>In Berlin / Im Berliner Wintergarten (NE: Pariser Grand Café)</td></tr>
-<tr><td>4</td><td>Der Brüder Lumière</td></tr>
-<tr><td>5</td><td>Wegen der Corona-Pandemie</td></tr>
-<tr><td>6</td><td>Mehr als die Hälfte (NE: Die Hälfte)</td></tr>
-</table>
-<p><strong>Aufgabe 3</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>unabhängig</td></tr>
-<tr><td>2</td><td>Feiern</td></tr>
-<tr><td>3</td><td>im zweiten Lockdown / wegen Corona</td></tr>
-<tr><td>4</td><td>einer Milliarde Euro</td></tr>
-<tr><td>5</td><td>Einnahmequellen</td></tr>
-<tr><td>6</td><td>verlegten Premieren / fehlenden Blockbuster</td></tr>
-</table>
-</div>
-<hr class="section-break">
-<div class="solution-exam">
-<h3>Spomladanski izpitni rok 2024</h3>
-<p><strong>Aufgabe 1</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>H</td></tr>
-<tr><td>2</td><td>F</td></tr>
-<tr><td>3</td><td>G</td></tr>
-<tr><td>4</td><td>A</td></tr>
-<tr><td>5</td><td>C</td></tr>
-<tr><td>6</td><td>B</td></tr>
-</table>
-<p><strong>Aufgabe 2</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>R</td></tr>
-<tr><td>2</td><td>F</td></tr>
-<tr><td>3</td><td>F</td></tr>
-<tr><td>4</td><td>F</td></tr>
-<tr><td>5</td><td>R</td></tr>
-<tr><td>6</td><td>R</td></tr>
-</table>
-<p><strong>Aufgabe 3</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>keine</td></tr>
-<tr><td>2</td><td>pädagogische / lehrreiche / erzieherische</td></tr>
-<tr><td>3</td><td>Erzieher</td></tr>
-<tr><td>4</td><td>Kindergarten</td></tr>
-<tr><td>5</td><td>zwei</td></tr>
-<tr><td>6</td><td>gleichen / ähnlichen</td></tr>
-</table>
-</div>
-<hr class="section-break">
-<div class="solution-exam">
-<h3>Spomladanski izpitni rok 2023</h3>
-<p><strong>Aufgabe 1</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>G</td></tr>
-<tr><td>2</td><td>E</td></tr>
-<tr><td>3</td><td>B</td></tr>
-<tr><td>4</td><td>F</td></tr>
-<tr><td>5</td><td>D</td></tr>
-<tr><td>6</td><td>A</td></tr>
-</table>
-<p><strong>Aufgabe 2</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>Grillenpulver / Insektenpulver</td></tr>
-<tr><td>2</td><td>essen</td></tr>
-<tr><td>3</td><td>Fleischersatzprodukte / pflanzliche Lebensmittel</td></tr>
-<tr><td>4</td><td>(fast gleich/genauso) wie</td></tr>
-<tr><td>5</td><td>Kunstfleisch / Laborfleisch</td></tr>
-<tr><td>6</td><td>Zucker</td></tr>
-</table>
-<p><strong>Aufgabe 3</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>Weil sie Muskeln aufbauen</td></tr>
-<tr><td>2</td><td>Weil sie ihre Nahrung viel besser verwerten</td></tr>
-<tr><td>3</td><td>Weil der Insektengenuss für viele Europäer unvorstellbar ist</td></tr>
-<tr><td>4</td><td>Spezielle Nährflüssigkeit / Ein Gefäß mit Nährflüssigkeit</td></tr>
-<tr><td>5</td><td>Weil sie noch entwickelt wird</td></tr>
-<tr><td>6</td><td>Sie wurden mit Hilfe von Gentechnik umprogrammiert</td></tr>
-</table>
-</div>
-<hr class="section-break">
-<div class="solution-exam">
-<h3>Spomladanski izpitni rok 2022</h3>
-<p><strong>Aufgabe 1</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>E</td></tr>
-<tr><td>2</td><td>A</td></tr>
-<tr><td>3</td><td>F</td></tr>
-<tr><td>4</td><td>D</td></tr>
-<tr><td>5</td><td>H</td></tr>
-<tr><td>6</td><td>C</td></tr>
-</table>
-<p><strong>Aufgabe 2</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>1,40 Meter groß</td></tr>
-<tr><td>2</td><td>Behinderungen / Wachstumsstörung</td></tr>
-<tr><td>3</td><td>diskriminiert / nicht ernst genommen / beleidigt</td></tr>
-<tr><td>4</td><td>unterschiedliche / verschiedene</td></tr>
-<tr><td>5</td><td>(zu) teuer</td></tr>
-<tr><td>6</td><td>Integration</td></tr>
-</table>
-<p><strong>Aufgabe 3</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>In der Kinderabteilung</td></tr>
-<tr><td>2</td><td>Die benachteiligte Situation verbessern / Mode für Kleinwüchsige produzieren</td></tr>
-<tr><td>3</td><td>Viele Menschen vermessen</td></tr>
-<tr><td>4</td><td>Ihre Kunden / Kleinwüchsige</td></tr>
-<tr><td>5</td><td>Im Online-Shop / Im Internet</td></tr>
-<tr><td>6</td><td>Auf der Berliner Modewoche</td></tr>
-</table>
-</div>
-<hr class="section-break">
-<div class="solution-exam">
-<h3>Spomladanski izpitni rok 2021</h3>
-<p><strong>Aufgabe 1</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>F</td></tr>
-<tr><td>2</td><td>F</td></tr>
-<tr><td>3</td><td>R</td></tr>
-<tr><td>4</td><td>F</td></tr>
-<tr><td>5</td><td>R</td></tr>
-<tr><td>6</td><td>R</td></tr>
-</table>
-<p><strong>Aufgabe 2</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>Malkurse</td></tr>
-<tr><td>2</td><td>Mit Eierschalen, Sand und Sägespänen</td></tr>
-<tr><td>3</td><td>Mit den Fingern / Sie hält die Finger darauf</td></tr>
-<tr><td>4</td><td>Die Angst</td></tr>
-<tr><td>5</td><td>Sie sind offen und helfen / hilfsbereit</td></tr>
-<tr><td>6</td><td>Für die staatliche Anerkennung / Job als Erzieherin</td></tr>
-</table>
-<p><strong>Aufgabe 3</strong></p>
-<table class="solution-table">
-<tr><th>Vpr.</th><th>Rešitev</th></tr>
-<tr><td>1</td><td>erinnern</td></tr>
-<tr><td>2</td><td>unterscheidet / unterscheiden kann</td></tr>
-<tr><td>3</td><td>Ein Bericht / Lesen</td></tr>
-<tr><td>4</td><td>hören</td></tr>
-<tr><td>5</td><td>Stiftung / Webseite</td></tr>
-<tr><td>6</td><td>selbstständig(er) / ein selbstständiger Mensch</td></tr>
-</table>
-</div>
-<hr class="section-break">
-
-</section>
-
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
 </body>
 </html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Spomladanski izpitni rok 2011</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Spomladanski izpitni rok 2011
+</nav>
+
+<h1>Spomladanski izpitni rok 2011</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Spomladanski izpitni rok 2011 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>den folgenden Text. – Unterwasser-Sitzung auf den Malediven</h3>
+<p><em>Lesen Sie bitte</em></p>
+<p>Können Sie sich vorstellen, dass ein Taucheranzug</p>
+<p>Arbeitskleidung für einen Politiker sein kann? Dass</p>
+<p>ein Politiker als Berufsausbildung einen Tauchkurs</p>
+<p>braucht? Oder dass der Konferenztisch einer</p>
+<p>Regierung auf dem Meeresboden steht?</p>
+<p>Normalerweise natürlich nicht. Am 17. Oktober 2009 aber schon: Da hat der Präsident der Malediven</p>
+<p>Mohamed Nasheed sein Kabinett zu einer Unterwasser-Sitzung einberufen. Er wollte damit darauf</p>
+<p>hinweisen, dass die Malediven ganz besonders vom Klimawandel bedroht sind.</p>
+<p>Die Malediven sind ein kleiner Staat im Indischen Ozean und liegen im Südwesten von Indien.</p>
+<p>Der Name &quot;Malediven&quot; bedeutet &quot;Inselkette&quot; - und warum sie so heißen, wird klar, wenn man</p>
+<p>vom Weltall aus draufschaut: Von so weit oben sieht man besonders gut die 26 Atolle der</p>
+<p>Malediven. Diese Inseln sind nämlich nicht durch Vulkanausbrüche entstanden, sondern es sind</p>
+<p>Korallenriffe, knapp 1.200 größere und kleinere Inseln. Von ihnen sind nur gut 200 bewohnt. Die</p>
+<p>Inseln ragen alle nur etwa ein bis zwei Meter aus dem Wasser, die höchste Erhebung der gesamten</p>
+<p>Republik Malediven ist auf der Insel Villingili - und auch das ist noch nicht gerade ein Berg: Diese</p>
+<p>höchste Stelle ist nur 2,4 Meter hoch. Damit sind die Malediven der weltweit am niedrigsten gelegene</p>
+<p>Staat.</p>
+<p>Niedrige Inseln - hohe Gefahr</p>
+<p>Und ihre geringe Höhe über dem Meeresspiegel ist gleichzeitig auch das größte Problem der</p>
+<p>Malediven: Wenn der Meeresspiegel wegen der Erderwärmung weiterhin ständig steigt, wird die</p>
+<p>Inselgruppe bis zum Jahr 2100 zum größten Teil überflutet sein. Mit der Unterwasser-Konferenz wollte</p>
+<p>die Regierung der Malediven die internationale Gemeinschaft dazu aufrufen, den CO -Ausstoß weiter</p>
+<p>2</p>
+<p>zu reduzieren, um damit dazu beizutragen, die Erderwärmung zu stoppen oder wenigstens zu</p>
+<p>verlangsamen.</p>
+<p>Sitzung mit Generalprobe</p>
+<p>Übrigens gab es eine Generalprobe für diese ungewöhnliche Unterwasser-Sitzung: Am Tag</p>
+<p>davor mussten die Minister ihre Taucheranzüge anziehen und schon mal hinunter ins Wasser.</p>
+<p>Und manche Politiker hatten das Tauchen in einem extra Tauchkurs speziell für diese Sitzung</p>
+<p>noch schnell gelernt!</p>
+<p>Die Unterwasser-Sitzung fand dann an einem hufeisenförmigen Tisch statt. Sie dauerte eine halbe</p>
+<p>Stunde und die Politiker verständigten sich dabei mit Handzeichen. Am Schluss unterzeichneten sie</p>
+<p>gemeinsam eine Erklärung: mit wasserfesten Stiften auf weißen Tafeln statt auf Papier. Nach der</p>
+<p>Sitzung haben Präsident und Minister ihre Taucheranzüge signiert, um sie für einen guten Zweck zu</p>
+<p>versteigern: nämlich zum Schutz der Korallenriffe der Malediven.</p>
+<p>Und Präsident Nasheed hat noch weitere Pläne: Er will die 350.000 Einwohner der Malediven</p>
+<p>umsiedeln und die Republik Malediven innerhalb der nächsten zehn Jahre zum ersten CO -neutralen</p>
+<p>2</p>
+<p>Staat auf der ganzen Welt machen.</p>
+<p>(Nach www.ard.de, 10/2009)</p>
+<p>M111-251-1-1 3</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+<p class="aufgabe-instruction">Entscheiden Sie, ob folgende Behauptungen richtig (R) oder falsch (F) sind, und markieren Sie
+jeweils den entsprechenden Buchstaben.</p>
+<div class="question-item"><span class="q-num">1.</span> An der Unterwassersitzung der maledivischen Regierung nahmen Berufstaucher teil. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Die Malediven bestehen aus vielen größeren und kleineren Inseln. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Auf allen maledivischen Inseln wohnen Menschen. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Eine große Gefahr für die Malediven sind Überschwemmungen. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Vor der Unterwasser-Sitzung mussten einige Politiker noch tauchen lernen. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Während der Unterwasser-Konferenz konnten die Politiker nicht miteinander kommunizieren. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">7.</span> Nach der Konferenz konnte man keine Klima-Erklärung unterschreiben. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">8.</span> Nach Plänen des Präsidenten Nasheed werden die Einwohner der Malediven umziehen müssen. (1) R F 4 M111-251-1-1</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2011-Spo-0">
+    <h4>Rešitve – Aufgabe 1</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">7.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">8.</span><span class="sol-ans">R</span></div>
+  </div>
+</div>
+</div>
+<div class="text-block">
+<h3>den folgenden Text. – Lotto-Annahmestelle</h3>
+<p><em>Lesen Sie bitte</em></p>
+<p>Das Kleeblatt ist ein Symbol für Glück – und das Symbol für Lotto, die populärste deutsche</p>
+<p>Lotterie.</p>
+<p>Es ist Mittwoch, 15 Uhr, in einer Lotto-</p>
+<p>Annahmestelle in Bremen. Noch drei Stunden</p>
+<p>bis zum Annahmeschluss für die nächste</p>
+<p>Ziehung der Lottozahlen. Vor der Lotto-</p>
+<p>Verkaufsstelle hat sich eine kleine Schlange</p>
+<p>gebildet. Wie die meisten Lotto-Annahmestellen</p>
+<p>ist auch diese in einem Geschäft für Tabakwaren</p>
+<p>und Zeitschriften. Eine junge Mutter schiebt</p>
+<p>einen Lottoschein unter der Scheibe durch. Iris</p>
+<p>Kaup nimmt den Lottoschein. Eine Maschine</p>
+<p>registriert die angekreuzten Zahlen und druckt</p>
+<p>(http://www.bodieko.si/tag/stiri-peresna-deteljica)</p>
+<p>eine Quittung aus. „Das macht dann 6,60 Euro,</p>
+<p>bitte“, sagt Iris Kaup und gibt der Kundin</p>
+<p>Quittung und Lottoschein. Nur mit der Quittung An diesem Mittwoch zahlen die Lottospieler</p>
+<p>kann sie später das gewonnene Geld insgesamt 24 545 790 Euro ein. Aber nicht alles</p>
+<p>bekommen. geht als Gewinn an die Spieler zurück. „Von den</p>
+<p>Lottoeinnahmen werden 50 Prozent an die</p>
+<p>Aber vielleicht klappt es ja dieses Mal. Mit ihrem Spieler ausgeschüttet“, erklärt Kai Vogel,</p>
+<p>Sohn Quentin hat sie die Zahlen angekreuzt. Der Rechtsanwalt der Lotteriegesellschaft in Bremen.</p>
+<p>Achtjährige weiß genau, was sie mit einem Circa 40 Prozent des Geldes bekommt der Staat,</p>
+<p>Gewinn machen würden: „Wir hoffen, 20 den Rest bekommen die Annahmestellen. Auch</p>
+<p>Millionen Euro zu gewinnen. Dann kaufen wir ein für die Bundesländer ist die Lotterie eine wichtige</p>
+<p>neues Haus, ein neues Auto und fahren in den Einnahmequelle. Mit dem Geld finanzieren sie</p>
+<p>Urlaub nach Hawaii.“ unter anderem Projekte in Sport und Kultur. Aber</p>
+<p>in den letzten Jahren gab es Diskussionen um</p>
+<p>Sechs Richtige im Lotto – davon träumen viele. das Monopol. Die Europäische Union fordert</p>
+<p>Woche für Woche versuchen sie ihr Glück bei mehr Rechte für private Glücksspielanbieter.</p>
+<p>der Mittwochs- oder Samstagslotterie. Immerhin:</p>
+<p>100 Lottospieler sind 2008 zu Millionären In der Lotto-Annahmestelle in Bremen gibt es</p>
+<p>geworden. Das hat der deutsche Lotto- und kurz vor Annahmeschluss nur eine Frage: Wie</p>
+<p>Totoblock mitgeteilt, der die staatliche Lotterie lauten die sechs Richtigen? „Jede</p>
+<p>organisiert und aus 16 Lottogesellschaften in Zahlenkombination ist gleich wahrscheinlich“, ist</p>
+<p>den einzelnen Bundesländern besteht. In die enttäuschende Antwort vom Rechtsanwalt</p>
+<p>Deutschland gilt ein Lotteriemonopol des Vogel. Manche Spieler kombinieren Geburts-</p>
+<p>Staates, auch Österreich und die Schweiz haben und Hochzeitsdaten, andere machen die Kreuze</p>
+<p>ähnliche Gesetze. Das heißt, nur der Staat darf nach einem Muster.</p>
+<p>Lotterien veranstalten. So will der Staat das</p>
+<p>Glücksspiel regulieren. An diesem Mittwoch hat keine Methode Erfolg,</p>
+<p>niemand hat nämlich sechs Richtige und das</p>
+<p>Die erste Lottoziehung nach dem Zweiten Geld kommt in den Jackpot. Iris Kaup wird</p>
+<p>Weltkrieg fand 1955 in Hamburg statt, 1965 trotzdem am nächsten Tag Gewinn auszahlen –</p>
+<p>wurde die erste Ziehung im Fernsehen gezeigt. die kleinen bis 1000 Euro, die es eigentlich</p>
+<p>Annette Bareck hat das alles miterlebt. Sie ist immer gibt. „Und mancher freut sich schon über</p>
+<p>100 Jahre alt und spielt schon seit immer Lotto. 2,50 Euro“, sagt sie.</p>
+<p>Aus einem Umschlag nimmt sie ihre</p>
+<p>Lottoscheine, die sie schon zu Hause ausgefüllt (Nach Deutsch Perfekt, 3/2009)</p>
+<p>hat. „So, jetzt versuchen wir wieder unser</p>
+<p>Glück“, sagt sie zu Iris Kaup und lacht.</p>
+<p>Millionärin ist sie in all der Zeit nicht geworden.</p>
+<p>Aber wenn sie es jetzt würde, was würde sie mit</p>
+<p>dem Geld tun? „Das würde ich an meine Kinder</p>
+<p>und arme Leute verteilen“, sagt sie.</p>
+<p>M111-251-1-1 5</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die folgenden Fragen. Die richtigen Lösungen finden Sie nur im obigen
+Text.</p>
+<div class="question-item"><span class="q-num">9.</span> Wo befinden sich gewöhnlich die deutschen Lotto-Annahmestellen? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">10.</span> Was braucht man unbedingt für die Auszahlung eines Gewinns? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">11.</span> Wie wird ein Lottoschein ausgefüllt? (1) ___ 1 2. Wann gibt es in Deutschland die Lotto-Ziehungen? (1) ___ 1 3. Wer hat das Recht und die Kontrolle über die deutsche Lotterie? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">14.</span> Wie viel Prozent des Gewinns bekommen die Lotto-Annahmestellen ausgezahlt? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">15.</span> Was finanzieren die Bundesländer mit dem Geld der Lotterie? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">16.</span> Warum sind besondere Zahlenkombinationen nicht sehr sinvoll? (1) ___ 6 M111-251-1-1</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2011-Spo-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">9.</span><span class="sol-ans">in einem Geschäft für Tabakwaren und Zeitschriften</span></div>
+<div class="solution-row"><span class="sol-num">10.</span><span class="sol-ans">(die) Quittung</span></div>
+<div class="solution-row"><span class="sol-num">11.</span><span class="sol-ans">Zahlen werden angekreuzt. / Man kreuzt Zahlen an</span></div>
+<div class="solution-row"><span class="sol-num">14.</span><span class="sol-ans">zehn</span></div>
+<div class="solution-row"><span class="sol-num">15.</span><span class="sol-ans">Projekte in Sport und Kultur</span></div>
+<div class="solution-row"><span class="sol-num">16.</span><span class="sol-ans">Jede Zahlenkombination ist gleich wahrscheinlich.</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Ergänzen Sie die Sätze. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">17.</span> Die Lottoscheine kann man an einer ___ kaufen und (1) später auch einlösen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">18.</span> Nach dem ___ kann man die Lottoscheine nicht mehr (1) abgeben.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">19.</span> Die deutsche Lotterie ist zusammengesetzt aus ___. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">20.</span> Deutschland, Österreich und die Schweiz haben fast die gleichen ___,(1) die die Lotterie regeln.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">21.</span> Fünfzig Prozent des Lottogewinns bekommen die ___. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">22.</span> Die Europäische Union will auch für ___ Lottoverkäufer (1) bessere Möglichkeiten und Bedingungen schaffen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">23.</span> Wenn man ___ bekommt, kann man den Hauptgewinn (1) bekommen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">24.</span> Es müssen nicht immer Millionen sein. Viele Lottospieler ___ (1) auch über kleinere Gewinne. M111-251-1-1 7</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2011-Spo-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">17.</span><span class="sol-ans">Lotto-Annahmestelle/Lotto-Verkaufsstelle</span></div>
+<div class="solution-row"><span class="sol-num">18.</span><span class="sol-ans">Annahmeschluss</span></div>
+<div class="solution-row"><span class="sol-num">19.</span><span class="sol-ans">6 Lottogesellschaften</span></div>
+<div class="solution-row"><span class="sol-num">20.</span><span class="sol-ans">Gesetze</span></div>
+<div class="solution-row"><span class="sol-num">21.</span><span class="sol-ans">Spieler/Lottospieler</span></div>
+<div class="solution-row"><span class="sol-num">22.</span><span class="sol-ans">private</span></div>
+<div class="solution-row"><span class="sol-num">23.</span><span class="sol-ans">sechs Richtige</span></div>
+<div class="solution-row"><span class="sol-num">24.</span><span class="sol-ans">freuen sich</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

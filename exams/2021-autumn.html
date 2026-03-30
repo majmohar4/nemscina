@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Jesenski izpitni rok 2021</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Jesenski izpitni rok 2021
+</nav>
+
+<h1>Jesenski izpitni rok 2021</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Jesenski izpitni rok 2021 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>Last-Minute-Lerntipps: – Wie du dir in kurzer</h3>
+<p><em>Lesen Sie den Text.</em></p>
+<p>Zeit viel merken kannst</p>
+<p>Textteile:</p>
+<p>0 I</p>
+<p>Wenn du merkst, dass ein bestimmtes Thema dir gar nicht liegt, überspringe es zunächst und nimm</p>
+<p>dir ein anderes Thema vor. Überlege dafür auch genau, ob dein Lehrer in letzter Zeit Andeutungen</p>
+<p>gemacht hat, was die Wichtigkeit der einzelnen Themen angeht. Die meisten Lehrer geben hier und</p>
+<p>da kleine Hinweise. Auf diese Bereiche solltest du dich beim Lernen vor allem konzentrieren.</p>
+<p>1</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+</div>
+<div class="text-block">
+<h3>Ein Lehrer auf Reise</h3>
+<p><em>Lesen Sie den Text.</em></p>
+<p>Der Englisch- und Geographielehrer Jan Kammann (39) unterrichtet in einer internationalen</p>
+<p>Vorbereitungsklasse in Hamburg. Er wollte mehr über die Heimatländer seiner Schüler wissen. Also</p>
+<p>nahm er sich ein Jahr lang frei und besuchte 14 Staaten. Über seine Erfahrungen hat er das Buch Ein</p>
+<p>deutsches Klassenzimmer geschrieben.</p>
+<p>Herr Kammann, ist Ihnen ein Land nach Ihrer Reise besonders in Erinnerung geblieben?</p>
+<p>Ja, der Iran. Ich hatte vorher viele Vorurteile im Kopf. Bisher kannte ich nur den offiziellen Iran: der</p>
+<p>Ayatollah auf jedem Geldschein und überall religiöse Propaganda. Es gibt aber auch eine sehr</p>
+<p>engagierte Zivilgesellschaft, was mich sehr überrascht hat.</p>
+<p>Hatten Sie auf Ihren Reisen nur positive Erlebnisse?</p>
+<p>Die Begegnungen, die ich gemacht habe, habe ich mir ausgesucht. Deshalb waren sie alle sehr</p>
+<p>positiv. Aber in Ghana habe ich mir auch eine Goldmine und eine Elektroschrottdeponie angesehen.</p>
+<p>Dort habe ich unschöne Bilder gesehen. Und ich habe festgestellt, dass die Arbeit der Menschen dort</p>
+<p>direkt mit unserem Konsum zu tun hat. Vielleicht müssten wir mal nachdenken, wie wir das ändern</p>
+<p>können.</p>
+<p>Wie sind Sie eigentlich auf die Idee gekommen, die Heimatländer Ihrer Schüler zu besuchen?</p>
+<p>Mit meiner internationalen Klasse hatte ich drei Jahre lang ein sehr gutes Verhältnis. Da habe ich viel</p>
+<p>über die Denkweise von Menschen aus anderen Ländern gelernt. Das hat mich total fasziniert und</p>
+<p>zum Reisen bewegt.</p>
+<p>Wie haben Ihre Schüler auf die Idee reagiert?</p>
+<p>Sehr positiv. Ich habe mir Reiseführer von ihnen schreiben lassen. Dafür habe ich die Struktur von</p>
+<p>Lonely-Planet-Büchern übernommen: Die besten fünf Gerichte, Festivals, Sehenswürdigkeiten. Und</p>
+<p>am Ende einen kleinen Essay: Warum lohnt es sich, den Iran, Albanien oder auch Russland zu</p>
+<p>besuchen? Das hat den Schülern viel Spaß gemacht. Und sie haben mir wirklich sehr gute Tipps</p>
+<p>gegeben.</p>
+<p>Hat sich Ihre Beziehung zu den Schülern geändert?</p>
+<p>Die Schüler, um die es in dem Buch geht, sind schon mit der Schule fertig. Aber ich habe noch</p>
+<p>Kontakt zu ihnen. Meine Beziehung zu meinen aktuellen Schülern hat sich nicht wirklich geändert.</p>
+<p>Aber ich merke schon: Sie freuen sich, wenn sie sehen, dass ich etwas über ihre Heimat weiß.</p>
+<p>Ist also schon die nächste Reise geplant?</p>
+<p>Noch nicht, ich bin Papa geworden. Aber ich habe jetzt schon Reiseführer für 50 verschiedene</p>
+<p>Länder. Meine Schüler wollen immer wieder welche schreiben. Also werden sicher noch Reisen</p>
+<p>kommen. Das ist in mir drin, das kann ich nicht ändern.</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Ergänzen Sie die Sätze. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Die größte Überraschung in Iran war für Kammann ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Die Arbeit der Ghanaer ist laut Kammann mit unserem ___ verbunden.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Die Multikulturalität in seiner Klasse und verschiedene ___ seiner Schüler motivierten den Lehrer Kammann, sich auf Reisen zu machen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Schüler fertigten für seinen Lehrer einen ___ mit Vorschlägen an.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Wenn Herr Kammann den Schülern über ihre eigene ___ erzählt, sind sie sehr begeistert.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Momentan reist Herr Kammann nicht, weil er ein ___ bekommen hat. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2021-Jes-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">engagierte Zivilgesellschaft</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">Konsum</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">Denkweise(n)</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">Reiseführer</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">Heimat</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans"> Kind</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Jesenski izpitni rok 2010</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Jesenski izpitni rok 2010
+</nav>
+
+<h1>Jesenski izpitni rok 2010</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Jesenski izpitni rok 2010 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>Deutschland entdecken – eine Woche gebraucht. &quot;Inklusive sehr viele</h3>
+<p><em>Lesen Sie bitte.</em></p>
+<p>Reifenpannen,&quot; sagt die Bankangestellte.</p>
+<p>warum nicht per Fahrrad?</p>
+<p>Flussrouten sind meistens leicht zu fahren, weil es</p>
+<p>keine schwierigen Steigungen gibt. Aber auch</p>
+<p>Touren in flachen Regionen sind nicht immer</p>
+<p>einfach. An der Nord- und Ostseeküste gibt es oft</p>
+<p>starken Wind. Der macht die Fahrt manchmal</p>
+<p>anstrengender als eine Tour in den Bergen. Die</p>
+<p>letzte Etappe von Hamburg bis Cuxhaven sind</p>
+<p>Kati Börner und ihre Freunde deshalb nicht mehr</p>
+<p>gefahren: &quot;Zu viel Wind!&quot; Eigentlich schade. Die</p>
+<p>Landschaft an der Nordseeküste ist sehr schön:</p>
+<p>viel Grün, viel Wasser.</p>
+<p>Es sind die vielen kleinen Überraschungen, die</p>
+<p>Radtouren so interessant machen. Wenn sich von</p>
+<p>einem Dorf ins nächste der Dialekt ändert oder ein</p>
+<p>Getränk einen anderen Namen bekommt – wie das</p>
+<p>Bier mit Zitronenlimonade, das in Süddeutschland</p>
+<p>Radler, in Hamburg aber Alsterwasser heißt.</p>
+<p>Auf dem Weg durch Brandenburg glaubte Kati</p>
+<p>Börner, die Zeit sei stehen geblieben.</p>
+<p>&quot;Brandenburg ist entlang des Elberadweges sehr</p>
+<p>ländlich. In einem Dorf trafen wir eine alte Frau,</p>
+<p>die hatte in ihren Garten Tische gestellt und</p>
+<p>verkaufte selbst gebackenen Kuchen. Hinter dem</p>
+<p>Garten waren ein Teich zum Baden und viel</p>
+<p>Natur.&quot; Die Radlerin war überrascht. &quot;Ich dachte</p>
+<p>nicht, dass man so etwas in Deutschland noch</p>
+<p>findet,&quot; erzählt sie. Die Landschaft an der Elbe ist</p>
+<p>außergewöhnlich: Von Coswig (Sachsen-Anhalt)</p>
+<p>bis kurz vor Hamburg ist der Fluss auf rund 400</p>
+<p>Immer mehr Menschen entdecken Deutschland</p>
+<p>Kilometern ein von der UNESCO geschütztes</p>
+<p>per Fahrrad. Mehr als 21 Millionen Deutsche</p>
+<p>Gebiet.</p>
+<p>fuhren im Jahr 2006 im Urlaub Fahrrad, so der</p>
+<p>Allgemeine Deutsche Farrad-Club (ADFC). Am Kati Börner rät anderen Radfahrern: Keine zu</p>
+<p>liebsten reisen die Radfahrurlauber durch das großen Tagesetappen! Sonst fehlt Zeit für Kultur</p>
+<p>eigene Land: 88 Prozent nannten in der ADFC- und all die schönen kleinen Dinge am Weg: &quot;60</p>
+<p>Umfrage Deutschland als Urlaubsziel für 2007. bis 80 Kilometer am Tag sind genug,&quot; findet sie.</p>
+<p>Der Po dankt es einem auch. Die erste halbe</p>
+<p>Aber wo in Deutschland? Es gibt mehr als 200</p>
+<p>Stunde jeden Morgen im Sattel ist die Hölle. Aber</p>
+<p>Radfernwege im Land. Die meisten führen an</p>
+<p>es ist auch ein ganz besonderes Erlebnis, in einer</p>
+<p>Flüssen entlang – wie die drei populärsten: der</p>
+<p>Stadt wie Hamburg anzukommen mit dem Gefühl,</p>
+<p>Elberadweg, der Weserradweg und der</p>
+<p>dass man mehr als 650 Kilometer geradelt ist.&quot;</p>
+<p>Donauradweg. Andere folgen Themen: die Route</p>
+<p>der Industriekultur, der Radweg Deutsche Ob Radwandern Spaß macht, entscheidet vor</p>
+<p>Weinstraße in Rheinland-Pfalz, der Gurken- allem die Qualität der Route. Wichtige Fragen: Ist</p>
+<p>Radweg in Brandenburg. Jede Route hat ihren der Weg in gutem Zustand oder hat er viele</p>
+<p>eigenen Charakter und unterscheidet sich von Löcher? Wie ist der Weg ausgeschildert? Ist der</p>
+<p>anderen durch ihre Länge, die Landschaft und die Weg in der Natur oder neben einer stark</p>
+<p>Schwierigkeit. befahrenen Straße? Gibt es Tourkarten? – Ist man</p>
+<p>man gut vorbereitet, kann der Spaß beginnen ...</p>
+<p>Kati Börner (30) ist den Elberadweg von Dresden</p>
+<p>bis Hamburg zusammen mit zwölf Freunden</p>
+<p>geradelt. Für die rund 650 Kilometer haben sie (Nach Deutsch Perfekt, 7/2007)</p>
+<p>M102-251-1-1 3</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+<p class="aufgabe-instruction">Entscheiden Sie, ob folgende Behauptungen richtig (R) oder falsch (F) sind, und markieren Sie
+jeweils den entsprechenden Buchstaben.</p>
+<div class="question-item"><span class="q-num">1.</span> Deutschland ist das beliebteste Urlaubsziel der deutschen Radurlauber. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> In Deutschland gibt es 200 Radfernwege an Flüssen entlang. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Jeder Radfernweg folgt einem bestimmten Thema. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Kati und ihre Freunde hatten keinen Ärger auf dem Weg von Dresden bis Hamburg. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Das Wetter an der Nord- und Ostseeküste ist ideal für Radtouren. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> In Brandenburg hat es Kati Börner sehr gut gefallen. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">7.</span> Man soll nicht mehr als 80 Kilometer pro Tag fahren. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">8.</span> Radwandern macht immer Spaß, auch wenn die Radwege schlecht sind. (1) R F 4 M102-251-1-1</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2010-Jes-0">
+    <h4>Rešitve – Aufgabe 1</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">. 3. 4. 5. 6. 7. 8.</span></div>
+  </div>
+</div>
+</div>
+<div class="text-block">
+<h3>Bald endgültiges &quot;Aus&quot; für die Glühbirne? – Australien will normale Glühbirnen</h3>
+<p><em>Lesen Sie bitte.</em></p>
+<p>abschaffen.</p>
+<p>Australiens Regierung plant, alle herkömmlichen Glühbirnen zu</p>
+<p>verbieten und durch Energiesparlampen zu ersetzen. Ab 2010</p>
+<p>sollen in Australien keine Glühbirnen mehr verkauft werden.</p>
+<p>Würden sich auch andere Länder auf die effizienteren</p>
+<p>Energiesparlampen umstellen, könnte man extrem viel Energie</p>
+<p>einsparen.</p>
+<p>Aktuell ist Umweltschutz in der Politik weltweit leuchten. Zudem sind die Stromkosten natürlich</p>
+<p>ein großes Thema. Die Beobachtungen und viel geringer, da ungefähr 80 Prozent der Energie</p>
+<p>Voraussagen zum Klimawandel sind alarmierend. eingespart werden. Zwar brauchen Energiespar-</p>
+<p>Nun will die australische Regierung ein komplettes lampen nach dem Einschalten zwischen 30</p>
+<p>Verbot für normale Glühlampen durchsetzen. Sekunden und einer Minute, bis sie ihre maximale</p>
+<p>Helligkeit erreicht haben. Dann erzeugen sie aber</p>
+<p>Der Energieverbrauch einer Glühbirne, zum</p>
+<p>mindestens genauso viel Licht wie normale</p>
+<p>Beispiel mit Glühfaden aus Wolfram, ist um ein</p>
+<p>Glühbirnen.</p>
+<p>vielfaches größer als der einer Energiesparlampe.</p>
+<p>Das liegt daran, dass der Draht in der Glühbirne</p>
+<p>durch Elektrizität sehr stark erhitzt werden muss, Australien macht es vor – ziehen andere Länder</p>
+<p>um für uns sichtbares Licht abzugeben. nach?</p>
+<p>Allerdings ist das Licht, das wir wahrnehmen, nur Auch in Deutschland führt man derzeit Debatten</p>
+<p>ein kleiner Teil dessen, was die Glühbirne über ein Verbot für normale Glühbirnen. Die</p>
+<p>tatsächlich an Energie verbraucht. Der größte Teil Politiker sind sich jedoch uneinig und bisher</p>
+<p>der Energie wird als Wärme abgestrahlt oder als scheint eine solche Regelung noch äußerst</p>
+<p>für uns nicht sichtbares ultraviolettes Licht unwahrscheinlich. Nach geltendem EU-Recht wäre</p>
+<p>abgegeben. Nur ungefähr fünf Prozent der das Verbot eines einzelnen Mitgliedsstaates</p>
+<p>Elektroenergie werden bei einer normalen überhaupt nicht möglich.</p>
+<p>Glühbirne in sichtbares Licht umgewandelt.</p>
+<p>Auf Energiesparlampen umzusteigen ist auf jeden</p>
+<p>Fall sinnvoll. Verzichtet allerdings nur Australien</p>
+<p>Energiesparlampen verbrauchen 80 Prozent</p>
+<p>auf herkömmliche Glühbirnen, ist damit noch kein</p>
+<p>weniger Energie!</p>
+<p>großer Beitrag für die Umwelt geleistet. Auch in</p>
+<p>Moderne Energiesparlampen, auch Leuchtstof- Australien achtet man in vielen Bereichen nicht</p>
+<p>fröhren genannt, beanspruchen nur etwa 20 bis 25 gerade auf einen sparsamen Umgang mit Energie.</p>
+<p>Prozent der Energie, die eine normale Glühbirne Ebenso für die Reduzierung von Schadstoff-</p>
+<p>benötigt, also vier bis fünf Mal weniger. Würden abgaben wird bisher viel zu wenig getan. Würden</p>
+<p>weltweit alle Haushalte auf Energiesparlampen andere Länder nachziehen, könnte man mit einem</p>
+<p>umsteigen, könnte dadurch enorm an Energie Verbot von Glühbirnen allerdings extrem viel</p>
+<p>eingespart werden. Viele Leute bevorzugen die Energie einsparen.</p>
+<p>billigen Glühlampen, weil die Anschaffung von</p>
+<p>Entscheidend ist aber, auch in anderen Bereichen</p>
+<p>Energiesparlampen auf den ersten Blick recht teuer</p>
+<p>auf unnötige Energieverschwendung zu verzichten.</p>
+<p>erscheint. Tatsächlich spart man mit diesen</p>
+<p>Zum Beispiel, indem man dafür sorgt, dass</p>
+<p>Lampen aber viel Geld.</p>
+<p>technische Geräte wie DVD-Player, Computer</p>
+<p>Die Lebensdauer einer normalen Glühbirne beträgt oder Fernseher regelmäßig abgeschaltet werden,</p>
+<p>dafür nämlich nur einen Bruchteil von der einer anstatt ständig im &quot;Stand-by-Modus&quot; zu laufen.</p>
+<p>Energiesparlampe. Je nach Modell hält eine Alleine in Deutschland müssen für diesen völlig</p>
+<p>Energiesparlampe zwischen fünf und 15 Mal überflüssigen Energieverbrauch ungefähr zwei von</p>
+<p>länger als eine herkömmliche Birne! Sie kann bei 17 Atomkraftwerken Tag und Nacht betrieben</p>
+<p>einer durchschnittlichen Nutzung bis zu zehn Jahre werden.</p>
+<p>(Nach www.tagesschau.de, Februar 2007)</p>
+<p>M102-251-1-1 5</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die folgenden Fragen. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">9.</span> Wie will die australische Regierung in Zukunft Energie sparen? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">10.</span> Wofür verbraucht die herkömmliche Glühbirne den größten Teil der Energie? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">11.</span> Wie viel weniger Energie verbrauchen Energiesparbirnen? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">12.</span> Warum sind die traditionellen Glühlampen immer noch so beliebt? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">13.</span> Wie lange kann man bei normalem Gebrauch eine Energiesparlampe benutzen? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">14.</span> Wie reagieren die deutschen Politiker auf eine mögliche Einführung der Energiespar- (1) lampen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">15.</span> In welchem Bereich macht Australien zu wenig für eine saubere Umwelt? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">16.</span> Wie könnte man beim Gebrauch von technischen Geräten Energie sparen? (1) ___ 6 M102-251-1-1</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2010-Jes-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">9.</span><span class="sol-ans">Man will die herkömmlichen Glühbirnen verbieten.</span></div>
+<div class="solution-row"><span class="sol-num">10.</span><span class="sol-ans">Für Wärme / Für das Erhitzen des Drahts</span></div>
+<div class="solution-row"><span class="sol-num">11.</span><span class="sol-ans">0 Prozent</span></div>
+<div class="solution-row"><span class="sol-num">12.</span><span class="sol-ans">Weil sie billiger sind.</span></div>
+<div class="solution-row"><span class="sol-num">13.</span><span class="sol-ans">Bis zu 10 Jahre</span></div>
+<div class="solution-row"><span class="sol-num">14.</span><span class="sol-ans">Sie sind sich uneinig.</span></div>
+<div class="solution-row"><span class="sol-num">15.</span><span class="sol-ans">Bei der Reduzierung von Schadstoffabgaben</span></div>
+<div class="solution-row"><span class="sol-num">16.</span><span class="sol-ans">Man könnte sie regelmäßig abschalten.</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Ergänzen Sie die Sätze. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">17.</span> Ab 2010 werden in Australien statt normaler Glühbirnen nur noch (1) ___ verwendet.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">18.</span> Energiesparen ist nicht nur in Australien und Deutschland sondern auch (1) ___ ein großes Problem.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">19.</span> Ultraviolettes Licht ist für die Menschen nicht ___. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">20.</span> Eine normale Glühbirne verbraucht nur ___ Prozent (1) der Energie für Licht.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">21.</span> Wenn wir Energiesparbirnen verwenden, ___ (1) wir weniger Energie.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">22.</span> Nachdem die Energiesparbirnen eingeschaltet sind, können sie so viel (1) ___ wie normale Birnen erzeugen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">23.</span> Weil Deutschland ein Mitglied der Europäischen Union ist, ist es nicht (1) ___, die herkömmlichen Glühbirnen nur in Deutschland zu verbieten.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">24.</span> Man sollte nicht nur bei Energiesparlampen, sondern auch in vielen weiteren (1) ___ nicht so verschwenderisch mit der Energie umgehen. M102-251-1-1 7</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2010-Jes-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">17.</span><span class="sol-ans">Energiesparbirnen/Energiesparlampen</span></div>
+<div class="solution-row"><span class="sol-num">18.</span><span class="sol-ans">weltweit</span></div>
+<div class="solution-row"><span class="sol-num">19.</span><span class="sol-ans">sichtbar</span></div>
+<div class="solution-row"><span class="sol-num">20.</span><span class="sol-ans">fünf/5</span></div>
+<div class="solution-row"><span class="sol-num">21.</span><span class="sol-ans">verbrauchen</span></div>
+<div class="solution-row"><span class="sol-num">22.</span><span class="sol-ans">Licht/Helligkeit</span></div>
+<div class="solution-row"><span class="sol-num">23.</span><span class="sol-ans">möglich</span></div>
+<div class="solution-row"><span class="sol-num">24.</span><span class="sol-ans">Bereichen</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

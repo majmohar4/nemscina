@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Spomladanski izpitni rok 2023</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Spomladanski izpitni rok 2023
+</nav>
+
+<h1>Spomladanski izpitni rok 2023</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Spomladanski izpitni rok 2023 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>Tipps bei Müdigkeit und – Erschöpfung</h3>
+<p><em>Lesen Sie den Text.</em></p>
+<p>0. Kaum etwas ist schwerer als Gewohnheiten und</p>
+<p>eingefahrene Verhaltensweisen zu ändern. Wenn wir aber</p>
+<p>feststellen, dass wir unter unserem Alltag zu leiden</p>
+<p>beginnen, dass wir uns andauernd belastet, müde und</p>
+<p>schlapp fühlen, dann sollten wir etwas dagegen tun.</p>
+<p>1. Auch wenn es sich banal anhört, ist das der erste Schritt. Der Körper sendet natürliche Signale und</p>
+<p>das ist auch gut so. Anstatt sich also weiter dagegen zu wehren oder antreiben zu lassen, sollten</p>
+<p>wir akzeptieren, dass wir uns total müde und abgeschlagen fühlen.</p>
+<p>2. Ja, richtig gelesen: Werden wir (ein bisschen) egoistischer! Wann haben wir denn das letzte Mal</p>
+<p>einen ganzen Tag, einen Abend oder wenigstens ein paar Stunden für uns ganz allein gehabt? Wir</p>
+<p>sind am Zug, unsere Batterien wieder aufzuladen. Hören wir in uns hinein, was uns jetzt guttun</p>
+<p>würde. Schaffen wir uns Freiräume, in denen wir uns von nichts und niemandem vorschreiben</p>
+<p>lassen, was zu tun und zu lassen ist! Einfach einmal unerreichbar sein und diese Freiräume</p>
+<p>nutzen, um einem Hobby oder einer Lieblingsbeschäftigung nachzugehen.</p>
+<p>3. Anspannung beherrschen die meisten von uns fast bis zur Perfektion, aber was wir eher üben</p>
+<p>müssen, ist, wie uns zu entspannen. Dafür gibt es viele Wege. Viel wichtiger ist es, dass man sich</p>
+<p>Zeit für Entspannung nimmt, man soll diese Rituale gleichmäßig so über die Zeit verteilen, dass sie</p>
+<p>den Alltag in regelmäßigen, überschaubaren Abständen unterbrechen und Erholung bieten. Solche</p>
+<p>kurzen Pausen sind eine tolle Hilfe für eine zumindest teilweise Regeneration von Körper und</p>
+<p>Geist.</p>
+<p>4. Ein Bad, ein gutes Buch, bewusstes Musikhören, all das sind einfache Mittel, um nach einem</p>
+<p>langen Tag herunterzukommen. Mit etwas mehr Zeit können Bäder, Saunabesuche und</p>
+<p>Massagen, ebenso Yoga, autogenes Training und viele andere Techniken tiefe Entspannung</p>
+<p>bringen.</p>
+<p>5. Wir wissen es ja längst: Wer Sport treibt, dem geht es einfach besser! „Viel hilft viel“ gilt dabei aber</p>
+<p>nicht immer, denn förderlicher als der einmalige Marathon sind gemäßigtes Radfahren,</p>
+<p>Spazierengehen oder Walken an zwei bis drei Tagen in der Woche. Zum Wohlgefühl tragen auch</p>
+<p>frische Luft und Tageslicht bei. Das alles stärkt das Herz-Kreislauf-System, trainiert die Muskulatur</p>
+<p>und macht uns gelassener. Das kann sich auch auf die Wahrnehmung unseres Alltags übertragen,</p>
+<p>dem wir mutiger entgegentreten und besser standhalten.</p>
+<p>6. Was wir essen, ist ein zentraler Baustein für das körperliche und seelische Wohlbefinden und</p>
+<p>unsere Gesundheit – und kein Thema, bei dem wir „Zeit sparen“ sollten. In großer Eile und</p>
+<p>kürzester Zeit ganze Fast-Food-Menüs zu verschlingen ist sinnlos, da es eine vertane Chance für</p>
+<p>eine kleine Erholung zwischendurch ist. Wer es dagegen schafft, seine Mahlzeiten überlegt</p>
+<p>anzugehen, mit Freude zuzubereiten und bewusst zu genießen, der profitiert gleich dreifach: von</p>
+<p>der Vorfreude, der Ablenkung und einem schönen Geschmackserlebnis.</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+</div>
+<div class="text-block">
+<h3>Auf den Tellern von morgen – Essen aus anderen Gegenden der Erde</h3>
+<p><em>Lesen Sie den Text.</em></p>
+<p>Im Supermarkt gibt es seit einer Weile einen neuen Fitness-</p>
+<p>Riegel. Auf der Verpackung ist ein schwarzes Insekt mit</p>
+<p>großen Flügeln abgedruckt. Und auf der Zutatenliste steht</p>
+<p>Grillenpulver. Klarer Fall: Das ist ein Insekten-Riegel! Fast</p>
+<p>2.000 Insekten-Arten auf der Welt sind essbar. In vielen</p>
+<p>Ländern in Asien, Afrika oder Südamerika stehen Grillen,</p>
+<p>Mehlwürmer oder Heuschrecken schon immer auf dem Speiseplan der Menschen. Und das aus</p>
+<p>gutem Grund: Insekten enthalten viel Eiweiß – das braucht unser Körper beispielsweise, um Muskeln</p>
+<p>aufzubauen. Zwar ist auch in Fleisch viel Eiweiß enthalten. Aber bis z. B. ein Rind groß genug ist,</p>
+<p>dass man es schlachten und essen kann, muss ihm der Bauer sehr viel Futter geben. Um ein</p>
+<p>Kilogramm Rindfleisch zu produzieren, braucht es 25 Kilogramm Futter. Dagegen benötigt man für ein</p>
+<p>Kilogramm Insekten nur zwei Kilogramm Futter! Denn Insekten verwerten ihre Nahrung viel besser.</p>
+<p>Sich eine gebratene Grille in den Mund stecken und – knusper, knusper – darauf herumkauen? Das</p>
+<p>ist für viele Menschen in Europa kaum vorstellbar. Darum werden Insekten häufig getrocknet, zu</p>
+<p>Pulver zermahlen und kommen als Zutat in ein anderes Nahrungsmittel. So kann man die Tiere unter</p>
+<p>den anderen Zutaten nicht wirklich herausschmecken und vor allem nicht sehen. Tatsächlich, der</p>
+<p>Insekten-Riegel schmeckt eigentlich wie ein ganz normaler süßer Riegel. Vielleicht gewöhnen sich auf</p>
+<p>diese Weise mit der Zeit immer mehr Menschen daran, etwas mit Insekten zu essen?</p>
+<p>Essen aus dem Labor</p>
+<p>Nicht nur Sportlerinnen und Sportler brauchen Eiweiße für ihre Muskeln, auch alle anderen Menschen</p>
+<p>können ohne diese Nährstoffe nicht überleben. Am einfachsten bekommt man Eiweiße über tierische</p>
+<p>Nahrungsmittel, also aus Eiern, Quark oder Fleisch. Immer mehr Menschen ernähren sich inzwischen</p>
+<p>vegetarisch oder vegan. Viele davon möchten nicht, dass für ihr Essen Tiere gehalten oder</p>
+<p>geschlachtet werden. Zum Glück stecken Eiweiße auch in pflanzlichen Lebensmitteln. Besonders viel</p>
+<p>ist etwa in Bohnen oder Linsen enthalten. Vegetarier essen häufig sogenannte Fleischersatzprodukte</p>
+<p>– Tofu zum Beispiel, der aus Sojabohnen hergestellt wird, oder Seitan, den man aus Weizen macht. In</p>
+<p>manchen Fast-Food-Restaurants gibt es vegane Hamburger, die fast genauso aussehen, riechen und</p>
+<p>schmecken wie Burger aus Rindfleisch. In ihnen steckt auch viel Eiweiß, aber statt Fleisch enthalten</p>
+<p>sie hauptsächlich Soja, Weizen oder Erbsen. Manche Wissenschaftlerinnen und Wissenschaftler</p>
+<p>versuchen auch, Fleisch künstlich im Labor wachsen zu lassen. Dafür nimmt der niederländische</p>
+<p>Forscher Mark Post von einer echten Kuh nur ein paar Muskelzellen. Diese lässt er in einem Gefäß</p>
+<p>mit spezieller Nährflüssigkeit wachsen. Darin teilen sich die Zellen und bilden eine Art Muskelfleisch –</p>
+<p>nur, dass damit kein Tier verbunden ist, das fühlen oder „Muh“ sagen kann. Auch aus diesem Fleisch</p>
+<p>wurden schon Hamburger gebraten. Momentan ist das noch viel zu teuer, weil es noch entwickelt</p>
+<p>wird, aber schrittweise wird solches Kunstfleisch billiger. Forschende glauben: In ein paar Jahren</p>
+<p>könnte es in Restaurants angeboten werden. Für Fischstäbchen-Fans funktioniert das Prinzip auch:</p>
+<p>Fisch-Muskelzellen können genauso im Labor gezüchtet werden. Auch Milch, Joghurt oder Quark</p>
+<p>lassen sich heute schon ganz ohne Tiere produzieren. Eine amerikanische und eine deutsche Firma</p>
+<p>haben winzige Bakterien und Pilze mit Hilfe der Gentechnik umprogrammiert, sodass sie aus Zucker</p>
+<p>Milch produzieren.</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Ergänzen Sie sinngemäß. Die richtigen Informationen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Im neuen Fitness-Riegel findet man die Zutat namens ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> In vielen Ländern der Welt kann man Insekten regelmäßig ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Statt Fleisch werden immer häufiger ___ gegessen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Der Geschmack der veganen Hamburger ist ___ der Geschmack der Burger aus Rindfleisch.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Wissenschaftler sind der Meinung, dass man in Restaurants schon bald ___ bestellen könnte.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Milch kann man auch ohne Tiere aus ___ herstellen. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2023-Spo-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans"> Grillenpulver  Insekten</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans"> essen  kaufen</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans"> Fleischersatzprodukte  Pflanzen, Bohnen, Linsen</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">M231-251-1-4</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans"> Kunstfleisch  Fleischersatzprodukte</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">Zucker NESPREJEMLJIVO:</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die Fragen. Die richtigen Informationen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Warum sind Eiweiße für unseren Körper wichtig? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Warum brauchen Insekten weniger Futter als Rind? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Warum werden Insekten meistens als Pulver bei der Zubereitung verwendet? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Was brauchen die Muskelzellen einer Kuh im Labor, um Muskelfleisch zu bilden? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Warum sind die Kosten für die Laborzucht vom Fleisch so hoch? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Was wurde mit Bakterien und Pilzen gemacht, um sie bei der Milchproduktion zu verwenden? ___ (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2023-Spo-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">Weil sie Muskeln aufbauen.</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">Weil sie ihre Nahrung viel besser verwerten. NESPREJEMLJIVO:</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans"> Weil der Insektengenuss für viele Menschen  Tofu ist gut.</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans"> Sie wachsen in einem Gefäß mit spezieller  Eiweiße</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">Weil sie noch entwickelt wird. NESPREJEMLJIVO:</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans"> Sie wurden mit Hilfe von Gentechnik  Aus Zucker Milch produzieren.</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

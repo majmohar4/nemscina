@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Jesenski izpitni rok 2011</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Jesenski izpitni rok 2011
+</nav>
+
+<h1>Jesenski izpitni rok 2011</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Jesenski izpitni rok 2011 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>den folgenden Text. – Soul aus tiefstem Herzen</h3>
+<p><em>Lesen Sie bitte</em></p>
+<p>Der ehemalige Computerfachmann Klaus Gassmann startet mit der Show „Sweet Soul Music“</p>
+<p>ein neues Leben – nun gastiert er im Deutschen Theater.</p>
+<p>Sein Enthusiasmus ist ansteckend und seine Energie bemerkt man sofort. Klaus Gassmann ist ein</p>
+<p>Mann, der sich im Leben verwirklicht hat. Der jugendlich wirkende 61-Jährige hat noch einmal ganz</p>
+<p>neu angefangen. Drei Jahrzehnte lang war er Softwareentwickler und Manager bei der Computerfirma</p>
+<p>SAP. Vor kurzem hat er auf eigene Rechnung eine Musikshow kreiert, die seiner großen Liebe</p>
+<p>gewidmet ist: „Sweet Soul Music“.</p>
+<p>Mit 20 Musikern, Tänzern und attraktiver Lichtgestaltung erzählt die Show die Geschichte des Souls,</p>
+<p>moderiert von Ron Williams, der in der Show die Hauptrolle übernimmt: er spielt den Musiker Ray</p>
+<p>Charles. Nach zwei Jahren Vorarbeit gab es im März vergangenen Jahres die erfolgreiche Premiere</p>
+<p>in der schwäbischen Heimat. Nach 50 weiteren Shows bekam Gassmann Anfragen aus der ganzen</p>
+<p>Welt – sogar aus den USA.</p>
+<p>Gassmanns Idee, Musik zu machen, stammt aus den 60er Jahren, als er in Deutschland Auftritte von</p>
+<p>James Brown und Wilson Pickett sah. „Danach war alles klar“, sagt Gassmann heute. Er kaufte sich</p>
+<p>eine Gitarre und ein Saxofon und übte, als ob er besessen wäre. Schon ein paar Monate später tourte</p>
+<p>er mit einer Soulband durch die amerikanischen Clubs. „Eine harte Schule“, sagt Gassmann</p>
+<p>rückblickend. „Wir als weiße Deutsche mit Soulmusik vor amerikanischem Publikum. Natürlich tobte</p>
+<p>das Publikum nicht immer vor Begeisterung.“ Aber ein amerikanischer Soldat beruhigte den damals</p>
+<p>jungen Musiker Gassmann: „Solange das Publikum nicht den Saal verlässt, ist das ein Zeichen, dass</p>
+<p>es den Leuten gefallen hat.“</p>
+<p>Jam-Session mit dem Chef</p>
+<p>Anfang der 70er Jahre aber durchkreuzte eine zweite Leidenschaft die Musikkarriere von Klaus</p>
+<p>Gassmann. Der technikbegeisterte Musiker begann sich in diesen Jahren für Computer zu</p>
+<p>interessieren. Mit seiner Arbeit als Programmierer finanzierte er sein Studium und arbeitete hart und</p>
+<p>erfolgreich vier Jahrzehnte in der digitalen Boombranche. „Das war wie die Musik auch eine</p>
+<p>Entscheidung des Herzens“, sagt Gassmann. Bei SAP, wo er als Programmierer arbeitete,</p>
+<p>organisierte er die Betriebspartys und begeisterte den Firmengründer und seinen Chef Hasso Plattner</p>
+<p>für Musik: Er musste ihm so lange Gitarrenunterricht geben, bis der Chef endlich gelernt hatte, einige</p>
+<p>Lieder allein zu spielen.</p>
+<p>Im Job als Programmierer hat Gassmann viel gelernt für sein zweites Leben als Musiker und</p>
+<p>Produzent. „Das alles Entscheidende für den Erfolg ist Teamarbeit“, sagt Gassmann heute. Für seine</p>
+<p>letzte Show hat er die Künstler aus vielen Ländern zu einer „Familie“ zusammengeschweißt. Nur Ron</p>
+<p>Williams ist als charismatischer Frontman unverzichtbar.</p>
+<p>Seine Show „Sweet Soul Music“ ist ein absoluter Erfolg. 14 Mal spielte er hintereinander im</p>
+<p>ausverkauften Stuttgarter Theaterhaus und in der Schweiz beim Open-Air am Zürcher See vor über</p>
+<p>zehntausend Menschen. Als er vor zwei Wochen ein Interview gab, sagte er: „Lange Zeit war ich ein</p>
+<p>leidenschaftlicher Softwareentwickler, aber die Erfolgserlebnisse, die man bekommt, wenn man vor</p>
+<p>dem Publikum auf der Bühne steht, kriegt man da nicht. Nicht so direkt. Das ist es, was es ausmacht“,</p>
+<p>sagt Gassmann.</p>
+<p>Nun will er systematisch Europas große Städte erobern. Denn seine Show – das haben ihm viele</p>
+<p>bestätigt – ist völlig konkurrenzlos.</p>
+<p>(Nach www.abendzeitung.de, 9/2010)</p>
+<p>M112-251-1-1 3</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+<p class="aufgabe-instruction">Entscheiden Sie, ob folgende Behauptungen richtig (R) oder falsch (F) sind, und markieren Sie
+jeweils den entsprechenden Buchstaben.</p>
+<div class="question-item"><span class="q-num">1.</span> Klaus Gassmanns Lebensträume sind wahr geworden. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Klaus Gassmann hat sein ganzes Leben nur als Musiker gearbeitet. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Für seine Musikshow bekam Klaus finanzielle Hilfe. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Die Vorbereitungen auf die Show dauerten zwei Jahre. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Gassmanns Soulmusik hat dem amerikanischen Publikum überhaupt nicht gefallen. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Auf einer Betriebsparty wurde die Firma SAP gegründet. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">7.</span> Gassmann war eine Zeit lang Plattners Gitarrenlehrer. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">8.</span> Sein technischer Beruf hatte für ihn eine größere Bedeutung als sein künstlerisches Wirken. (1) R F 4 M112-251-1-1</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2011-Jes-0">
+    <h4>Rešitve – Aufgabe 1</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">7.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">8.</span><span class="sol-ans">F</span></div>
+  </div>
+</div>
+</div>
+<div class="text-block">
+<h3>den folgenden Text. – Auf Glückssuche in Sportschuhen</h3>
+<p><em>Lesen Sie bitte</em></p>
+<p>Warum es gar nicht so einfach ist, die passende Sportart zu finden.</p>
+<p>Auch wenn es auf den ersten Blick abwegig erscheint, haben Schokolade und Sport etwas</p>
+<p>gemeinsam: Beide sorgen dafür, dass der Körper mit Glückshormonen überschüttet wird. Allerdings</p>
+<p>nur, wenn der persönliche Geschmack exakt getroffen wird – das gilt für Vollmilch-Nuss ebenso wie</p>
+<p>für Tennis, Hockey und Co.</p>
+<p>Als Leon Fleischer die dritte Klasse besuchte, hatte er schon beim Aufstehen Bauchweh. Nicht etwa,</p>
+<p>weil er zum Abendbrot zu viel gegessen hatte – dem damals Neunjährigen war nur allzu schmerzhaft</p>
+<p>bewusst, dass er beim Gerangel auf dem Schulhof stets den Kürzeren zog, was blaue Flecken und</p>
+<p>Angstschweiß zur Folge hatte. Der Mainzer war eben nicht nur kleiner als die anderen Jungs, sondern</p>
+<p>auch schmächtig. „Mit neun Jahren habe ich mit Judo angefangen. Es war die Idee meines Opas, der</p>
+<p>darüber in der Zeitung gelesen hatte. Es klingt abgedroschen, ist aber tatsächlich so: Das hat mein</p>
+<p>Leben verändert.” Nicht nur, dass sich Leon plötzlich gegenüber den Klassenkameraden behaupten</p>
+<p>konnte, er wurde auch immer beliebter.</p>
+<p>Auch die Philosophie muss stimmen</p>
+<p>Und die ansehnlichen Muskelpartien sind nach wie vor ein hübscher Nebeneffekt. „Viele Mädchen</p>
+<p>stehen auf ein Sixpack”, sagt er augenzwinkernd. Doch das ist nicht der einzige Grund, weshalb er</p>
+<p>seit nun acht Jahren zweimal die Woche beim Training anzutreffen ist. „Mir gefällt die Philosophie, die</p>
+<p>sich hinter Judo verbirgt. Es gibt feste Regeln und einen Ehrenkodex. Fairness und Respekt haben</p>
+<p>Priorität – das ist auch für das Leben außerhalb der Halle von Vorteil”, berichtet der Gymnasiast.</p>
+<p>„Beim Training tauche ich komplett ab, da bin ich in einer anderen Welt. Das gibt mir Kraft, vor allem</p>
+<p>in Prüfungszeiten. Ich kann mir keinen besseren Sport vorstellen!” Es gibt noch viele weitere Leons da</p>
+<p>draußen – und wir alle kennen sie: Klassenkameraden, Geschwister oder Freunde, die richtig viel Zeit</p>
+<p>freiwillig in verschwitzten Jogginganzügen verbringen. Und das, wo man stattdessen shoppen gehen</p>
+<p>könnte! Oder von 300 an rückwärts zählen. Vielleicht mal Gummibärchen nach Farben sortieren …</p>
+<p>Tja, da gäbe es so einiges. Doch für überzeugte Sportler ist ihr Hobby eben nicht nur irgendein</p>
+<p>zufällig gewählter Zeitvertreib, sondern fußt auf echter Überzeugung.</p>
+<p>Viele hängen den Sport an den Nagel</p>
+<p>Das Herz von Katharina Scheidt beispielsweise gehört nach einem Abstecher in die Ballettstunde nun</p>
+<p>dem Tennis. „Mir ist wichtig, einen Mannschaftssport zu betreiben, bei dem man sich viel bewegt. Golf</p>
+<p>wäre also nichts für mich”, sagt die Zwölftklässlerin aus Wiesbaden. „Mir gefällt, dass man dabei</p>
+<p>rennen muss. Sport tut mir vor allem an Schultagen gut, wenn ich acht Stunden still gesessen habe.”</p>
+<p>Allerdings kennt auch sie Durchhänger. „Ich schaffe es nicht immer zum Training, vor allem nicht,</p>
+<p>wenn in der Schule wichtige Arbeiten anstehen. Was mich aber motiviert, ist die tolle Gruppe, mit der</p>
+<p>ich trainiere.” In ihrem Freundeskreis ist Katharina eine Ausnahme. „Als wir jünger waren, hat fast</p>
+<p>jeder meiner Freunde irgendeinen Sport betrieben: Tanzen, Hockey oder auch Tennis, doch mit der</p>
+<p>Zeit haben viele aufgehört, und mittlerweile betreiben nur noch die wenigsten einen Sport. Eigentlich</p>
+<p>nur die, die auch richtig gut geworden sind. Die anderen haben den Sport wegen Schulstress oder</p>
+<p>weil sie keine Lust mehr hatten, an den Nagel gehängt.“</p>
+<p>(Nach www.yaez.de, 9/2010)</p>
+<p>M112-251-1-1 5</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die folgenden Fragen. Die richtigen Lösungen finden Sie nur im obigen
+Text.</p>
+<div class="question-item"><span class="q-num">9.</span> Was verbindet Schokolade und Sport? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">10.</span> Wie fühlte sich der neunjährige Leon oft morgens vor der Schule? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">11.</span> Warum hatte Leon Probleme mit seinen Mitschülern? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">12.</span> Wodurch wurde Leons Leben anders? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">13.</span> Was findet Leon bei Judo gut? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">14.</span> Was passiert mit Leon während des Trainings? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">15.</span> Warum findet Katharina Golf nicht so interessant? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">16.</span> Warum hören viele Jugendliche mit Sport auf? (1) ___ 6 M112-251-1-1</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2011-Jes-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">9.</span><span class="sol-ans">Der Körper wird mit Glückshormonen überschüttet.</span></div>
+<div class="solution-row"><span class="sol-num">10.</span><span class="sol-ans">Er hatte Bauchweh.</span></div>
+<div class="solution-row"><span class="sol-num">11.</span><span class="sol-ans">Er war kleiner (und auch schmächtig).</span></div>
+<div class="solution-row"><span class="sol-num">12.</span><span class="sol-ans">durch Judo / Er begann mit Judo.</span></div>
+<div class="solution-row"><span class="sol-num">13.</span><span class="sol-ans">die Philosophie / Es gibt feste Regeln und einen Ehrenkodex.</span></div>
+<div class="solution-row"><span class="sol-num">14.</span><span class="sol-ans">Er ist in einer anderen Welt. Er taucht komplett ab.</span></div>
+<div class="solution-row"><span class="sol-num">15.</span><span class="sol-ans">Es ist kein Mannschaftssport. / Man bewegt sich nicht viel.</span></div>
+<div class="solution-row"><span class="sol-num">16.</span><span class="sol-ans">wegen Schulstress / Sie haben keine Lust.</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Ergänzen Sie die Sätze. Die richtigen Lösungen finden sie nur im Text.</p>
+<div class="question-item"><span class="q-num">17.</span> Sport und Schokolade haben eine Sache ___. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">18.</span> Leon begann mit Judo, als er ___ Jahre alt war. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">19.</span> Leons Opa bekam die Informationen über Judo in ___. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">20.</span> Wegen Judo wurde Leon bei seinen Mitschülern viel ___. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">21.</span> Viele Mädchen bewundern bei den Jungs die ___. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">22.</span> An erster Stelle bei Judo sind ___. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">23.</span> Überzeugte Sportler entscheiden sich nicht nur ___ für eine (1) Sportart.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">24.</span> Katharina braucht Sport besonders dann, wenn sie in der Schule (1) ___ hat. M112-251-1-1 7</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2011-Jes-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">17.</span><span class="sol-ans">gemeinsam</span></div>
+<div class="solution-row"><span class="sol-num">18.</span><span class="sol-ans">0 1</span></div>
+<div class="solution-row"><span class="sol-num">19.</span><span class="sol-ans">der Zeitung</span></div>
+<div class="solution-row"><span class="sol-num">20.</span><span class="sol-ans">beliebter</span></div>
+<div class="solution-row"><span class="sol-num">21.</span><span class="sol-ans">Muskeln/Muskelpartien/Sixpack</span></div>
+<div class="solution-row"><span class="sol-num">22.</span><span class="sol-ans">Fairness und Respekt</span></div>
+<div class="solution-row"><span class="sol-num">23.</span><span class="sol-ans">zufällig</span></div>
+<div class="solution-row"><span class="sol-num">24.</span><span class="sol-ans">acht Stunden</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

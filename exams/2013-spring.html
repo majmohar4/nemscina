@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Spomladanski izpitni rok 2013</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Spomladanski izpitni rok 2013
+</nav>
+
+<h1>Spomladanski izpitni rok 2013</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Spomladanski izpitni rok 2013 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>0. Der Philosoph Martin Heidegger nennt Langeweile „die Abgründe des Daseins”, denn sie wirft</h3>
+<p><em>Lesen Sie.</em></p>
+<p>Sinnfragen auf. Blaise Pascal, Sören Kierkegaard, Georg Büchner und Arthur Schopenhauer</p>
+<p>hatten oft mit Langeweile zu kämpfen – und wurden wohl nur auf diese Weise zu wirklich</p>
+<p>großen Denkern. Denn nur wer die Leere zulässt und den Gedanken erlaubt, allerlei Kreuz-</p>
+<p>und Querverbindungen zu bilden, kommt auf wirklich neue Ideen.</p>
+<p>Weil diese Gefühlslage unter Forschern als äußert vielschichtig gilt und sich auf</p>
+<p>1.</p>
+<p>unterschiedlichste Weise ausdrücken kann: Menschen, die sich langweilen, werden aggressiv</p>
+<p>oder zappelig, manchmal aber auch träge oder fühlen sich innerlich leer. Im Vergleich dazu</p>
+<p>sind Freude oder Ärger ziemlich langweilige Emotionen.</p>
+<p>Eindeutig in der Schule. Laut verschiedenen Studien sind Schüler in einem bis zwei Dritteln</p>
+<p>2.</p>
+<p>der Unterrichtszeit ziemlich angeödet. Sie vertreiben sich ihre Zeit vorzugsweise, indem sie an</p>
+<p>ihre Hobbies denken oder in eine Art Dämmerschlaf fallen, letzteres fällt Jugendlichen</p>
+<p>besonders leicht.</p>
+<p>Unser Gehirn verfügt über keine innere Uhr. Deshalb greift es zu einer Hilfskonstruktion: Alles,</p>
+<p>3.</p>
+<p>was passiert, wird in Zeiteinheiten umgerechnet. Ereignisarme Phasen verstreichen</p>
+<p>dementsprechend viel langsamer – fünf Minuten Warten können sich anfühlen wie eine halbe</p>
+<p>Stunde. Wenn richtig was los ist, haben wir hingegen den Eindruck: Die Zeit vergeht wie im</p>
+<p>Fluge. Nachträglich gesehen verhält sich das Ganze umgekehrt: Langweilige Lebensphasen</p>
+<p>scheinen uns viel schneller vergangen als Zeiten, in denen sich viel ereignet hat.</p>
+<p>Burn-Out lautet die derzeit häufig gestellte Diagnose bei Menschen, die beruflich und privat</p>
+<p>4.</p>
+<p>chronisch im Stress sind. Genauso gesundheitsschädlich, sagen Psychologen, sei aber das</p>
+<p>„Bore out”. Wer im Job und im Leben dauerhaft gelangweilt und unterfordert ist, kann genauso</p>
+<p>an Herz-Kreislaufsystem, Depressionen erkranken, wie die Generation Stress.</p>
+<p>Eine Studie des Deutschen Jugendinstituts in München ergab: Egal, wie viel Kinder in ihrer</p>
+<p>5.</p>
+<p>Freizeit unternehmen – Aktive sind ebenso häufig gelangweilt wie Stubenhocker. Denn eine</p>
+<p>sinnvolle Gestaltung ihrer Zeit können Kinder und Erwachsene nur lernen, wenn sie es sich</p>
+<p>erlauben auch mal Zeit zu verschwenden.</p>
+<p>Jedenfalls deutet diese Studie darauf hin: Britische Wissenschaftler befragten im Rahmen</p>
+<p>6.</p>
+<p>einer Langzeit-Untersuchung bereits in den 80er Jahren 7500 Beamte zwischen 35 und 55</p>
+<p>Jahren, ob ihr Leben stark von Langeweile gekennzeichnet sei. Nach 25 Jahren fragten sie</p>
+<p>noch mal nach: Da waren viele der Interviewten bereits gestorben. Unter denjenigen, die sich</p>
+<p>damals chronisch gelangweilt hatten, kamen fast 40 Prozent mehr Todesfälle vor.</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+</div>
+<div class="text-block">
+<h3>Wohnen im Studium</h3>
+<p><em>Lesen Sie.</em></p>
+<p>Ich bau mir ein Schloss...</p>
+<p>„Lustig ist das Studentenleben” – noch lustiger vielleicht, wenn</p>
+<p>man nicht mehr im Kinderzimmer bei seinen Eltern weilt. Aber</p>
+<p>um einiges teurer wird es dann leider auch...</p>
+<p>Das mag der Grund sein, warum immerhin an die 22 Prozent aller Studis im „Hotel Mama” bleiben.</p>
+<p>Wer jedoch nicht an seinem Heimatort studiert, der muss sich eine Bleibe suchen – und im Schnitt, so</p>
+<p>eine Erhebung des Deutschen Studentenwerks, 225 Euro im Monat bezahlen. Das ist der dickste</p>
+<p>Batzen bei den monatlichen Ausgaben der Studierenden. Anspruch auf Wohngeld haben Studierende</p>
+<p>leider nur in Ausnahmefällen...</p>
+<p>Auswärts zu wohnen, kann also richtig reinhauen ins Portemonnaie. Doch ist der Preis fürs Wohnen</p>
+<p>von zweierlei Faktoren abhängig: zum einen vom Studienort, zum anderen von der Wohnform. In</p>
+<p>Frankfurt am Main beispielweise bezahlen Studierende im Schnitt 323 Euro im Monat für Miete und</p>
+<p>Nebenkosten, auch in Hamburg und München über 300 Euro. In Chemnitz, Erfurt und Ilmenau jedoch</p>
+<p>weniger als 190 Euro. Insgesamt kann man sagen: Gerade in westdeutschen Großstädten und</p>
+<p>Studienhochburgen ist es am teuersten.</p>
+<p>Rund 17 Prozent aller Studierenden entscheiden sich für die teuerste Wohnvariante und mieten sich</p>
+<p>alleine eine Wohnung, etwas über 20 Prozent tun sich mit ihrem Partner oder ihrer Partnerin</p>
+<p>zusammen. Der Vorteil: Man ist unabhängig – der Nachteil: der Preis.</p>
+<p>Günstiger ist es, sich ein Zimmer zu mieten. Für Gesellige bietet sich eine WG an, bei der sich</p>
+<p>mehrere Studierende eine Wohnung teilen. Das Gute: Man kann auch Telefon oder Internetanschluss</p>
+<p>gemeinsam nutzen und so Geld sparen. Wer lieber alleine ist, kann auch ein Zimmer zur Untermiete</p>
+<p>suchen – mal mit mehr, mal mit weniger Familienanschluss. Das Wohnmodell „Zimmer” wählen 28</p>
+<p>Prozent aller Studenten.</p>
+<p>Eine besondere Art zu wohnen ist das Studentenwohnheim. 12 Prozent der Studenten wählen diese</p>
+<p>Variante. Bundesweit gibt es rund 180.000 Wohnplätze in Studentenwohnheimen, die die örtlichen</p>
+<p>Studentenwerke betreiben. Mittlerweile heißt das nicht unbedingt, dass man auf einem ellenlangen</p>
+<p>Gang mit 20 anderen wohnt. Vielmehr bieten die Studentenwerke eine breite Palette an Wohnformen:</p>
+<p>vom Einzelzimmer über Appartements bis hin zu Wohngemeinschaften. Die Zimmer sind oft (teil-)</p>
+<p>möbliert und zumindest in modernen Anlagen recht gut ausgestattet. Darüber hinaus verfügen sie</p>
+<p>über Gemeinschaftsräume. Sehr positiv: Die Häuser sind oft nah am Campus.</p>
+<p>Die Mieten fürs Wohnheim schwanken erheblich. Auch hier kommt es sowohl auf die Lage als auch</p>
+<p>auf Faktoren wie Ausstattung oder Größe an. In Bochum beispielsweise kann man in einem kleinen</p>
+<p>Einzel- oder WG-Zimmer ab rund 170 Euro (warm) wohnen, unmöbliert auch günstiger. Einraum-</p>
+<p>Appartements starten bei rund 225 Euro (warm), größere sind entsprechend teurer. Insgesamt bleibt</p>
+<p>das Wohnheim in vielen Städten im Vergleich zum freien Markt eine Geldbörsen-schonende</p>
+<p>Möglichkeit – daher ist die Jagd auf Wohnheimplätze auch sehr groß. Und das heißt: Frühzeitig beim</p>
+<p>zuständigen Studentenwerk melden!</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Entscheiden Sie, ob folgende Behauptungen richtig (R) oder falsch (F) sind, und markieren Sie
+jeweils den entsprechenden Buchstaben ().</p>
+<div class="question-item"><span class="q-num">1.</span> Nur wenige Studierende in Deutschland sind an ein Wohngeld berechtigt.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Die großen Universitätsstädte bieten die günstigsten Wohnbedingungen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Wer die Freiheit liebt, mietet sich alleine eine Wohnung.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Weniger als ein Drittel der Studierenden wohnt in einem gemieteten Zimmer.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> In Studentenheimen gibt es entweder Einzelzimmer oder Wohngemeinschaften.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> In einem Wohnheim kann man die Räume nicht selbst möblieren.</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2013-Spo-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">F</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die folgenden Fragen. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Wofür gibt man als auswärtiger Student das meiste Geld aus? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Was muss man außer Miete in einer Mietswohnung noch bezahlen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Welche Städte sind am billigsten zum Wohnen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Warum ist eine WG günstig? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Welcher ist ein großer Vorteil von Studentenheimen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Von wem werden die Studentenwohnheime betrieben? ___</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2013-Spo-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">für die Miete</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">die Nebenkosten</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">Chemnitz, Erfurt und Ilmenau</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans"> Die Kosten kann man sich teilen.</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">Sie sind oft nah am Campus</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">von den Studentenwerken</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

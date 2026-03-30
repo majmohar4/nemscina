@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Jesenski izpitni rok 2014</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Jesenski izpitni rok 2014
+</nav>
+
+<h1>Jesenski izpitni rok 2014</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Jesenski izpitni rok 2014 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>Neunjährige Ballettänzerin klagt Wiener Staatsoper</h3>
+<p><em>Lesen Sie.</em></p>
+<p>Sophie H. wurde mitten im Schuljahr gefeuert. Nun wehren sich die Eltern.</p>
+<p>„Nicht geeignet“: Ein kurzes Schreiben der Staatsoper beendet die Ballettkarriere von Sophie</p>
+<p>aus Wien. Jetzt klagen ihre Eltern die Oper. Da stellt sich natürlich die Frage: Wer hat Recht,</p>
+<p>die Eltern oder die Wiener Staatsoper, die seit vielen Jahren junge Talente zu perfekten</p>
+<p>Tänzern ausbildet?</p>
+<p>Wien</p>
+<p>Die Aufnahmeprüfung für die strenge Ballettschule</p>
+<p>der Staatsoper schaffte das neunjährige Talent</p>
+<p>Sophie H. auf Anhieb. Jetzt will die Ballettschule die</p>
+<p>Tanzmaus aber von einem Tag auf den anderen nicht</p>
+<p>mehr weiter ausbilden. Mitten im Schuljahr kam das</p>
+<p>Aus, nicht einmal ein Zeugnis gab es. Als ihnen diese</p>
+<p>Information übermittelt wurde, war die junge Tänzerin</p>
+<p>schockiert und die Eltern wütend.</p>
+<p>Sophie H. sei für die Ballettausbildung „körperlich nicht geeignet“, heißt es wörtlich in einer schlichten</p>
+<p>Mitteilung der Staatsoper. Bitter: Mit dem Rauswurf aus der Opern-Ballettschule platzte auch der</p>
+<p>Traum von Sophie, auf das Ballettgymnasium in der Wiener Boerhaavergasse zu kommen. Kein</p>
+<p>Ballett, keine Schule.</p>
+<p>„Nach der Absage haben wir uns um die Gesundheit der kleinen Sorgen gemacht“, erzählt ihr Vater.</p>
+<p>„Wir haben sie von einem Mediziner durchchecken lassen – aus Sicht des Arztes besteht aber kein</p>
+<p>Grund, warum Sophie nicht für eine Tanzausbildung geeignet ist.“ Daraufhin klagten die Eltern von</p>
+<p>Sophie. Sie wollen kein Geld. Die Staatsoper soll Sophie nur wieder aufnehmen.</p>
+<p>Strenge Beurteilung</p>
+<p>Das wird haarig: Jedes Halbjahr müssen die jungen Tanzschülerinnen vor einer Kommission um</p>
+<p>Balett-Vorsitzende Simona Noja vortanzen. Sie entscheidet, ob ein Mädchen weiter ausgebildet wird</p>
+<p>oder gehen muss. „Diese fünfköpfige Kommission hat nach dem ersten Vorbereitungsjahr einstimmig</p>
+<p>entschieden, dass Sophie leider für das klassische Ballett nicht geeignet ist. Weil sie aber durchaus</p>
+<p>tänzerisch talentiert ist, haben wir dem Vater in einem Gespräch nahegelegt, einen anderen</p>
+<p>Ausbildungsweg als das Ballett zu versuchen“, sagt der Geschäftsführer der Wiener Staatsoper,</p>
+<p>Thomas Platzer.</p>
+<p>Ballerina-Figur</p>
+<p>„Nach welchen Kriterien die Kommission entscheidet, weiß niemand so genau“, sagt eine Mutter zu</p>
+<p>ÖSTERREICH. Die Mutter will anonym bleiben, denn ihr Kind darf weiter an der Oper tanzen. „Der</p>
+<p>Druck und Drill auf die kleinen Mädchen und natürlich auch auf ihre Eltern sind enorm. Die Balettlehrer</p>
+<p>sprechen nicht von Kindern, sondern von ’Material’, das sie formen müssen“, so die Mutter weiter.</p>
+<p>Wer aus Sicht der Kommission körperlich nicht geeignet ist, fliegt auch, wenn die Leistung passt: „Es</p>
+<p>mussten schon Kinder gehen, weil ihre Schultern zu breit oder sie in einem Jahr zu schnell</p>
+<p>gewachsen waren.“ Sophie könnte nun nach Berlin gehen. Dort hat sie die Aufnahmeprüfung an der</p>
+<p>Ballettschule geschafft.</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+<p class="aufgabe-instruction">Entscheiden Sie, ob folgende Behauptungen richtig (R) oder falsch (F) sind, und markieren Sie
+jeweils den entsprechenden Buchstaben ().</p>
+<div class="question-item"><span class="q-num">1.</span> Sophie H. war bei der Aufnahmeprüfung für die Ballettschule erfolgreich.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Am Ende des Schuljahres bekam Sophie das erste Schulzeugnis. Sophie wird sich auf dem Ballettgymnasium in der Wiener Boerhaavergasse</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> weiterbilden.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Der Arzt meint, dass Sophie für eine Tanzausbildung geeignet ist. Thomas Platzer meint, dass sich Sophie noch weiter mit Tanzen beschäftigen</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> kann.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Die Kriterien der Ballett-Kommission sind klar durchschaubar. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2014-Jes-0">
+    <h4>Rešitve – Aufgabe 1</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">F</span></div>
+  </div>
+</div>
+</div>
+<div class="text-block">
+<h3>In bester Lage – Im Herzen des Landes und also am</h3>
+<p><em>Lesen Sie.</em></p>
+<p>Schnittpunkt vieler Reisewege liegt seit fast</p>
+<p>zehn Jahren das Autobahnrestaurant</p>
+<p>Ansfelden Süd. Doch das ist bei weitem</p>
+<p>nicht dessen einziger Vorteil.</p>
+<p>Wenn Herr Klapf von seinem Markt-Restaurant</p>
+<p>spricht, spricht er zumeist vom Essen. Und</p>
+<p>gerät dabei ins Schwärmen: „Wir braten zwei</p>
+<p>Medaillons von einem zarten Schweinsfilet an,</p>
+<p>legen sie übereinander und geben Gemüse</p>
+<p>dazwischen. Wir nehmen, was die Saison bietet:</p>
+<p>Fisolen, Karotten, Lauch, Champignons und viel</p>
+<p>frische Kräuter.“ Johannes Klapf ist Leiter des</p>
+<p>Autobahnrestaurants Ansfelden Süd, 7</p>
+<p>Kilometer westlich von Linz an der A1 gelegen.</p>
+<p>Wovon er da so begeistert erzählt, das ist das</p>
+<p>Frühlingsschnitzerl. Dieses ist ein besonders</p>
+<p>illustres Beispiel dafür, wie ernst man bei</p>
+<p>Rosenberger die Jahreszeiten nimmt – nicht</p>
+<p>Besonders die Pizzeria hat einen hohen Anteil</p>
+<p>nur, was das Einheizen betrifft. Jetzt, wo der</p>
+<p>an Stammgästen aus der Umgebung. Kein</p>
+<p>Winter endlich ausgewandert ist, hat die Küche</p>
+<p>Wunder, denn neben den erstklassigen Pizzen</p>
+<p>ebenfalls von den wärmenden, deftigen</p>
+<p>können auch jede Menge Parkplätze direkt vor</p>
+<p>Gerichten rund um Wild und Preiselbeeren</p>
+<p>der Restauranttür garantiert werden.</p>
+<p>Abschied genommen. Einzug halten nun die</p>
+<p>Dass die Beliebtheit allein durch günstige Lage</p>
+<p>hellen, leichten, grünen Sachen. Kräuter eben,</p>
+<p>nicht erhalten werden kann, weiß das</p>
+<p>zartes Blattwerk, das reich an Vitaminen und</p>
+<p>professionelle Team von Rosenberger sehr</p>
+<p>Geschmack ist, frisches Obst, man nennt das</p>
+<p>genau. Deshalb sind die beiden Räume</p>
+<p>Produkte der Saison, und hier, in Ansfelden,</p>
+<p>besonders gemütlich eingerichtet, es gibt eine</p>
+<p>nennt man es auch Produkte aus dem Umland.</p>
+<p>weitläufige Terrasse, der Kinderspielplatz ist</p>
+<p>Denn das Umland ist reich an gesunder</p>
+<p>attraktiv ausgestattet und Desserts, wie die</p>
+<p>Landwirtschaft in kleinen Einheiten, und die</p>
+<p>weithin berühmte Ribiselschaumschnitte werden</p>
+<p>freut sich über den guten Kunden Rosenberger.</p>
+<p>immer in aller Frische zubereitet.</p>
+<p>Der Schafbauer zum Beispiel ist keine fünf</p>
+<p>Wegen dieser Art von kundenorientierter</p>
+<p>Kilometer vom Restaurant entfernt, die frischen,</p>
+<p>Wirkungsweise finden sich auch immer mehr</p>
+<p>weißen Käseleibchen könnte man also fast zu</p>
+<p>Geschäftsleute in Ansfelden Süd ein. Nicht nur</p>
+<p>Fuß holen.</p>
+<p>zum Rasten, sondern auch zum Arbeiten. Ihnen</p>
+<p>Die starke Verbindung zur Region ist aber nur</p>
+<p>stehen vier mit allem modernen Equipment</p>
+<p>eine der Besonderheiten von Ansfelden Süd. Es</p>
+<p>versehene Seminarräume zur Verfügung, und</p>
+<p>ist auch das einzige Autobahnrestaurant in ganz</p>
+<p>die verschiebbaren Wände ermöglichen auch</p>
+<p>Österreich, das mit einer echten Pizzeria</p>
+<p>die Gestaltung eines Konferenzsaals für 200</p>
+<p>aufwarten kann. Nicht einfach nur mit einem</p>
+<p>Personen.</p>
+<p>Pizzaofen, sondern mit dem gesamten Original</p>
+<p>– Ambiente und Flair.</p>
+<p>Das Restaurant „Pizza &amp; Pasta“ im Erdgeschoss</p>
+<p>verfügt natürlich über einen Holzofen, und die</p>
+<p>duftig-aromatischen Pizzen werden vor den</p>
+<p>Augen der Gäste belegt. Wer gerade keine Pizza</p>
+<p>mag, der wird mit der großen Auswahl an</p>
+<p>köstlichen Pastagerichten sein kulinarisches</p>
+<p>Glück finden – und natürlich auch mit den</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die folgenden Fragen. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Wie heißt das Gericht, von dem Herr Klapf so enthusiastisch spricht? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Was wird im Restaurant Rosenberger im Winter gekocht? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Was hat nur dieses Autobahnrestaurant in ganz Österreich? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Was ist das Besondere an der Pizza-Zubereitung? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Welcher ist ihr berühmter Nachtisch? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Warum besuchen immer mehr Geschäftsleute das Restaurant? ___ (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2014-Jes-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">(Das) Frühlingsschnitzerl.</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans"> Wärmende und deftige Gerichte.</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">Eine echte Pizzeria.</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans"> Sie werden im Holzofen zubereitet.</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">(Die) Ribiselschaumschnitte.</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans"> Weil das Restaurant kundenorientiert arbeitet.</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Ergänzen Sie die Sätze. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Für die Zubereitung der Speisen verwendet man im Restaurant Zutaten, die in einer bestimmten ___ zur Verfügung stehen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Die ___ in der Umgebung des Restaurants ist gut entwickelt und liefert dem Rosenberger gesunde Produkte.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Die Pizzeria befindet sich im ___ des Restaurants.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Wegen der guten Pizzen und der vielen ___ hat die Pizzeria auch viele Stammgäste.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Das Rosenberger Team weiß, dass man den Gästen mehr als eine gute ___ bieten muss.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Durch die ___ kann man aus Seminarräumen einen Konferenzsaal machen. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2014-Jes-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans"> Saison</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">Landwirtschaft</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">Erdgeschoss</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans"> Parkplätze</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">Lage</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">verschiebbaren Wände</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

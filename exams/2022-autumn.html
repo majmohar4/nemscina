@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Jesenski izpitni rok 2022</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Jesenski izpitni rok 2022
+</nav>
+
+<h1>Jesenski izpitni rok 2022</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Jesenski izpitni rok 2022 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>Alexander von Humboldt – Vor 250 Jahren, genau am 14. September 1769, wurde Alexander von</h3>
+<p><em>Lesen Sie.</em></p>
+<p>Humboldt als Sohn reicher Adeliger in Berlin geboren. Sein</p>
+<p>privilegiertes Leben und den für ihn vorgesehenen Staatsdienst ließ er</p>
+<p>zurück und finanzierte mit dem reichen Erbe seiner Familie eine</p>
+<p>fünfjährige Entdeckungsreise nach Mittel- und Südamerika, die 1799</p>
+<p>startete. Diese Reise machte Alexander von Humboldt zu einem der</p>
+<p>berühmtesten Wissenschaftler seiner Zeit. Er sammelte auf dieser</p>
+<p>Entdeckungsreise Unmengen an neuen botanischen und geologischen</p>
+<p>Daten, drang in Gebiete vor, die noch kein Europäer vor ihm gesehen</p>
+<p>hatte. Der rastlose Forscher beschäftigte sich jedoch nicht nur mit</p>
+<p>Biologie und Zoologie, er war auch Kartograf und Vulkanologe, Experte</p>
+<p>für Landwirtschaft und Bergbau und befasste sich mit Meereskunde und</p>
+<p>Meteorologie. Heute sind weltweit mehr Pflanzen, Tiere und Plätze</p>
+<p>nach Humboldt benannt als nach irgendeinem anderen Forscher.</p>
+<p>Es waren aber nicht seine unbestrittenen wissenschaftlichen Ergebnisse, sondern vor allem sein</p>
+<p>neuer Blick auf die Natur, mit dem Humboldt seine Zeitgenossen und auch nachfolgende</p>
+<p>Generationen beeinflusst hat. Denn es ging Humboldt eben nicht nur um eine reine Vermessung der</p>
+<p>Welt, sondern vor allem darum, die Natur als einen einzigen lebenden Organismus, den man sich wie</p>
+<p>ein dicht ineinander verwobenes Netz vorstellen muss, in dem vom kleinsten Insekt bis zum größten</p>
+<p>Baum alles miteinander seinen unverzichtbaren Platz hat, in dem alles einander spiegelt. Geht ein</p>
+<p>Teil, und sei er noch so klein und scheinbar unbedeutend, davon verloren, sind die Folgen fatal. Ein</p>
+<p>aktueller Beleg für Humboldts Erkenntnis wäre etwa das erst seit Kurzem thematisierte</p>
+<p>Insektensterben, dessen dramatische Auswirkungen auf das gesamte Ökosystem gerade ins</p>
+<p>öffentliche Bewusstsein dringen.</p>
+<p>Was Alexander von Humboldt heute so aktuell macht, ist, dass er außerdem der Erste war, der von</p>
+<p>einem globalen Klima sprach, der die dramatischen Folgen von Abholzung und Monokulturen</p>
+<p>thematisierte. Wenn der Mensch so weitermache, so Humboldt, werde er unweigerlich einen</p>
+<p>Klimawandel herbeiführen, der weitreichende Folgen für Natur und Menschen haben wird – warnte</p>
+<p>der große Gelehrte bereits in der ersten Hälfte des 19. Jahrhunderts.</p>
+<p>Alexander von Humboldt war aber nicht nur Klima- und Umweltschützer. Trotz seiner bedeutenden</p>
+<p>wissenschaftlichen Leistungen plädierte er dafür, sich der Natur nicht ausschließlich mit dem</p>
+<p>Verstand, mittels Daten und Vermessungen, sondern vor allem mit dem Herzen, den Gefühlen zu</p>
+<p>nähern. „Die Natur muss gefühlt werden“, lautete Humboldts Aufforderung: Wer eine Blumenwiese</p>
+<p>nach einem sommerlichen Regenschauer bestaunen, riechen und fühlen kann; wer die Poesie von</p>
+<p>tanzenden Meereswellen auf sich wirken lassen kann, der, so der Forscher, vermag sich der</p>
+<p>Vollkommenheit der Natur anzunähern und wird alles tun, um diese zu schützen. Wer kann dem</p>
+<p>großen Naturforscher hier widersprechen?</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+<p class="aufgabe-instruction">Entscheiden Sie, ob diese Behauptungen richtig (R) oder falsch (F) sind. Markieren Sie jeweils
+den entsprechenden Buchstaben ().</p>
+<div class="question-item"><span class="q-num">1.</span> bezahlen. Durch die Reise nach Mittel- und Südamerika wurde er allerdings noch</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> nicht bekannt. Er erforschte viele Wissensgebiete, unter anderem die Kartografie und</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Vulkanologie. Es werden nach keinem anderen Wissenschaftler so viele Lebewesen</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> benannt wie nach Humboldt.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Er warnte bereits im 19. Jahrhundert vor dem Klimawandel.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Nach Humboldt sollte man die Natur fühlen und auch verstehen. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2022-Jes-0">
+    <h4>Rešitve – Aufgabe 1</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">R</span></div>
+  </div>
+</div>
+</div>
+<div class="text-block">
+<h3>Ja, ich will!</h3>
+<p><em>Lesen Sie.</em></p>
+<p>Jedes dritte Ehepaar in Deutschland lässt sich scheiden. Aber vom Heiraten hält das die Menschen</p>
+<p>nicht ab: Fast 407 500 Paare haben sich 2017 das Jawort gegeben, viel mehr als vor fünf Jahren.</p>
+<p>Warum heiraten die Deutschen wieder öfter? „Für mich ist die Ehe ein Symbol dafür, dass mein Mann,</p>
+<p>mein Sohn und ich eine Familie sind“, antwortet Rebekka Volmert. So sehen es viele. In einer</p>
+<p>Umfrage des Portals Statista zu den wichtigsten Heiratsmotiven antworten 46 Prozent der Befragten,</p>
+<p>dass dadurch die Verbindung zum Partner stärker wird. 34 Prozent finden, dass eine Heirat ein</p>
+<p>Liebesbeweis ist. Und 30 Prozent meinen: „Durch eine Hochzeit wird man zu einer richtigen Familie.“</p>
+<p>Man sagt über die Deutschen, dass sie gern pragmatisch denken. Aber bei der Ehe dominierten die</p>
+<p>Emotionen. Erst an fünfter Stelle nennen die Menschen bei der Umfrage finanzielle Motive für eine</p>
+<p>Heirat – wie das Sparen von Steuern. „Natürlich ist es positiv für uns, dass wir als Ehepaar weniger</p>
+<p>Steuern zahlen müssen“, sagt Volmert. „Aber viel wichtiger ist es, dass wir jetzt alle drei denselben</p>
+<p>Nachnamen haben. Das macht vieles einfacher, zum Beispiel Arztbesuche mit unserem Sohn.“</p>
+<p>Auch wenn eine Heirat manches leichter macht – der Weg dorthin ist es nicht immer. Eine wichtige</p>
+<p>Station ist die Anmeldung beim Standesamt. Dafür braucht man mehrere Dokumente. Volmert und ihr</p>
+<p>Partner mussten zu der Anmeldung ihre Ausweise mitbringen und ihre Geburtsurkunden – auch die</p>
+<p>ihres Sohnes. Eine spezielle Meldebescheinigung haben sie auf dem Amt bekommen. „Ich war</p>
+<p>überrascht, wie unkompliziert die Anmeldung war“, erzählt Volmert.</p>
+<p>Komplexer wird es, wenn einer der Verlobten Ausländer ist. Mehr als 46 000 binationale Paare mit</p>
+<p>einem deutschen und einem ausländischen Partner haben 2017 in Deutschland geheiratet. „Der</p>
+<p>bürokratische Prozess bei binationalen Ehen ist individuell“, sagt Swenja Gerhard vom Verband</p>
+<p>binationaler Familien und Partnerschaften in Frankfurt. Sie erklärt: „Zwei Aspekte sind entscheidend:</p>
+<p>der Wohnort des ausländischen Verlobten und seine Staatsangehörigkeit.“</p>
+<p>Kommt der ausländische Partner aus der Europäischen Union, ist vieles einfacher. Sonst kann es zum</p>
+<p>Beispiel schwierig sein, eine Geburtsurkunde zu bekommen. „In Brasilien, auf den Philippinen oder in</p>
+<p>der Türkei kann es da Probleme geben“, sagt Gerhard. Die Juristin empfiehlt: „Prüfen Sie in allen</p>
+<p>Dokumenten: Vorname, Nachname, Geburtsdatum und Geburtsort müssen überall korrekt und gleich</p>
+<p>geschrieben sein.“</p>
+<p>Binationale Ehepaare brauchen auch ein Ehefähigkeitszeugnis. Das beantragt der ausländische</p>
+<p>Partner in seinem Heimatland. Es dokumentiert, dass die Verlobten nicht schon verheiratet und nicht</p>
+<p>miteinander verwandt sind. Aber nicht in allen Staaten bekommt man es: „Nur circa 30 Länder stellen</p>
+<p>ein Ehefähigkeitszeugnis aus“, sagt Gerhard. Tut es das Heimatland nicht, muss der ausländische</p>
+<p>Partner eine Befreiung beantragen. Das alles kann Monate dauern. Sind alle ausländischen</p>
+<p>Dokumente da, muss man sie noch übersetzen lassen – und das am besten in Deutschland von</p>
+<p>einem vereidigten Übersetzer, denn er kennt die juristische Sprache genau.</p>
+<p>Die Bürokratie sollte aber binationale Paare nicht vom Heiraten abhalten. So gibt es in vielen Städten</p>
+<p>Beratungsangebote, zum Beispiel vom Verband binationaler Familien und Partnerschaften. „Wir</p>
+<p>helfen Menschen in genau diesen Situationen“, sagt Gerhard.</p>
+<p>Wenn dieser Teil des Weges zur Heirat geschafft ist, braucht man einen Termin für die Trauung auf</p>
+<p>dem Standesamt. Wer an einem speziellen Tag wie dem 5. 5. oder dem 6. 6., im Frühling oder im</p>
+<p>Sommer heiraten möchte, sollte sich früh um einen Termin kümmern. Zu einer anderen Zeit kann es</p>
+<p>auch spontan klappen. Volmert und ihr Verlobter hatten Glück: Sie haben schon zwei Wochen nach</p>
+<p>ihrer Anmeldung einen Termin an einem Dienstag bekommen.</p>
+<p>„Die Trauung war schön, aber sehr kurz“, sagt Volmert. „Mich hat überrascht, wie formell manches</p>
+<p>war“, erzählt sie. „Zum Beispiel die Antwort auf die Frage, ob man den anderen heiraten will. Da war</p>
+<p>es ganz wichtig, dass man klar und deutlich Ja sagt.“</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die Fragen. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Was ist laut der Umfrage der häufigste Grund für die Heirat? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Welchen finanziellen Vorteil hat Heirat für die Deutschen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Welche Dokumente mussten Rebekka Volmert und ihr Partner bei der Heiratsanmeldung vorlegen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Wer muss bei der Heiratsanmeldung das Ehefähigkeitszeugnis vorlegen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Warum ist es oft schwierig, ein Ehefähigkeitszeugnis zu bekommen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Was macht man, wenn man kein Ehefähigkeitszeugnis bekommen kann? ___ (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2022-Jes-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans"> Die Verbindung zwischen den Partnern wird stärker.</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">Sie sparen an Steuern.</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">Ausweise und Geburtsurkunden. Napačna rešitev, če</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">M222-251-1-4</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans"> Nicht alle Staaten stellen es aus.</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">Man beantragt eine Befreiung davon.</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Ergänzen Sie die Sätze. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Wenn man heiraten will, muss man sich ___ anmelden.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Bei jeder Heiratsanmeldung binationaler Paare spielt sowohl der Wohnort des ausländischen Partners als auch seine ___ eine wichtige Rolle.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Bei der Heiratsanmeldung binationaler Paare ist vom Vorteil, wenn der ausländische Partner ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Die nötigen Dokumente müssen in die ___ übersetzt werden.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Hochzeitstermine im Frühling und im Sommer sind ___, deshalb muss man sie lange im Voraus reservieren.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Rebekka Volmert stellt erstaunt fest, dass ihre Hochzeit zwar schön, aber kurz war, doch zugleich war sie auch sehr ___. (6 Punkte) Prazna stran OBRNITE LIST.</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2022-Jes-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">beim Standesamt</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans"> Nationalität</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans"> aus EU kommt europäisch</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">deutsche Sprache NESPREJEMLJIVO:</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans"> beliebt</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans"> formell</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

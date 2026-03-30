@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Spomladanski izpitni rok 2010</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Spomladanski izpitni rok 2010
+</nav>
+
+<h1>Spomladanski izpitni rok 2010</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Spomladanski izpitni rok 2010 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>Das blau-weiße Für jüngere Schlümpfe-Fans wie Beth aus – England steht der Spaß im Vordergrund. &quot;Ich</h3>
+<p><em>Lesen Sie bitte.</em></p>
+<p>mag sie sehr. Sie sind witzig und jeder von</p>
+<p>Zwergenkollektiv feiert</p>
+<p>ihnen ist einzigartig. Jeder Schlumpf hat seine</p>
+<p>eigene Persönlichkeit und sie arbeiten alle</p>
+<p>ein Jubiläum</p>
+<p>zusammen&quot;, sagt sie.</p>
+<p>Die kleinen Witzbolde spielen sich bei jeder</p>
+<p>Gelegenheit Streiche. Aber wenn es darauf</p>
+<p>ankommt, dann halten sie brüderlich</p>
+<p>zusammen. Alleine sind sie klein, gemeinsam</p>
+<p>aber stark. Peyo wollte seinen Lesern auch</p>
+<p>Werte wie Solidarität und Toleranz vermitteln.</p>
+<p>Seit 50 Jahren bevölkern die Schlümpfe</p>
+<p>unsere Welt, obwohl sie ja eigentlich viel</p>
+<p>älter sind. 1958 tauchten die blau-weißen</p>
+<p>Zwerge das erste Mal in dem belgischen</p>
+<p>Magazin &quot;Spirou&quot; auf. Eine Erfolgs-</p>
+<p>geschichte begann. Idee beim Frühstück</p>
+<p>Es schlumpft sich international verschieden. Die Idee für die Schlumpf-Reihe kam Peyo</p>
+<p>Doch überall geht es um das Gleiche: die am Frühstückstisch. &quot;Gib mir doch mal das</p>
+<p>legendären Abenteuer von Papa Schlumpf, Schlumpf rüber&quot;, sagte er zu einem Freund, als</p>
+<p>Schlumpfine, Fauli und Baby Schlumpf. In 25 ihm das Wort für Salzstreuer nicht einfiel. Die</p>
+<p>Sprachen hat man die Schlümpfe-Comics Schlumpfsprache war geboren. Am Anfang</p>
+<p>übersetzt, es gibt sie als Zeichentrickfilm und waren die Schlümpfe Nebenfiguren in einer</p>
+<p>demnächst sollen die kleinen Helden ganz groß anderen Comic-Serie, doch bald stiegen sie</p>
+<p>in einem 3-D Film auf die Leinwand kommen. schnell zu einer der beliebtesten Serien der</p>
+<p>Kurz gesagt – beziehungsweise &quot;geschlumpft&quot;: Welt auf.</p>
+<p>Fast jeder kennt die Einwohner von</p>
+<p>Schlumpfhausen. Schlümpfe-Ausstellung auf Tour</p>
+<p>Was viele nicht wissen, ist, dass die In der belgischen Hauptstadt Brüssel</p>
+<p>Schlümpfe aus Belgien kommen. Pierre befindet sich das berühmte Comic-Museum, in</p>
+<p>Culliford alias Peyo hat sie in Brüssel erfunden, dem den blau-weißen Zwergen zum 50-jährigen</p>
+<p>bevor sie in den USA als Zeichentrickserie Bestehen eine Ausstellung gewidmet wird.</p>
+<p>produziert wurden und auf diesem Wege die Marc, ein häufiger Museumsbesucher, ist stolz</p>
+<p>Welt eroberten. darauf, dass die Schlümpfe aus seinem</p>
+<p>Heimatland kommen. Sie vermitteln eine sehr</p>
+<p>Universelle Werte positive Botschaft und sind eine gute</p>
+<p>Die Leute sind an Peyos Werk fasziniert, Darstellung von Belgien.</p>
+<p>was an den Eigenschaften der Schlümpfe liegt. Doch auch wenn die Schlümpfe Belgier sind:</p>
+<p>Peyo ist auch ein fabelhafter Geschichten- für ihre vielen Fans außerhalb der Comic-</p>
+<p>erzähler. Anhand von Schlumpfgeschichten Metropole Brüssel ziehen sie in einer</p>
+<p>spricht er im Prinzip von universellen Werten. wandernden Ausstellung durch Europa.</p>
+<p>(Nach Anne-Sophie Legge, http://www.dw-world.de, September 2008)</p>
+<p>M101-251-1-1 3</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+<p class="aufgabe-instruction">Entscheiden Sie, ob folgende Behauptungen richtig (R) oder falsch (F) sind, und markieren Sie
+jeweils den entsprechenden Buchstaben.</p>
+<div class="question-item"><span class="q-num">1.</span> Die Schlümpfe-Comics sind in 25 Sprachen übersetzt. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Die Schlümpfe sind witzige blau-weiße Comic- und Zeichentrickfiguren. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Die Schlümpfe wurden in den USA erfunden. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Das, was die Leute fasziniert, sind die Eigenschaften der Schlümpfe. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> In den Schlumpf-Geschichten entdecken die Leser auch Werte wie Solidarität und Toleranz. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Die Schlümpfe wurden sofort Hauptfiguren in einer Comic-Serie. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">7.</span> Die Schlümpfe haben in Brüssel seit 50 Jahren ein eigenes Museum. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">8.</span> Die Schlümpfe-Ausstellung wandert aus der belgischen Hauptstadt durch Europa. (1) R F 4 M101-251-1-1</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2010-Spo-0">
+    <h4>Rešitve – Aufgabe 1</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">7.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">8.</span><span class="sol-ans">R</span></div>
+  </div>
+</div>
+</div>
+<div class="text-block">
+<h3>Ein Wasserhaus für Südafrika Unterstützt wird der Bau des – Wasserhauses von deutschen Partnern. Dazu</h3>
+<p><em>Lesen Sie bitte.</em></p>
+<p>gehören neben der Universität Potsdam, die</p>
+<p>das Projekt ent-wickelt hat, mehrere deutsche</p>
+<p>Unternehmen aus dem Wasser- und</p>
+<p>Energiesektor, die die nötigen Technologien</p>
+<p>liefern, sowie das Bundesministerium für</p>
+<p>Bildung und Forschung. Insgesamt fördert die</p>
+<p>deutsche Seite das Wasserhaus mit 1,3</p>
+<p>Millionen Euro. Noch im August soll mit dem</p>
+<p>Bau begonnen werden; für den kommenden</p>
+<p>Februar ist die Eröffnung des Wasserhauses</p>
+<p>geplant.</p>
+<p>Wasser zum Waschen und Duschen</p>
+<p>Der ungewöhnliche Platz ist zwar mit</p>
+<p>Ziel sei es, die Menschen in ländlichen</p>
+<p>hartem, grauem Beton überzogen und mit</p>
+<p>Kommunen so effektiv wie möglich mit Wasser</p>
+<p>seltsamen bunten Linien markiert, trotzdem</p>
+<p>zu versorgen, erläutert Projektleiter Konrad</p>
+<p>haben ihn die Kinder schnell zum</p>
+<p>Soyez von der Universität Potsdam die Idee.</p>
+<p>Fußballspielen und Herumtoben entdeckt.</p>
+<p>Für das Wasserhaus bedeutet das: Reines</p>
+<p>Schließlich liegt er doch ganz nah an dem Ort,</p>
+<p>Trinkwasser ist nur für diesen Zweck gedacht.</p>
+<p>an dem sie wohnen, an den kleinen rotbraunen</p>
+<p>Beim Duschen oder Waschen wird recyceltes</p>
+<p>Township-Häusern der Gemeinde Ikwezi in</p>
+<p>Wasser verwendet. &quot;Beim Betrieb setzen wir</p>
+<p>der südafrikanischen Provinz Eastern Cape.</p>
+<p>auch auf Solarenergie. Damit lässt sich das</p>
+<p>An diesem Tag Anfang Juli wird auf dem Platz</p>
+<p>Wasser erwärmen und die Räume des</p>
+<p>allerdings kein Fußball gespielt. Einiges ist</p>
+<p>Wasserhauses zu bestimmten Zeiten heizen&quot;,</p>
+<p>dennoch los. Die Gemeinde hat ein Festzelt</p>
+<p>sagt Soyez.</p>
+<p>aufgebaut, und viele der rund 10.000</p>
+<p>Damit die Anlagen des Wasserhauses</p>
+<p>Einwohner von Ikwezi haben sich um den</p>
+<p>später auch gewartet werden können, wollen</p>
+<p>Platz versammelt. Sie wollen hier ein</p>
+<p>die deutschen und südafrikanischen</p>
+<p>besonderes Ereignis miterleben – die</p>
+<p>Projektpartner einige Einwohner der Gemeinde</p>
+<p>Grundsteinlegung für ein wichtiges Bauprojekt,</p>
+<p>außerdem schulen und sie mit der Technologie</p>
+<p>das ihre Lebens-situation deutlich verbessern</p>
+<p>vertraut machen. Schon jetzt, sagt Soyez,</p>
+<p>dürfte: das erste kommunale Wasserhaus in</p>
+<p>zeigten auch andere südafrikanische</p>
+<p>Südafrika.</p>
+<p>Kommunen in der Nachbarschaft von Ikwezi</p>
+<p>Interesse an dem Projekt. Ein gutes Signal:</p>
+<p>Unter einem Dach: Trinkwasser,</p>
+<p>Denn bei einem einzigen Wasserhaus soll es</p>
+<p>Duschen und Waschbecken</p>
+<p>nicht bleiben. Geht das Konzept auf, sind</p>
+<p>Für die Bevölkerung der südafrikanischen</p>
+<p>weitere Häuser in Südafrika und anderen</p>
+<p>Gemeinde hat das Wasserhaus eine große</p>
+<p>afrikanischen Ländern geplant.</p>
+<p>Bedeutung. Denn Ikwezi liegt in einer</p>
+<p>Mit seinem neuen Wasserhaus könnte</p>
+<p>Halbwüstenlandschaft, in der es kaum regnet.</p>
+<p>Ikwezi ein Vorbild werden für eine</p>
+<p>Die Region leidet unter extremem Wasser-</p>
+<p>fortschrittliche Wasserversorgung in Afrika –</p>
+<p>mangel und schlechter Wasserqualität. Wer</p>
+<p>und damit auch seinem Namen alle Ehre</p>
+<p>hier Wasser braucht, muss es häufig äußerst</p>
+<p>machen, der in Südafrika in der Sprache der</p>
+<p>mühsam und beschwerlich in großen Kanistern</p>
+<p>Xhosa für den Beginn einer neuen, besseren</p>
+<p>oder Plastikeimern an Wasserstellen abfüllen</p>
+<p>Ära steht.</p>
+<p>und nach Hause transportieren. Mit dem</p>
+<p>Wasserhaus soll sich dies ändern. Unter einem</p>
+<p>Dach gibt es auf rund 118 Quadratmetern</p>
+<p>Trinkwasser sowie Waschräume mit Duschen</p>
+<p>und Waschbecken für die Körperpflege oder</p>
+<p>das Waschen von Wäsche.</p>
+<p>(Nach Deutschland Magazine, http://www.magazine-deutschland.de/, September 2008)</p>
+<p>M101-251-1-1 5</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die folgenden Fragen. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">9.</span> Was haben die Kinder in der Nähe ihres Wohnortes entdeckt? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">10.</span> Warum haben sich die Einwohner von Ikwezi um diesen Platz versammelt? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">11.</span> Wodurch sollte die Lebenssituation der Gemeinde Ikwezi deutlich verbessert werden? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">12.</span> In was für einer Landschaft liegt die südafrikanische Gemeinde Ikwezi? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">13.</span> Worunter leiden die Bewohner dieser Region? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">14.</span> Wie wird das Wasser nach Hause gebracht? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">15.</span> Wann soll man mit dem Bau anfangen? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">16.</span> Wer zeigt noch Interesse an dem Projekt? (1) ___ 6 M101-251-1-1</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2010-Spo-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">9.</span><span class="sol-ans">Einen (ungewöhnlichen) Platz (zum Fußballspielen)</span></div>
+<div class="solution-row"><span class="sol-num">10.</span><span class="sol-ans">Sie wollen ein besonderes Ereignis miterleben.</span></div>
+<div class="solution-row"><span class="sol-num">11.</span><span class="sol-ans">Durch das erste kommunale Wasserhaus in Südafrika</span></div>
+<div class="solution-row"><span class="sol-num">12.</span><span class="sol-ans">In einer Halbwüstenlandschaft (in der es kaum regnet)</span></div>
+<div class="solution-row"><span class="sol-num">13.</span><span class="sol-ans">Unter extremem Wassermangel und schlechter Wasserqualität</span></div>
+<div class="solution-row"><span class="sol-num">14.</span><span class="sol-ans">Mühsam und beschwerlich / In großen Kanistern oder Plastikeimern</span></div>
+<div class="solution-row"><span class="sol-num">15.</span><span class="sol-ans">Im August</span></div>
+<div class="solution-row"><span class="sol-num">16.</span><span class="sol-ans">Andere südafrikanische Kommunen</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Ergänzen Sie die Sätze. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">17.</span> Der ungewöhnliche Platz in der Nähe von Ikwezi wurde von den Kindern zum (1) ___ benutzt.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">18.</span> Der Platz liegt ganz nah an dem ___, (1) in dem die Menschen wohnen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">19.</span> Die Grundsteinlegung wollen alle Einwohner von Ikwezi (1) ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">20.</span> Das Wasserhaus hat für die Bevölkerung der südafrikanischen Gemeinde eine (1) ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">21.</span> Die deutschen Partner helfen bei ___ (1) des Wasserhauses.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">22.</span> Für den kommenden Februar ist ___ (1) des Wasserhauses vorgesehen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">23.</span> Durch das Projekt will man die Leute mit Wasser ___. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">24.</span> Das neue Wasserhaus ist ein ___ für eine moderne (1) Lösung des Wasserproblems in Afrika. M101-251-1-1 7</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2010-Spo-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">17.</span><span class="sol-ans">Fußballspielen/Herumtoben</span></div>
+<div class="solution-row"><span class="sol-num">18.</span><span class="sol-ans">Ort</span></div>
+<div class="solution-row"><span class="sol-num">19.</span><span class="sol-ans">miterleben</span></div>
+<div class="solution-row"><span class="sol-num">20.</span><span class="sol-ans">große Bedeutung</span></div>
+<div class="solution-row"><span class="sol-num">21.</span><span class="sol-ans">dem Bau</span></div>
+<div class="solution-row"><span class="sol-num">22.</span><span class="sol-ans">die Eröffnung</span></div>
+<div class="solution-row"><span class="sol-num">23.</span><span class="sol-ans">versorgen</span></div>
+<div class="solution-row"><span class="sol-num">24.</span><span class="sol-ans">Vorbild</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

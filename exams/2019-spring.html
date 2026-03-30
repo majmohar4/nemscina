@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Spomladanski izpitni rok 2019</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Spomladanski izpitni rok 2019
+</nav>
+
+<h1>Spomladanski izpitni rok 2019</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Spomladanski izpitni rok 2019 · Izpitna pola 1A · Osnovna raven</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+</div>
+<div class="text-block">
+<h3>Knallhart auf der – Brooklyn Bridge</h3>
+<p><em>Lesen Sie.</em></p>
+<p>Die Deutsche Ariane Hundt hat in New York</p>
+<p>ein erfolgreiches Fitness-Unternehmen</p>
+<p>gegründet. Ein Bericht von Norbert Klaus.</p>
+<p>Über dem Kinderbett von Ariane Hundt im Trainer weitere Ernährungsprogramme und</p>
+<p>bayerischen Waging am See hing ein Bild der eine Fitness-Freizeit in Costa Rica.</p>
+<p>berühmten Brooklyn Bridge. „Schon als kleines</p>
+<p>Praktikanten hingegen pflegen die Präsenz</p>
+<p>Mädchen war ich von New York fasziniert“,</p>
+<p>des Unternehmens in den sozialen Medien und</p>
+<p>erzählt die jetzt 37 Jahre alte Frau bei einem</p>
+<p>kümmern sich um Marketing. Die nächsten</p>
+<p>Kaffee in der Nähe ihrer Wohnung in</p>
+<p>Projekte stehen schon an. Ariane befindet sich</p>
+<p>Manhattan.</p>
+<p>in Gesprächen mit einem großen Verlag über</p>
+<p>Begonnen hat die Geschichte des ein Buch zum Thema Fitness, Ernährung und</p>
+<p>Unternehmens aber nicht in einem ganzheitliche Gesundheit.</p>
+<p>Fitnessstudio, sondern tatsächlich auf der</p>
+<p>Ariane Hundt hat gelernt, sich durchzubeißen.</p>
+<p>Brooklyn Bridge. Fitness für den Job war</p>
+<p>Nach einer Ausbildung als Erzieherin für</p>
+<p>damals der neue Fitness-Trend in New York</p>
+<p>behinderte Kinder in München ging sie</p>
+<p>und Ariane wollte sich mit dem</p>
+<p>zunächst als Au-pair in die amerikanische</p>
+<p>ungewöhnlichen Standort von ihren</p>
+<p>Hauptstadt Washington. Sie blieb in den</p>
+<p>Konkurrenten absetzen. Wo sonst kann man</p>
+<p>Vereinigten Staaten, arbeitete als</p>
+<p>mit Blick auf die Freiheitsstatue und die</p>
+<p>Kindermädchen, gab Deutschunterricht und</p>
+<p>Wolkenkratzer der Wall-Street Extrem-</p>
+<p>kellnerte. Daneben studierte sie Psychologie.</p>
+<p>Frühsport machen? Dennoch kam zu ihrem</p>
+<p>Sie zog nach Connecticut, um an der</p>
+<p>ersten Kurs auf der Brücke im April 2008 kein</p>
+<p>Universität einer Provinzstadt in der Forschung</p>
+<p>einziger der drei Leute, die sich angemeldet</p>
+<p>zu arbeiten. Nebenher erwarb Hundt, die als</p>
+<p>hatten. Aber Ariane gab nicht auf. Bald sprach</p>
+<p>junges Mädchen unter anderem an</p>
+<p>sich die Geschichte vom harten Training auf</p>
+<p>Übergewicht litt, eine Lizenz als persönliche</p>
+<p>der Brücke herum. Der muskulöse Wettermann</p>
+<p>Fitnesstrainerin. „Ich wollte einen Weg finden,</p>
+<p>Peter Wild vom Nachrichtensender Fox bekam</p>
+<p>Leuten zu helfen. Mir geht es dabei nicht so</p>
+<p>Wind davon und machte sich sofort auf den</p>
+<p>sehr um sportliche Leistung, sondern mehr um</p>
+<p>Weg, um Ariane vorzustellen und seine</p>
+<p>ein gutes Körpergefühl. Dennoch setzte sie</p>
+<p>Wetterprognosen vor der imposanten Kulisse</p>
+<p>erst auf eine traditionelle Karriere. Zurück in</p>
+<p>der Brücke abzugeben. Der große Durchbruch</p>
+<p>New York arbeitete sie in der Marktforschung</p>
+<p>kam aber mit einem Bericht des</p>
+<p>für Pharmaunternehmen. Eines Tages saß sie</p>
+<p>Fernsehsenders ABC, der auf den</p>
+<p>am Schreibtisch und fühlte ihre Arme und</p>
+<p>Bildschirmen der New Yorker Taxis lief.</p>
+<p>Beine nicht mehr richtig – eine Folge des</p>
+<p>Mittlerweile bietet Ariane eine ganze Palette krummen Sitzens und der hohen</p>
+<p>von Programmen an. Neben klassischen Arbeitsbelastung. Ariane beschloss, anders zu</p>
+<p>Freiluft-Gruppenkursen auf der Brücke oder im leben. Sie schrieb sich an der Universität ein</p>
+<p>Central-Park gibt es auch die Kurse in und machte einen Master-Abschluss in</p>
+<p>Fitnessstudios. Dieses Produkt, Ariane nennt Ernährungswissenschaften. Und sie gründete</p>
+<p>es „Slim&amp;Strong“, ist seit fünf Jahren ihr Brot- das Brooklyn Bridge Boot Camp. „Jetzt mache</p>
+<p>und-Butter-Geschäft. Eingeschlossen in das ich das, wofür ich eine Leidenschaft habe“,</p>
+<p>Training ist für 350 Dollar eine Ernährungs- sagt sie.</p>
+<p>beratung. Dazu bieten Ariane und ihre vier</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die Fragen. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Wodurch wollte Ariane Hundt ihrem Unternehmen zum Erfolg verhelfen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Wie viele Leute hatten die Absicht, an ihrem ersten Kurs teilzunehmen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Was war für den ersten großen Erfolg des Unternehmens entscheidend? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Mit welchem Programm verdient Ariane Hundt das meiste Geld? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Wer ist für die Werbung des Unternehmens von Ariane Hundt verantwortlich? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Welche persönliche Erfahrung bewirkte die Gründung von Brooklyn Bridge Boot Camp? ___ (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2019-Spo-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans"> Mit dem ungewöhnlichen Standort.  Auf Brooklyn Bridge.</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">Drei.</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">Ein Bericht des Fernsehsenders ABC.</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">Mit „Slim&amp;Strong“.</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">Praktikanten.</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans"> Sie fühlte ihre Arme und Beine nicht richtig.</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Ergänzen Sie die Sätze. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Als sie klein war, lebte Ariane in ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Trotz der Schwierigkeiten am Anfang wollte Ariane nicht ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Peter Wild half ihr bekannt zu werden, indem er von der Brooklyn Bridge ___ sendete.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Wem der Standort New York nicht ausreicht, kann an einem Programm in ___ teilnehmen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Arianes eigentliches Ziel ist es, bei den Kunden ___ zu erreichen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Ihr jetziger Beruf ist ihre ___. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2019-Spo-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans"> Deutschland</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans"> aufgeben</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">Wetterprognosen</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">M191-251-1-4</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">ein gutes Körpergefühl</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans"> Leidenschaft</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

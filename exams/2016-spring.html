@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Spomladanski izpitni rok 2016</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Spomladanski izpitni rok 2016
+</nav>
+
+<h1>Spomladanski izpitni rok 2016</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Spomladanski izpitni rok 2016 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>Ein Wörterbuch für Schulen und Universitäten – Georg Cox ist ein Sprachgenie. Er spricht 64</h3>
+<p><em>Lesen Sie.</em></p>
+<p>Sprachen und hat ein einzigartiges Wörterbuch</p>
+<p>publiziert. Astrid Labbert hat mit ihm gesprochen.</p>
+<p>Sie lernen seit Ihrer Kindheit Sprachen. Wie</p>
+<p>hat das angefangen?</p>
+<p>Meine Eltern haben sich scheiden lassen, als ich</p>
+<p>fünf war. Meine Mutter und ich sind nach Los</p>
+<p>Angeles gezogen und ich war in einer Schule, wo</p>
+<p>88 Prozent Mexikaner waren. Spanisch war für</p>
+<p>mich ganz neu. Da habe ich angefangen, es zu</p>
+<p>lernen. Später war ich mit ein paar Leuten aus</p>
+<p>Brasilien befreundet und so fing das mit</p>
+<p>Portugiesisch an. Warum studiert man nämlich</p>
+<p>eine Sprache? Entweder aus Interesse, oder</p>
+<p>man will dort hinreisen. Oder man kennt</p>
+<p>jemanden.</p>
+<p>Sie sind viel gereist und haben 64</p>
+<p>Sprachprüfungen gemacht. Wie lernt man am</p>
+<p>besten eine Sprache?</p>
+<p>In Ihrem Wörterbuch hat jedes Wort eine</p>
+<p>Das Beste ist, wenn man im Land ist. Aber nicht</p>
+<p>Nummer. Damit kann man zum Beispiel vom</p>
+<p>jeder kann das machen. Für mich habe ich immer</p>
+<p>Deutschen ins Kiswahili übersetzen. Wie</p>
+<p>noch diese Karteikarten. Ich schreibe ein Wort auf</p>
+<p>funktioniert das?</p>
+<p>die eine Seite der Karte, das andere Wort auf die</p>
+<p>andere Seite der Karte. Dann kann man üben. Am Wenn man zum Beispiel das Wort „Katze“ vom</p>
+<p>besten fängt man mit 10 Karten an und am Deutschen ins Kiswahili übersetzen will, macht</p>
+<p>nächsten Tag lernt man andere. Wenn man 1000 man das so: Man geht zum deutschen Teil und</p>
+<p>Wörter gelernt hat, fängt man mit Grammatik an. sucht das Wort „Katze“. Ich weiß jetzt nicht,</p>
+<p>welche Zahl das ist, aber sagen wir, 3000. Also</p>
+<p>Wie schaffen Sie es, dass Sie sich so viele</p>
+<p>liest man „Katze“ = 3000. Dann geht man zu</p>
+<p>Wörter aus so vielen verschiedenen Sprachen</p>
+<p>Kiswahili, zur Zahl 3000 und hat dann das Wort</p>
+<p>merken?</p>
+<p>„Paka“, was Katze heißt. Das Wörterbuch dürfte</p>
+<p>Ich nehme ein Buch in einer bestimmten Sprache</p>
+<p>meiner Ansicht nach 50 400 verschiedenen</p>
+<p>oder gehe durch die Karteikarten oder durch das</p>
+<p>Wörterbüchern entsprechen.</p>
+<p>Wörterbuch. Man versucht, ein bisschen am Ball</p>
+<p>zu bleiben. Haben Sie eine Lieblingssprache?</p>
+<p>Ich finde Chinook sehr lustig. Das ist eine</p>
+<p>Sie haben ein Wörterbuch mit 25 Bänden</p>
+<p>Indianer-Sprache aus Oregon. Es gibt nur 2000</p>
+<p>publiziert. 8000 Begriffe werden darin in 225</p>
+<p>Wörter in der gesamten Sprache – also ist es sehr</p>
+<p>Sprachen übersetzt, auf 45 000 Seiten. Wie</p>
+<p>leicht zu lernen.</p>
+<p>haben Sie das gemacht?</p>
+<p>Wir haben das mit sehr vielen Übersetzungsbüros Für wen ist das Wörterbuch?</p>
+<p>gemacht, es war natürlich ein Haufen Arbeit. Es Ich habe das für alle Universitäten und Schulen</p>
+<p>war aber sehr, sehr interessant. Besonders, weil gemacht. Ich hatte immer das Problem, als ich in</p>
+<p>viele von diesen kleinen Sprachen dabei waren – den verschiedenen Universitäten Sprachen studiert</p>
+<p>zum Beispiel Cherokee oder die Aborigine- habe: Es gab an den Universitäten immer</p>
+<p>Sprachen. Wörterbücher für Deutsch, Französisch, Englisch,</p>
+<p>Russisch, aber kaum welche für diese anderen</p>
+<p>Was interessiert Sie an diesen Sprachen?</p>
+<p>Sprachen.</p>
+<p>Sie interessieren mich, weil sie aussterben und</p>
+<p>ich weiß: In den nächsten 50 Jahren wird es nicht</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+<p class="aufgabe-instruction">Entscheiden Sie, ob folgende Behauptungen richtig (R) oder falsch (F) sind, und markieren Sie
+jeweils den entsprechenden Buchstaben.</p>
+<div class="question-item"><span class="q-num">1.</span> Georg Cox meint, dass man die Grammatik vor den Vokabeln lernen soll.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Er verbessert seinen Wortschatz, indem er liest.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Im Wörterbuch von Cox wird ein Wort in zwei Sprachen übersetzt.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Das Wörterbuch von Cox ist ein Projekt, das er ganz allein gemacht hat.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Er meint, dass kleinere Sprachen bald nicht mehr existieren werden.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Die Sprache, die ihm am besten gefällt, gehört zu den kleineren Sprachen. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2016-Spo-0">
+    <h4>Rešitve – Aufgabe 1</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">R</span></div>
+  </div>
+</div>
+</div>
+<div class="text-block">
+<h3>Es ist schön, zu erfinden – Am 10. August 1893 erschütterte eine Explosion</h3>
+<p><em>Lesen Sie.</em></p>
+<p>die Versuchshalle der Maschinenfabrik Augsburg.</p>
+<p>Wie durch ein Wunder blieben die beiden</p>
+<p>Männer in der Halle unverletzt: der Mechaniker</p>
+<p>Hans Linder und der Ingenieur Rudolf Diesel. Zum</p>
+<p>ersten Mal hatte der Motor “gezündet“, welcher</p>
+<p>einige Jahrzehnte später Millionen von Maschinen</p>
+<p>und Generatoren, von Personen-, Lastwagen</p>
+<p>und Omnibussen, von Traktoren, Lokomotiven</p>
+<p>und Schiffen antreiben sollte: der Dieselmotor.</p>
+<p>Wer war jener Ingenieur?</p>
+<p>Diesel begann seine Laufbahn als Ingenieur in</p>
+<p>Augsburg. Die Dampfmaschine ermöglichte</p>
+<p>damals die Industrielle Revolution. Aber die</p>
+<p>Dampfmaschine war eine Dienerin der Reichen,</p>
+<p>weil sie um so rationeller arbeitete, je größer und</p>
+<p>teurer sie war; und sie war vor allem eine</p>
+<p>Verschwenderin, denn selbst die größten und</p>
+<p>besten ihrer Art hatten einen Wirkungsgrad von</p>
+<p>nur zehn bis zwölf Prozent. Die</p>
+<p>Dampfmaschinen drohten daher die kleinen</p>
+<p>Betriebe und das Handwerk zu vernichten und</p>
+<p>die wirtschaftliche Macht in den großen Fabriken</p>
+<p>zu konzentrieren. Erst nach vier Jahren, am 28. Januar 1897,</p>
+<p>Diesel wollte deshalb eine kleinere, billigere, gelang es Diesel einen Motor zu entwickeln,</p>
+<p>rationell arbeitende Maschine zur Verfügung der an Sparsamkeit alle bisher bekannten</p>
+<p>stellen. Er dachte zuerst an eine Verbesserung Wärmekraftmaschinen weit übertraf. In</p>
+<p>der Dampfmaschine. Dann aber führte ihn seine demselben Jahr begann sich auch das Ausland</p>
+<p>Erfahrung mit Eismaschinen auf einen anderen für seine Maschine zu interessieren und der</p>
+<p>Gedanken: Wird Gas zusammengepresst, so Bau von Dieselmotoren begann sowohl in</p>
+<p>entsteht Wärme; dehnt sich dagegen das Gas Europa als auch in den USA. Der Erfinder</p>
+<p>aus, so kühlt es sich gleichzeitig ab. Sollte es stand auf dem Höhepunkt seiner Laufbahn.</p>
+<p>nicht möglich sein, mit Hilfe eines Kolbens in Aber die jahrelangen Anstrengungen hatten</p>
+<p>einem Zylinder die Luft so stark zu verdichten Diesels Gesundheit angegriffen. Im Frühjahr</p>
+<p>und zu erhitzen, dass eingespritzter Brennstoff 1912 traf Diesel in Orange City den</p>
+<p>sich von selbst entzündet und der entstehende amerikanischen Erfinder Th. A. Edison. Es war</p>
+<p>Gasdruck den Kolben bewegt? Durch die hohe einer der letzten glücklichen Tage seines Lebens.</p>
+<p>Verdichtung – so berechnete Diesel – müsste Am 29. September 1913 ging Diesel in</p>
+<p>ein solcher Motor einen viel besseren Antwerpen an Bord des Dampfers „Dresden“.</p>
+<p>Wirkungsgrad haben als die Dampfmaschine. Das Ziel des Schiffes war Harwich in England, wo</p>
+<p>1892 erklärte sich die Maschinenfabrik Augsburg er als Kind mit seiner Familie lebte. Überwältigt</p>
+<p>bereit, einen Versuchsmotor zu bauen. Zuerst von Sorgen und von einem Gefühl der</p>
+<p>gab es natürlich Misserfolge. Fragwürdigkeit allen menschlichen Fortschritts</p>
+<p>stürzte er sich nachts vom Schiff in die Nordsee</p>
+<p>und ertrank.</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die folgenden Fragen. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Was konzentrierte sich durch die Einführung der Dampfmaschinen in den großen Fabriken? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Durch welche Maschinen bekam Diesel eine neue Idee? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Wodurch sollte der Motor einen guten Wirkungsgrad haben? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> In welchem Jahr begann weltweit die Produktion von Dieselmotoren? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> In welchem Land verbrachte Diesel seine Kinderjahre? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Wie starb er? ___ (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2016-Spo-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">Die wirtschaftliche Macht.</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">Durch Eismaschinen.</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">Durch die hohe Verdichtung.</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">1897.</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">In England.</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans"> Er stürzte sich ins Wasser.</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Ergänzen Sie die Sätze. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Teure und große Dampfmaschinen bedrohten ___ ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Der erste Dieselmotor wurde in ___ gebaut.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Der neue Motor war im Vergleich zu den Dampfmaschinen ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Als Diesel 1912 den Erfinder Th. A. Edison traf, war er sehr ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> 1913 reiste Diesel mit ___ nach Harwich.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Es plagten ihn ___ und auch Zweifel über den Nutzen vom Fortschritt. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2016-Spo-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans"> die kleinen Betriebe und das Handwerk</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">Augsburg</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans"> sparsam</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">M161-251-1-4</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans"> dem Dampfer</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">Sorgen</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

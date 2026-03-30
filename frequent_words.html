@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Najpogostejše besede – Nemščina Matura</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+
+    .freq-intro {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.9rem;
+      color: #555;
+      background: var(--light-bg);
+      padding: 1rem 1.2rem;
+      border-radius: 4px;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    .section-header {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.7rem 1.2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      border-radius: 4px;
+    }
+    .freq-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    .freq-table th {
+      background: var(--light-bg);
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 700;
+      padding: 0.5rem 0.7rem;
+      border: 1px solid var(--border);
+      text-align: left;
+      position: sticky;
+      top: 0;
+    }
+    .freq-table td {
+      padding: 0.4rem 0.7rem;
+      border: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .freq-table tr.even td { background: #f7f5f2; }
+    .freq-table td.rank { width: 2.5rem; text-align: center; color: #888; font-size: 0.8rem; }
+    .freq-table td.word { width: 30%; color: var(--accent); }
+    .freq-table td.meaning { width: 38%; }
+    .freq-table td.pos { width: 18%; color: #888; font-size: 0.82rem; }
+    .freq-table td.freq { width: 7%; text-align: center; color: #888; font-size: 0.82rem; }
+    .search-box {
+      width: 100%;
+      padding: 0.6rem 0.9rem;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 0.95rem;
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      background: var(--answer-bg);
+      margin-bottom: 1rem;
+    }
+    .search-box:focus { outline: none; border-color: var(--accent); }
+    @media (max-width: 600px) {
+      .freq-table td.pos, .freq-table th:nth-child(4) { display: none; }
+      .freq-table td.freq, .freq-table th:nth-child(5) { display: none; }
+    }
+    </style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span>
+  Najpogostejše besede
+</nav>
+
+<h1>Najpogostejše besede in besedne zveze</h1>
+<p class="subtitle">Analiza besedišča iz besedil za bralno razumevanje · Nemščina · Splošna matura 2009–2023</p>
+
+<div class="freq-intro">
+  Na tej strani so zbrane najpogostejše nemške besede in besedne zveze iz vseh besedil za bralno razumevanje.
+  Besedišče je pridobljeno iz 100 besed in 50 besednih zvez, ki se najpogosteje pojavljajo v izpitnih besedilih.
+  Stopbesede (člen, predlogi, vezniki) so izključene.
+</div>
+
+<div class="section-header">1. Najpogostejše besede</div>
+<input class="search-box" id="word-search" type="text"
+  placeholder="Išči besedo ali prevod ..."
+  oninput="filterTable('word-search','word-table')">
+
+<table class="freq-table" id="word-table">
+<thead>
+  <tr>
+    <th>#</th>
+    <th>Nemška beseda</th>
+    <th>Slovensko</th>
+    <th>Vrsta besede</th>
+    <th>Pogostost</th>
+  </tr>
+</thead>
+<tbody>
+<tr class="even"><td class="rank">1</td><td class="word"><strong>Menschen</strong></td><td class="meaning">ljudje</td><td class="pos"><em>samostalnik</em></td><td class="freq">95</td></tr><tr class=""><td class="rank">2</td><td class="word"><strong>Deutschland</strong></td><td class="meaning">Nemčija</td><td class="pos"><em>samostalnik</em></td><td class="freq">74</td></tr><tr class="even"><td class="rank">3</td><td class="word"><strong>machen</strong></td><td class="meaning">delati / narediti</td><td class="pos"><em>glagol</em></td><td class="freq">45</td></tr><tr class=""><td class="rank">4</td><td class="word"><strong>Beispiel</strong></td><td class="meaning">primer</td><td class="pos"><em>samostalnik</em></td><td class="freq">42</td></tr><tr class="even"><td class="rank">5</td><td class="word"><strong>Prozent</strong></td><td class="meaning">odstotek</td><td class="pos"><em>samostalnik</em></td><td class="freq">41</td></tr><tr class=""><td class="rank">6</td><td class="word"><strong>Welt</strong></td><td class="meaning">svet</td><td class="pos"><em>samostalnik</em></td><td class="freq">35</td></tr><tr class="even"><td class="rank">7</td><td class="word"><strong>Wasser</strong></td><td class="meaning">voda</td><td class="pos"><em>samostalnik</em></td><td class="freq">32</td></tr><tr class=""><td class="rank">8</td><td class="word"><strong>einfach</strong></td><td class="meaning">preprosto / enostavno</td><td class="pos"><em>prislov/pridevnik</em></td><td class="freq">32</td></tr><tr class="even"><td class="rank">9</td><td class="word"><strong>leben</strong></td><td class="meaning">živeti</td><td class="pos"><em>glagol</em></td><td class="freq">32</td></tr><tr class=""><td class="rank">10</td><td class="word"><strong>Stadt</strong></td><td class="meaning">mesto</td><td class="pos"><em>samostalnik</em></td><td class="freq">32</td></tr><tr class="even"><td class="rank">11</td><td class="word"><strong>Jahre</strong></td><td class="meaning">leta</td><td class="pos"><em>samostalnik</em></td><td class="freq">31</td></tr><tr class=""><td class="rank">12</td><td class="word"><strong>natürlich</strong></td><td class="meaning">naravno / seveda</td><td class="pos"><em>prislov/pridevnik</em></td><td class="freq">31</td></tr><tr class="even"><td class="rank">13</td><td class="word"><strong>neu/neue</strong></td><td class="meaning">nov/nova</td><td class="pos"><em>pridevnik</em></td><td class="freq">28</td></tr><tr class=""><td class="rank">14</td><td class="word"><strong>Geld</strong></td><td class="meaning">denar</td><td class="pos"><em>samostalnik</em></td><td class="freq">28</td></tr><tr class="even"><td class="rank">15</td><td class="word"><strong>deshalb</strong></td><td class="meaning">zato</td><td class="pos"><em>prislov</em></td><td class="freq">28</td></tr><tr class=""><td class="rank">16</td><td class="word"><strong>Kinder</strong></td><td class="meaning">otroci</td><td class="pos"><em>samostalnik</em></td><td class="freq">28</td></tr><tr class="even"><td class="rank">17</td><td class="word"><strong>kommen</strong></td><td class="meaning">priti</td><td class="pos"><em>glagol</em></td><td class="freq">26</td></tr><tr class=""><td class="rank">18</td><td class="word"><strong>finden</strong></td><td class="meaning">najti / meniti</td><td class="pos"><em>glagol</em></td><td class="freq">25</td></tr><tr class="even"><td class="rank">19</td><td class="word"><strong>besonders</strong></td><td class="meaning">posebej</td><td class="pos"><em>prislov</em></td><td class="freq">24</td></tr><tr class=""><td class="rank">20</td><td class="word"><strong>Mädchen</strong></td><td class="meaning">deklica</td><td class="pos"><em>samostalnik</em></td><td class="freq">24</td></tr><tr class="even"><td class="rank">21</td><td class="word"><strong>Schüler</strong></td><td class="meaning">učenci</td><td class="pos"><em>samostalnik</em></td><td class="freq">24</td></tr><tr class=""><td class="rank">22</td><td class="word"><strong>Sport</strong></td><td class="meaning">šport</td><td class="pos"><em>samostalnik</em></td><td class="freq">23</td></tr><tr class="even"><td class="rank">23</td><td class="word"><strong>Eltern</strong></td><td class="meaning">starši</td><td class="pos"><em>samostalnik</em></td><td class="freq">23</td></tr><tr class=""><td class="rank">24</td><td class="word"><strong>gehen</strong></td><td class="meaning">iti</td><td class="pos"><em>glagol</em></td><td class="freq">22</td></tr><tr class="even"><td class="rank">25</td><td class="word"><strong>wirklich</strong></td><td class="meaning">resnično / zares</td><td class="pos"><em>prislov</em></td><td class="freq">22</td></tr><tr class=""><td class="rank">26</td><td class="word"><strong>erst/erste</strong></td><td class="meaning">prvi/prva</td><td class="pos"><em>pridevnik</em></td><td class="freq">22</td></tr><tr class="even"><td class="rank">27</td><td class="word"><strong>geben</strong></td><td class="meaning">dati</td><td class="pos"><em>glagol</em></td><td class="freq">22</td></tr><tr class=""><td class="rank">28</td><td class="word"><strong>außerdem</strong></td><td class="meaning">poleg tega</td><td class="pos"><em>prislov</em></td><td class="freq">21</td></tr><tr class="even"><td class="rank">29</td><td class="word"><strong>Schule</strong></td><td class="meaning">šola</td><td class="pos"><em>samostalnik</em></td><td class="freq">20</td></tr><tr class=""><td class="rank">30</td><td class="word"><strong>Leute</strong></td><td class="meaning">ljudje</td><td class="pos"><em>samostalnik</em></td><td class="freq">19</td></tr><tr class="even"><td class="rank">31</td><td class="word"><strong>zusammen</strong></td><td class="meaning">skupaj</td><td class="pos"><em>prislov</em></td><td class="freq">19</td></tr><tr class=""><td class="rank">32</td><td class="word"><strong>Energie</strong></td><td class="meaning">energija</td><td class="pos"><em>samostalnik</em></td><td class="freq">19</td></tr><tr class="even"><td class="rank">33</td><td class="word"><strong>Essen</strong></td><td class="meaning">hrana / jesti</td><td class="pos"><em>samostalnik/glagol</em></td><td class="freq">19</td></tr><tr class=""><td class="rank">34</td><td class="word"><strong>Buch</strong></td><td class="meaning">knjiga</td><td class="pos"><em>samostalnik</em></td><td class="freq">19</td></tr><tr class="even"><td class="rank">35</td><td class="word"><strong>richtig</strong></td><td class="meaning">pravilno / prav</td><td class="pos"><em>prislov/pridevnik</em></td><td class="freq">18</td></tr><tr class=""><td class="rank">36</td><td class="word"><strong>bisher</strong></td><td class="meaning">doslej / do sedaj</td><td class="pos"><em>prislov</em></td><td class="freq">18</td></tr><tr class="even"><td class="rank">37</td><td class="word"><strong>Millionen</strong></td><td class="meaning">milijoni</td><td class="pos"><em>samostalnik</em></td><td class="freq">18</td></tr><tr class=""><td class="rank">38</td><td class="word"><strong>Kilometer</strong></td><td class="meaning">kilometer</td><td class="pos"><em>samostalnik</em></td><td class="freq">18</td></tr><tr class="even"><td class="rank">39</td><td class="word"><strong>Musik</strong></td><td class="meaning">glasba</td><td class="pos"><em>samostalnik</em></td><td class="freq">17</td></tr><tr class=""><td class="rank">40</td><td class="word"><strong>arbeiten</strong></td><td class="meaning">delati</td><td class="pos"><em>glagol</em></td><td class="freq">17</td></tr><tr class="even"><td class="rank">41</td><td class="word"><strong>letzt/letzte</strong></td><td class="meaning">zadnji/zadnja</td><td class="pos"><em>pridevnik</em></td><td class="freq">17</td></tr><tr class=""><td class="rank">42</td><td class="word"><strong>sehen</strong></td><td class="meaning">videti</td><td class="pos"><em>glagol</em></td><td class="freq">17</td></tr><tr class="even"><td class="rank">43</td><td class="word"><strong>Erfolg</strong></td><td class="meaning">uspeh</td><td class="pos"><em>samostalnik</em></td><td class="freq">16</td></tr><tr class=""><td class="rank">44</td><td class="word"><strong>wichtig</strong></td><td class="meaning">pomemben</td><td class="pos"><em>pridevnik</em></td><td class="freq">16</td></tr><tr class="even"><td class="rank">45</td><td class="word"><strong>eigene</strong></td><td class="meaning">lastni</td><td class="pos"><em>pridevnik</em></td><td class="freq">16</td></tr><tr class=""><td class="rank">46</td><td class="word"><strong>eigentlich</strong></td><td class="meaning">pravzaprav</td><td class="pos"><em>prislov</em></td><td class="freq">16</td></tr><tr class="even"><td class="rank">47</td><td class="word"><strong>Teil</strong></td><td class="meaning">del</td><td class="pos"><em>samostalnik</em></td><td class="freq">16</td></tr><tr class=""><td class="rank">48</td><td class="word"><strong>möglich</strong></td><td class="meaning">mogoče</td><td class="pos"><em>pridevnik</em></td><td class="freq">16</td></tr><tr class="even"><td class="rank">49</td><td class="word"><strong>Sprache</strong></td><td class="meaning">jezik</td><td class="pos"><em>samostalnik</em></td><td class="freq">16</td></tr><tr class=""><td class="rank">50</td><td class="word"><strong>Frau</strong></td><td class="meaning">ženska / gospa</td><td class="pos"><em>samostalnik</em></td><td class="freq">15</td></tr><tr class="even"><td class="rank">51</td><td class="word"><strong>stehen</strong></td><td class="meaning">stati</td><td class="pos"><em>glagol</em></td><td class="freq">15</td></tr><tr class=""><td class="rank">52</td><td class="word"><strong>nutzen</strong></td><td class="meaning">uporabiti / koristiti</td><td class="pos"><em>glagol</em></td><td class="freq">15</td></tr><tr class="even"><td class="rank">53</td><td class="word"><strong>Hilfe</strong></td><td class="meaning">pomoč</td><td class="pos"><em>samostalnik</em></td><td class="freq">15</td></tr><tr class=""><td class="rank">54</td><td class="word"><strong>Land</strong></td><td class="meaning">dežela / država</td><td class="pos"><em>samostalnik</em></td><td class="freq">15</td></tr><tr class="even"><td class="rank">55</td><td class="word"><strong>spielen</strong></td><td class="meaning">igrati</td><td class="pos"><em>glagol</em></td><td class="freq">15</td></tr><tr class=""><td class="rank">56</td><td class="word"><strong>Unternehmen</strong></td><td class="meaning">podjetje</td><td class="pos"><em>samostalnik</em></td><td class="freq">15</td></tr><tr class="even"><td class="rank">57</td><td class="word"><strong>Familie</strong></td><td class="meaning">družina</td><td class="pos"><em>samostalnik</em></td><td class="freq">15</td></tr><tr class=""><td class="rank">58</td><td class="word"><strong>helfen</strong></td><td class="meaning">pomagati</td><td class="pos"><em>glagol</em></td><td class="freq">15</td></tr><tr class="even"><td class="rank">59</td><td class="word"><strong>wissen</strong></td><td class="meaning">vedeti</td><td class="pos"><em>glagol</em></td><td class="freq">14</td></tr><tr class=""><td class="rank">60</td><td class="word"><strong>beispielsweise</strong></td><td class="meaning">na primer</td><td class="pos"><em>prislov</em></td><td class="freq">14</td></tr><tr class="even"><td class="rank">61</td><td class="word"><strong>versuchen</strong></td><td class="meaning">poskusiti</td><td class="pos"><em>glagol</em></td><td class="freq">14</td></tr><tr class=""><td class="rank">62</td><td class="word"><strong>Frage</strong></td><td class="meaning">vprašanje</td><td class="pos"><em>samostalnik</em></td><td class="freq">14</td></tr><tr class="even"><td class="rank">63</td><td class="word"><strong>zunächst</strong></td><td class="meaning">najprej</td><td class="pos"><em>prislov</em></td><td class="freq">14</td></tr><tr class=""><td class="rank">64</td><td class="word"><strong>manchmal</strong></td><td class="meaning">včasih</td><td class="pos"><em>prislov</em></td><td class="freq">13</td></tr><tr class="even"><td class="rank">65</td><td class="word"><strong>Lernen</strong></td><td class="meaning">učenje</td><td class="pos"><em>glagol/samostalnik</em></td><td class="freq">13</td></tr><tr class=""><td class="rank">66</td><td class="word"><strong>Ziel</strong></td><td class="meaning">cilj</td><td class="pos"><em>samostalnik</em></td><td class="freq">13</td></tr><tr class="even"><td class="rank">67</td><td class="word"><strong>fragen</strong></td><td class="meaning">vprašati</td><td class="pos"><em>glagol</em></td><td class="freq">13</td></tr><tr class=""><td class="rank">68</td><td class="word"><strong>weltweit</strong></td><td class="meaning">po vsem svetu</td><td class="pos"><em>prislov</em></td><td class="freq">13</td></tr><tr class="even"><td class="rank">69</td><td class="word"><strong>häufig</strong></td><td class="meaning">pogosto</td><td class="pos"><em>prislov/pridevnik</em></td><td class="freq">13</td></tr><tr class=""><td class="rank">70</td><td class="word"><strong>Jungen</strong></td><td class="meaning">dečki</td><td class="pos"><em>samostalnik</em></td><td class="freq">13</td></tr><tr class="even"><td class="rank">71</td><td class="word"><strong>mittlerweile</strong></td><td class="meaning">medtem / v tem času</td><td class="pos"><em>prislov</em></td><td class="freq">13</td></tr><tr class=""><td class="rank">72</td><td class="word"><strong>Internet</strong></td><td class="meaning">internet</td><td class="pos"><em>samostalnik</em></td><td class="freq">13</td></tr><tr class="even"><td class="rank">73</td><td class="word"><strong>Reise</strong></td><td class="meaning">potovanje</td><td class="pos"><em>samostalnik</em></td><td class="freq">13</td></tr><tr class=""><td class="rank">74</td><td class="word"><strong>sprechen</strong></td><td class="meaning">govoriti</td><td class="pos"><em>glagol</em></td><td class="freq">12</td></tr><tr class="even"><td class="rank">75</td><td class="word"><strong>wichtige</strong></td><td class="meaning">pomembni</td><td class="pos"><em>pridevnik</em></td><td class="freq">12</td></tr><tr class=""><td class="rank">76</td><td class="word"><strong>gemeinsam</strong></td><td class="meaning">skupaj / skupen</td><td class="pos"><em>prislov/pridevnik</em></td><td class="freq">12</td></tr><tr class="even"><td class="rank">77</td><td class="word"><strong>trotzdem</strong></td><td class="meaning">kljub temu</td><td class="pos"><em>prislov</em></td><td class="freq">12</td></tr><tr class=""><td class="rank">78</td><td class="word"><strong>Problem</strong></td><td class="meaning">težava / problem</td><td class="pos"><em>samostalnik</em></td><td class="freq">12</td></tr><tr class="even"><td class="rank">79</td><td class="word"><strong>Freunde</strong></td><td class="meaning">prijatelji</td><td class="pos"><em>samostalnik</em></td><td class="freq">12</td></tr><tr class=""><td class="rank">80</td><td class="word"><strong>Natur</strong></td><td class="meaning">narava</td><td class="pos"><em>samostalnik</em></td><td class="freq">12</td></tr><tr class="even"><td class="rank">81</td><td class="word"><strong>Mann</strong></td><td class="meaning">moški / mož</td><td class="pos"><em>samostalnik</em></td><td class="freq">12</td></tr><tr class=""><td class="rank">82</td><td class="word"><strong>Kunst</strong></td><td class="meaning">umetnost</td><td class="pos"><em>samostalnik</em></td><td class="freq">12</td></tr><tr class="even"><td class="rank">83</td><td class="word"><strong>Fleisch</strong></td><td class="meaning">meso</td><td class="pos"><em>samostalnik</em></td><td class="freq">12</td></tr><tr class=""><td class="rank">84</td><td class="word"><strong>Stunden</strong></td><td class="meaning">ure</td><td class="pos"><em>samostalnik</em></td><td class="freq">11</td></tr><tr class="even"><td class="rank">85</td><td class="word"><strong>verbessern</strong></td><td class="meaning">izboljšati</td><td class="pos"><em>glagol</em></td><td class="freq">11</td></tr><tr class=""><td class="rank">86</td><td class="word"><strong>meistens</strong></td><td class="meaning">večinoma</td><td class="pos"><em>prislov</em></td><td class="freq">11</td></tr><tr class="even"><td class="rank">87</td><td class="word"><strong>Länder</strong></td><td class="meaning">dežele / države</td><td class="pos"><em>samostalnik</em></td><td class="freq">11</td></tr><tr class=""><td class="rank">88</td><td class="word"><strong>groß</strong></td><td class="meaning">velik</td><td class="pos"><em>pridevnik</em></td><td class="freq">11</td></tr><tr class="even"><td class="rank">89</td><td class="word"><strong>verstehen</strong></td><td class="meaning">razumeti</td><td class="pos"><em>glagol</em></td><td class="freq">11</td></tr><tr class=""><td class="rank">90</td><td class="word"><strong>Jugendliche</strong></td><td class="meaning">mladostniki</td><td class="pos"><em>samostalnik</em></td><td class="freq">11</td></tr><tr class="even"><td class="rank">91</td><td class="word"><strong>Arbeit</strong></td><td class="meaning">delo</td><td class="pos"><em>samostalnik</em></td><td class="freq">10</td></tr><tr class=""><td class="rank">92</td><td class="word"><strong>zeigen</strong></td><td class="meaning">pokazati</td><td class="pos"><em>glagol</em></td><td class="freq">10</td></tr><tr class="even"><td class="rank">93</td><td class="word"><strong>Film</strong></td><td class="meaning">film</td><td class="pos"><em>samostalnik</em></td><td class="freq">10</td></tr><tr class=""><td class="rank">94</td><td class="word"><strong>kaufen</strong></td><td class="meaning">kupiti</td><td class="pos"><em>glagol</em></td><td class="freq">10</td></tr><tr class="even"><td class="rank">95</td><td class="word"><strong>hören</strong></td><td class="meaning">slišati</td><td class="pos"><em>glagol</em></td><td class="freq">10</td></tr><tr class=""><td class="rank">96</td><td class="word"><strong>insgesamt</strong></td><td class="meaning">skupaj / v celoti</td><td class="pos"><em>prislov</em></td><td class="freq">9</td></tr><tr class="even"><td class="rank">97</td><td class="word"><strong>klein</strong></td><td class="meaning">majhen</td><td class="pos"><em>pridevnik</em></td><td class="freq">9</td></tr><tr class=""><td class="rank">98</td><td class="word"><strong>Stelle</strong></td><td class="meaning">mesto / delovno mesto</td><td class="pos"><em>samostalnik</em></td><td class="freq">9</td></tr><tr class="even"><td class="rank">99</td><td class="word"><strong>überhaupt</strong></td><td class="meaning">sploh</td><td class="pos"><em>prislov</em></td><td class="freq">9</td></tr><tr class=""><td class="rank">100</td><td class="word"><strong>Möglichkeit</strong></td><td class="meaning">možnost</td><td class="pos"><em>samostalnik</em></td><td class="freq">9</td></tr>
+</tbody>
+</table>
+
+<div class="section-header">2. Najpogostejše besedne zveze</div>
+<input class="search-box" id="phrase-search" type="text"
+  placeholder="Išči besedno zvezo ali prevod ..."
+  oninput="filterTable('phrase-search','phrase-table')">
+
+<table class="freq-table" id="phrase-table">
+<thead>
+  <tr>
+    <th>#</th>
+    <th>Besedna zveza</th>
+    <th>Slovensko</th>
+    <th>Pogostost</th>
+  </tr>
+</thead>
+<tbody>
+<tr class="even"><td class="rank">1</td><td class="word"><strong>zum Beispiel</strong></td><td class="meaning">na primer</td><td class="freq">0</td></tr><tr class=""><td class="rank">2</td><td class="word"><strong>auf der anderen Seite</strong></td><td class="meaning">po drugi strani</td><td class="freq">0</td></tr><tr class="even"><td class="rank">3</td><td class="word"><strong>in Deutschland</strong></td><td class="meaning">v Nemčiji</td><td class="freq">0</td></tr><tr class=""><td class="rank">4</td><td class="word"><strong>zum ersten Mal</strong></td><td class="meaning">prvič</td><td class="freq">0</td></tr><tr class="even"><td class="rank">5</td><td class="word"><strong>immer mehr</strong></td><td class="meaning">vedno več</td><td class="freq">0</td></tr><tr class=""><td class="rank">6</td><td class="word"><strong>immer wieder</strong></td><td class="meaning">vedno znova</td><td class="freq">0</td></tr><tr class="even"><td class="rank">7</td><td class="word"><strong>es gibt</strong></td><td class="meaning">obstaja / je</td><td class="freq">0</td></tr><tr class=""><td class="rank">8</td><td class="word"><strong>vor allem</strong></td><td class="meaning">predvsem / zlasti</td><td class="freq">0</td></tr><tr class="even"><td class="rank">9</td><td class="word"><strong>auf der einen Seite</strong></td><td class="meaning">po eni strani</td><td class="freq">0</td></tr><tr class=""><td class="rank">10</td><td class="word"><strong>in der Lage</strong></td><td class="meaning">sposoben / zmožen</td><td class="freq">0</td></tr><tr class="even"><td class="rank">11</td><td class="word"><strong>im Vergleich</strong></td><td class="meaning">v primerjavi</td><td class="freq">0</td></tr><tr class=""><td class="rank">12</td><td class="word"><strong>in der Regel</strong></td><td class="meaning">praviloma / navadno</td><td class="freq">0</td></tr><tr class="even"><td class="rank">13</td><td class="word"><strong>unter anderem</strong></td><td class="meaning">med drugim</td><td class="freq">0</td></tr><tr class=""><td class="rank">14</td><td class="word"><strong>in den letzten Jahren</strong></td><td class="meaning">v zadnjih letih</td><td class="freq">0</td></tr><tr class="even"><td class="rank">15</td><td class="word"><strong>aus diesem Grund</strong></td><td class="meaning">iz tega razloga</td><td class="freq">0</td></tr><tr class=""><td class="rank">16</td><td class="word"><strong>auf der Welt</strong></td><td class="meaning">na svetu</td><td class="freq">0</td></tr><tr class="even"><td class="rank">17</td><td class="word"><strong>mehr und mehr</strong></td><td class="meaning">vedno bolj</td><td class="freq">0</td></tr><tr class=""><td class="rank">18</td><td class="word"><strong>nach Hause</strong></td><td class="meaning">domov</td><td class="freq">0</td></tr><tr class="even"><td class="rank">19</td><td class="word"><strong>in der Schule</strong></td><td class="meaning">v šoli</td><td class="freq">0</td></tr><tr class=""><td class="rank">20</td><td class="word"><strong>auf dem Weg</strong></td><td class="meaning">na poti</td><td class="freq">0</td></tr><tr class="even"><td class="rank">21</td><td class="word"><strong>im Alltag</strong></td><td class="meaning">v vsakdanjem življenju</td><td class="freq">0</td></tr><tr class=""><td class="rank">22</td><td class="word"><strong>so viel</strong></td><td class="meaning">toliko</td><td class="freq">0</td></tr><tr class="even"><td class="rank">23</td><td class="word"><strong>so viele</strong></td><td class="meaning">toliko (mn.)</td><td class="freq">0</td></tr><tr class=""><td class="rank">24</td><td class="word"><strong>in Zukunft</strong></td><td class="meaning">v prihodnosti</td><td class="freq">0</td></tr><tr class="even"><td class="rank">25</td><td class="word"><strong>auf jeden Fall</strong></td><td class="meaning">vsekakor</td><td class="freq">0</td></tr><tr class=""><td class="rank">26</td><td class="word"><strong>gleichzeitig</strong></td><td class="meaning">hkrati / obenem</td><td class="freq">0</td></tr><tr class="even"><td class="rank">27</td><td class="word"><strong>einen großen</strong></td><td class="meaning">velik (tož.)</td><td class="freq">0</td></tr><tr class=""><td class="rank">28</td><td class="word"><strong>eine große</strong></td><td class="meaning">velika</td><td class="freq">0</td></tr><tr class="even"><td class="rank">29</td><td class="word"><strong>nicht nur</strong></td><td class="meaning">ne le / ne samo</td><td class="freq">0</td></tr><tr class=""><td class="rank">30</td><td class="word"><strong>sondern auch</strong></td><td class="meaning">ampak tudi</td><td class="freq">0</td></tr><tr class="even"><td class="rank">31</td><td class="word"><strong>nicht nur … sondern</strong></td><td class="meaning">ne le … ampak</td><td class="freq">0</td></tr><tr class=""><td class="rank">32</td><td class="word"><strong>sowohl … als auch</strong></td><td class="meaning">tako … kot</td><td class="freq">0</td></tr><tr class="even"><td class="rank">33</td><td class="word"><strong>je mehr</strong></td><td class="meaning">čim več</td><td class="freq">0</td></tr><tr class=""><td class="rank">34</td><td class="word"><strong>so viel wie</strong></td><td class="meaning">toliko kot</td><td class="freq">0</td></tr><tr class="even"><td class="rank">35</td><td class="word"><strong>auf einmal</strong></td><td class="meaning">naenkrat</td><td class="freq">0</td></tr><tr class=""><td class="rank">36</td><td class="word"><strong>in der Nähe</strong></td><td class="meaning">v bližini</td><td class="freq">0</td></tr><tr class="even"><td class="rank">37</td><td class="word"><strong>am besten</strong></td><td class="meaning">najboljše</td><td class="freq">0</td></tr><tr class=""><td class="rank">38</td><td class="word"><strong>am meisten</strong></td><td class="meaning">največ</td><td class="freq">0</td></tr><tr class="even"><td class="rank">39</td><td class="word"><strong>so dass</strong></td><td class="meaning">tako da</td><td class="freq">0</td></tr><tr class=""><td class="rank">40</td><td class="word"><strong>auf der Suche</strong></td><td class="meaning">v iskanju</td><td class="freq">0</td></tr><tr class="even"><td class="rank">41</td><td class="word"><strong>in Anspruch nehmen</strong></td><td class="meaning">koristiti / izkoristiti</td><td class="freq">0</td></tr><tr class=""><td class="rank">42</td><td class="word"><strong>in Verbindung</strong></td><td class="meaning">v zvezi / v povezavi</td><td class="freq">0</td></tr><tr class="even"><td class="rank">43</td><td class="word"><strong>zum Thema</strong></td><td class="meaning">na temo</td><td class="freq">0</td></tr><tr class=""><td class="rank">44</td><td class="word"><strong>auf dem Land</strong></td><td class="meaning">na podeželju</td><td class="freq">0</td></tr><tr class="even"><td class="rank">45</td><td class="word"><strong>in der Mitte</strong></td><td class="meaning">v sredini</td><td class="freq">0</td></tr><tr class=""><td class="rank">46</td><td class="word"><strong>im Laufe</strong></td><td class="meaning">v teku / med</td><td class="freq">0</td></tr><tr class="even"><td class="rank">47</td><td class="word"><strong>auf keinen Fall</strong></td><td class="meaning">v nobenem primeru</td><td class="freq">0</td></tr><tr class=""><td class="rank">48</td><td class="word"><strong>in erster Linie</strong></td><td class="meaning">najprej / v prvi vrsti</td><td class="freq">0</td></tr><tr class="even"><td class="rank">49</td><td class="word"><strong>in Bezug auf</strong></td><td class="meaning">glede na / v zvezi z</td><td class="freq">0</td></tr><tr class=""><td class="rank">50</td><td class="word"><strong>auf der Grundlage</strong></td><td class="meaning">na podlagi</td><td class="freq">0</td></tr>
+</tbody>
+</table>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+
+    function filterTable(inputId, tableId) {
+      var q = document.getElementById(inputId).value.toLowerCase();
+      var rows = document.getElementById(tableId).querySelectorAll('tbody tr');
+      rows.forEach(function(row) {
+        var text = row.textContent.toLowerCase();
+        row.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
+    </script>
+</body>
+</html>

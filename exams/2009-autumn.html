@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Jesenski izpitni rok 2009</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Jesenski izpitni rok 2009
+</nav>
+
+<h1>Jesenski izpitni rok 2009</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Jesenski izpitni rok 2009 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>den folgenden Text. – AUF DEN WELLEN DES RHEINS</h3>
+<p><em>Lesen Sie bitte</em></p>
+<p>Eine Schiffsfahrt zur Loreley und durch die schönste</p>
+<p>Flussregion Deutschlands</p>
+<p>Kapitän Mertens fürchtet die heimtückische Jungfrau nicht. Während das Männergrüppchen vor der</p>
+<p>Kommando-Brücke wie gebannt zu ihr hochschaut, bleibt der erfahrene Bootsführer völlig gelassen.</p>
+<p>Konzentriert steuert er sein großes Schiff um den mächtigen, steil aus dem Wasser ragenden Felsen.</p>
+<p>Es kümmert den langjährigen Rhein-Kenner nicht, dass dort oben die schöne Loreley sitzen soll, die</p>
+<p>mit ihrem Gesang vorbeifahrende Schiffer ins Verderben locken will.</p>
+<p>&quot;Es gibt heute keine heiklen Stellen mehr im Rhein,&quot; sagt Manfred Mertens nüchtern. Viele seiner</p>
+<p>Passagiere indes lehnen interessiert an der Reling. Ihre Augen suchen den Fluss nach den</p>
+<p>gefährlichen Wirbelströmungen ab, die einst zahlreiche Schiffe sinken ließen. Doch bald wenden sie</p>
+<p>sich wieder der Loreley zu, der mythischen, aber weit faszinierenderen Erklärung für das Unglück</p>
+<p>vieler Bootsleute.</p>
+<p>Ruhig gleitet das weiße Schiff an dem 132 Meter hohen Felsen vorbei, weiter durch das enge Tal. Die</p>
+<p>meisten Passagiere sitzen an Deck. Sie genießen den Rundumblick auf eine der berühmtesten</p>
+<p>Landschaften Deutschlands. &quot;Vater Rhein&quot;, wie die Deutschen ihren wichtigsten Fluss liebevoll</p>
+<p>nennen, zeigt sich hier von seiner schönen Seite. Statt breit und schnurgerade durch eine Ebene –</p>
+<p>wie etwa zwischen Basel und Mainz – fließt der Strom hier in unendlichen Windungen. Immer neue</p>
+<p>Perspektiven bietend, schlängelt er sich gemächlich von Bingen bis Koblenz durch das Rheinische</p>
+<p>Schiefergebirge.</p>
+<p>Im 19. Jahrhundert besangen Dichter wie Heinrich Heine und</p>
+<p>Klemens von Brentano in Versen die Schönheit dieses</p>
+<p>legendenumwobenen Landstriches. Fast 200 Jahre später begeisterte</p>
+<p>sich die UNESCO für das Mittelrheintal, kürte es zum Welterbe.</p>
+<p>Kleine, malerische Orte mit Fachwerkhäusern säumen das schmale</p>
+<p>Ufer. Laubwälder wechseln sich mit Weinbergen ab, die im Frühjahr</p>
+<p>im zarten Grün, im Herbst in goldenen und roten Farben leuchten.</p>
+<p>Und immer wieder tauchen rechts und links an den Hängen Burgen</p>
+<p>und Burgruinen auf – auf den 65 Flusskilometern zählen wir</p>
+<p>insgesamt 21! Majestätisch thronen sie über dem Strom. Bis auf eine:</p>
+<p>Pfalzgrafenstein. Mitten im Rhein, auf einer Felseninsel, liegt sie wie</p>
+<p>ein Schiff. &quot;Sie wurde 1326 als Zollburg gebaut,&quot; erklärt eine Stimme</p>
+<p>aus dem Bord-Lautsprecher.</p>
+<p>Weiter flusswärts. Erneut schenken die Passagiere ihre Aufmerksamkeit einer Frau: Germania. Weit</p>
+<p>sichtbar steht die Dame über dem Rhein. Das als Niederwalddenkmal bekannte Standbild erinnert an</p>
+<p>die Einigung Deutschlands im Jahr 1871.</p>
+<p>Kapitän Mertens blickt unterdessen auf das darunter liegende Städtchen. Routiniert steuert er das</p>
+<p>Schiff auf Rüdesheim zu. In dem romantischen Weinort gehen die Passagiere von Bord. Sie strömen</p>
+<p>in die berühmte Drosselgasse, lassen sich in den gemütlichen Gasthäusern nieder, trinken dort ein</p>
+<p>Glas des bekannten Rheingauer Weins – und stoßen an auf die verführerische Loreley mit dem</p>
+<p>goldenen Haar.</p>
+<p>(Nach Deutsche Welten 2005)</p>
+<p>M092-251-1-1 3</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+<p class="aufgabe-instruction">Entscheiden Sie, ob folgende Behauptungen richtig (R) oder falsch (F) sind, und markieren Sie
+jeweils den entsprechenden Buchstaben.</p>
+<div class="question-item"><span class="q-num">1.</span> Eine kleine Gruppe von Männern bleibt völlig gelassen. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> In der Vergangenheit ertranken viele Schiffer im Fluss. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Zwischen Basel und Mainz fließt der Rhein in vielen Windungen. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Man liest über die Schönheit dieser Landschaft in den Gedichten von H. Heine (1) und K. v. Brentano.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> In den Orten am Ufer besuchen die Passagiere viele Maler. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Am linken und rechten Ufer kann man Burgruinen sehen. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">7.</span> Mitten im Rhein liegt auf einer Insel ein Schiff. (1)</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">8.</span> In der Drosselgasse treffen die Passagiere die verführerische Loreley. (1) R F 4 M092-251-1-1</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2009-Jes-0">
+    <h4>Rešitve – Aufgabe 1</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">. 3. 4. 5. 6. 7. 8.</span></div>
+  </div>
+</div>
+</div>
+<div class="text-block">
+<h3>den folgenden Text. – Warme Farben bringen die Sonne ins Haus</h3>
+<p><em>Lesen Sie bitte</em></p>
+<p>Kleine Veränderungen für mehr Helligkeit in dunklen Räumen</p>
+<p>Selbst wenn draußen hell die Sonne scheint, gleichen</p>
+<p>manche Wohnungen dunklen Löchern. Mal fehlt</p>
+<p>ihnen eine Sonnenseite, mal sind die Fenster zu</p>
+<p>klein, oder Bäume stehen direkt davor. Wer mehr</p>
+<p>Licht in finstere Räume bringen möchte, ohne gleich</p>
+<p>neue Fenster einzubauen, kann schon mit kleinen</p>
+<p>Veränderungen an der Einrichtung viel bewirken:</p>
+<p>Glänzende Materialien, warme Farben und Kontraste</p>
+<p>lassen Wohnungen heller erscheinen.</p>
+<p>&quot;Einige einfache Maßnahmen können dazu beitragen,</p>
+<p>dass ein Raum das natürliche Licht optimal ausnutzt,&quot;</p>
+<p>sagt Peter Kunz, Architekt und Geschäftsführer der</p>
+<p>Gestaltungsfirma D&#x27;MEK aus Berlin.</p>
+<p>&quot; Die den Fensterflächen gegenüber liegenden Wandflächen sollten möglichst hell bleiben – damit das</p>
+<p>einfallende Licht gut reflektiert wird. Auch helle Bodenflächen, etwa weiß lackierte Dielen, können die</p>
+<p>Reflexion verstärken.&quot;</p>
+<p>&quot;Generell sind helle und glänzende Oberflächenfarben besser geeignet, die Grundhelligkeit des</p>
+<p>Raumes zu erhöhen,&quot; erklärt Walter Gebhart, Architekt aus Hamburg. Ähneln sich darüber hinaus die</p>
+<p>Farben und Materialien an Wand, Decke und Boden, lässt dies die Grenzen eines Raumes</p>
+<p>verschwimmen, wie Walter Gebhart erklärt. Dadurch wirkt er großzügiger. Warme Farbtöne bewirken</p>
+<p>außerdem, dass der Raum freundlicher erscheint.</p>
+<p>Auch über die Möblierung lässt sich Einfluss auf die Helligkeit nehmen – und wieder spielt die Farbe</p>
+<p>eine Rolle. Lacke und Stoffe in hellen Farbtönen lassen Räume lichter und größer wirken. Umgekehrt</p>
+<p>sollte man dunkle Farben nur sparsam einsetzen, denn sie lassen Räume kleiner erscheinen. Auch</p>
+<p>die Art der Materialien ist entscheidend, weil es Oberflächen gibt, die Licht reflektieren oder</p>
+<p>schlucken. Auf glänzenden Lackflächen oder Glas wird Licht hingegen stärker reflektiert als auf eher</p>
+<p>dunklen Holzoberflächen. Kunststoffe seien zudem meist matter und wirkten dadurch heller als</p>
+<p>natürliche Materialien.</p>
+<p>Spiegel erzeugen Weite</p>
+<p>Dunkle Räume sollten nicht mit zu vielen Möbeln voll gestellt werden. Ein Raum wirkt um so luftiger, je</p>
+<p>weniger, kleiner und transparenter die Möbel und durch sie entstehende Schatten sind. Was die</p>
+<p>Raumkanten ablesbar macht, verkleinere den Raum optisch. So ließen Regale, die an der Wand</p>
+<p>angebracht sind und nicht auf dem Boden stehen, Räume großzügiger erscheinen. Der Fußboden</p>
+<p>endet dadurch optisch nicht schon am Möbel, sondern erst an der Wand.</p>
+<p>Durch den geschickten Einsatz von Spiegeln lässt sich zusätzliches Licht einfangen: Werden sie mit</p>
+<p>Bedacht aufgehängt, können sie die Fenster verdoppeln. Diese Tricks kann man auch bei kleinen</p>
+<p>Zimmern nutzen. Spiegel können, an der richtigen Stelle angebracht, mehr Weite erzeugen und das</p>
+<p>Licht richtig lenken.</p>
+<p>Werden Möbel und Wandfarben geschickt kombiniert,</p>
+<p>erscheint ein Raum ebenfalls heller. Um das zu erreichen,</p>
+<p>sollten sich helle Flächen und dunkle Kleinmöbel abwechseln.</p>
+<p>Durch den Kontrast kommt die Helligkeit von Pastelltönen</p>
+<p>besser zum Vorschein, erklärt Architekt Gebhart. Überhaupt</p>
+<p>müssten helle Einrichtungsgegenstände und Wände nicht</p>
+<p>weiß oder cremefarben sein. Hellgrün oder hellgelb erzielen</p>
+<p>genau denselben Effekt.</p>
+<p>Wer die Möglichkeit zu baulichen Veränderungen hat, kann seine Fenster vergrößern und dadurch</p>
+<p>mehr Licht in die Wohnung bringen. Letztlich entscheidet aber auch der architektonische Schnitt, wie</p>
+<p>effektiv das Tageslicht ausgenutzt wird. Und manchmal ist mit natürlichem Licht einfach nichts zu</p>
+<p>machen.</p>
+<p>&quot;Je tiefer der Raum, desto mehr muss man mit künstlichen Lichtquellen nachhelfen,&quot; sagt Architekt</p>
+<p>Peter Kunz.</p>
+<p>(Nach Eßlinger Zeitung, Oktober 2006)</p>
+<p>M092-251-1-1 5</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die folgenden Fragen. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">9.</span> Wie sehen viele Wohnungen aus? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">10.</span> Welche Veränderungen lassen die Wohnung heller erscheinen? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">11.</span> Warum sollten Fenstern gegenüber liegende Wände hell bleiben? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">12.</span> Wodurch wirkt ein Raum freundlicher? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">13.</span> Wie sollte man mit dunklen Farben umgehen? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">14.</span> Wo sollten Regale angebracht werden, damit der Raum großzügiger erscheint? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">15.</span> Welche hellen Farben wirken gleich wie weiß und cremefarben? (1) ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">16.</span> Wann sollte man künstliche Lichtquellen anwenden? (1) ___ 6 M092-251-1-1</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2009-Jes-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">9.</span><span class="sol-ans">Wie dunkle Löcher</span></div>
+<div class="solution-row"><span class="sol-num">10.</span><span class="sol-ans">Glänzende Materialien, warme Farben, Kontraste</span></div>
+<div class="solution-row"><span class="sol-num">11.</span><span class="sol-ans">Damit das einfallende Licht gut reflektiert wird.</span></div>
+<div class="solution-row"><span class="sol-num">12.</span><span class="sol-ans">Durch warme Farbtöne</span></div>
+<div class="solution-row"><span class="sol-num">13.</span><span class="sol-ans">Sparsam</span></div>
+<div class="solution-row"><span class="sol-num">14.</span><span class="sol-ans">An der Wand</span></div>
+<div class="solution-row"><span class="sol-num">15.</span><span class="sol-ans">Hellgrün oder hellgelb</span></div>
+<div class="solution-row"><span class="sol-num">16.</span><span class="sol-ans">Wenn der Raum tief ist.</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Ergänzen Sie die Sätze. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">17.</span> Schon kleine Veränderungen bringen oft mehr ___ in dunkle (1) Räume.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">18.</span> Peter Kunz meint, dass man auch mit einfachen Mitteln ___ (1) Licht optimal ausnützen kann.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">19.</span> Mit hellen Bodenflächen und weiß lackierten Dielen wird die Reflexion des (1) ___ Lichtes verstärkt.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">20.</span> Die Helligkeit des Raumes kann man außerdem auch mit passender (1) ___ beeinflussen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">21.</span> In einem Raum kann man auch mehr Licht einfangen, wenn man geschickt (1) ___ einsetzt.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">22.</span> Auf jeden Fall sollte man Möbel und Wandfarben richtig ___, (1) um den Raum heller erscheinen zu lassen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">23.</span> Durch den Kontrast von hellen Flächen und dunklen Kleinmöbeln (1) ___ die Pastelltöne heller.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">24.</span> Um mehr Licht in die Wohnung zu bekommen, sollte man, wenn es die Architektur erlaubt, (1) ___ Fenster einbauen. M092-251-1-1 7</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2009-Jes-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">17.</span><span class="sol-ans">Helligkeit/Licht</span></div>
+<div class="solution-row"><span class="sol-num">18.</span><span class="sol-ans">natürliches</span></div>
+<div class="solution-row"><span class="sol-num">19.</span><span class="sol-ans">einfallenden</span></div>
+<div class="solution-row"><span class="sol-num">20.</span><span class="sol-ans">Möblierung</span></div>
+<div class="solution-row"><span class="sol-num">21.</span><span class="sol-ans">Spiegel</span></div>
+<div class="solution-row"><span class="sol-num">22.</span><span class="sol-ans">kombinieren</span></div>
+<div class="solution-row"><span class="sol-num">23.</span><span class="sol-ans">erscheinen</span></div>
+<div class="solution-row"><span class="sol-num">24.</span><span class="sol-ans">größere</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

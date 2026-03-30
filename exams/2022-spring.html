@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Spomladanski izpitni rok 2022</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Spomladanski izpitni rok 2022
+</nav>
+
+<h1>Spomladanski izpitni rok 2022</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Spomladanski izpitni rok 2022 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>An die Spitze getanzt – 0. Für einige Politiker ist Tiktok ein chinesisches</h3>
+<p><em>Lesen Sie den Text.</em></p>
+<p>Spionagewerkzeug. Für Facebook ist Tiktok ein Konkurrent,</p>
+<p>den es nicht kopieren oder aufkaufen kann. Für hunderte</p>
+<p>Millionen junge Menschen bedeutet aber die App etwas</p>
+<p>Anderes.</p>
+<p>1. Für viele junge Menschen ist nämlich die App zu einer digitalen Heimat</p>
+<p>geworden. Hier treffen sie ihre Freunde, lachen gemeinsam über lustige</p>
+<p>Videos und informieren sich über politische Ereignisse.</p>
+<p>2. In knapp vier Jahren hat Tiktok sämtliche Download-Rekorde gebrochen. 2019 verdiente der</p>
+<p>chinesische Eigentümer Bytedance bereits drei Milliarden Dollar mit der App. 800 Millionen</p>
+<p>Menschen nutzen sie regelmäßig, davon allein 100 Millionen in den USA. Tiktok zieht viele Nutzer</p>
+<p>an und mit ihrer Hilfe hat es die App geschafft, die Welt der Plattformen kräftig</p>
+<p>durcheinanderzubringen.</p>
+<p>3. Diesen Siegeszug verdankt Tiktok drei Faktoren: seinen aggressiven Werbestrategien, seinen</p>
+<p>Nutzern und seinem Algorithmus. Nachdem Bytedance Ende 2017 die App „Musically“ erworben</p>
+<p>und mit Tiktok zusammengetan hatte, investierte das Unternehmen rund eine Milliarde Dollar in</p>
+<p>Anzeigen bei der direkten Konkurrenz wie Facebook, Instagram und Twitter. Sofort sprang die App</p>
+<p>an die Spitze der Download-Charts, binnen weniger Monate erstrahlte ein neuer Stern am Himmel</p>
+<p>der sozialen Netzwerke.</p>
+<p>4. Der Erfolg von Tiktok steht und fällt mit der Kreativität seiner Nutzer. Die Videos sind oft kurz und</p>
+<p>subversiv. Wer sich auf das Format und die Ausdrucksform einlässt, kann eine neue Welt</p>
+<p>entdecken, die auf anderen Plattformen schwer zu finden ist. Die Musikindustrie castet auf Tiktok</p>
+<p>die Stars von morgen, Agenten suchen nach talentierten Tänzern und Regisseure lassen sich von</p>
+<p>Choreografien inspirieren.</p>
+<p>5. Kreativ sind nicht nur die jugendlichen Influencer, sondern auch die chinesischen Programmierer.</p>
+<p>Sie haben einen Algorithmus entwickelt, der Nutzern Inhalte anbietet, die sie dazu bringen, die App</p>
+<p>nicht so schnell zu verlassen. Im Gegensatz zu Facebook oder Instagram müssen sich Nutzer</p>
+<p>dafür keinen Freundeskreis aufbauen. Die Empfehlungen auf der „For You“-Seite werden</p>
+<p>personalisiert, ohne dass man anderen Accounts folgt. Die App wertet dafür aus, welche Videos</p>
+<p>man sich länger ansieht, wo man kommentiert oder Likes verteilt, und schlägt auf dieser Grundlage</p>
+<p>neue Informationen vor.</p>
+<p>6. Immer mehr bringt der Algorithmus auch die politischen Inhalte nach oben. Jugendliche informieren</p>
+<p>sich über den Klimawandel, organisieren Proteste gegen Rassismus oder spielen dem US-</p>
+<p>Präsidenten Streiche. Bei einer Wahlkampfveranstaltung in den USA blieben im Juni Tausende</p>
+<p>Sitze frei. Das lag wohl auch an einer gezielten Aktion der Tiktok-Jugendlichen, die erst</p>
+<p>massenhaft Tickets reservierten und dann von zu Hause aus über die halb leere Arena lachten.</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+</div>
+<div class="text-block">
+<h3>Gleichberechtigte Modewelt</h3>
+<p><em>Lesen Sie den Text.</em></p>
+<p>Bisher wurden kleinwüchsige Menschen von der Modeindustrie kaum berücksichtigt. Ein Label aus</p>
+<p>Berlin will das ändern.</p>
+<p>In Deutschland leben derzeit etwa 100 000 kleinwüchsige Menschen. Als kleinwüchsig gilt, wer nicht</p>
+<p>größer als 1,40 Meter ist. Als Wachstumsstörung zählt der Kleinwuchs offiziell zu den Behinderungen.</p>
+<p>Lange Zeit wurden betroffene Menschen diskriminiert. Bis vor weniger als 30 Jahren gab es</p>
+<p>beispielsweise noch Freizeitparks, in denen Kleinwüchsige als Attraktion präsentiert wurden.</p>
+<p>Das gibt es glücklicherweise heute nicht mehr. Aber aufgrund ihrer geringen Größe werden Betroffene</p>
+<p>noch heute oft weniger ernst genommen. Oder sie werden sogar beleidigt, etwa durch Worte wie</p>
+<p>„Liliputaner“ oder „Zwerg“. Auch der Alltag ist nicht immer einfach – zum Beispiel beim Kauf der</p>
+<p>Kleidung. Die meisten Kleinwüchsigen müssen sich passende Kleidung in der Kinderabteilung</p>
+<p>suchen. Doch das ist keine optimale Lösung: Ihre Körpergröße ähnelt zwar der eines Kindes, aber die</p>
+<p>Maße unterscheiden sich sehr. Daher sitzen Hosen und T-Shirts für Kinder bei kleinwüchsigen</p>
+<p>Menschen meistens nicht gut. Außerdem sind häufig Motive oder Sprüche aufgedruckt, die nicht zu</p>
+<p>Erwachsenen passen. Eine Alternative zur Kindermode ist es, sich maßgeschneiderte Kleidung</p>
+<p>anfertigen zu lassen. Aber das kostet viel mehr Geld.</p>
+<p>Die Designerin Sema Gedik aus Berlin wollte diese benachteiligte Situation verbessern. Sie hat 2017</p>
+<p>das Modelabel „Auf Augenhöhe“ gegründet und produziert seitdem Mode für Kleinwüchsige. Ihr</p>
+<p>Engagement begann allerdings schon einige Jahre vorher. Denn ihr Projekt war einzigartig und sie</p>
+<p>musste alles neu aufbauen. „Es gab nichts, keine Schneiderpuppen, keine Maßtabellen, keine</p>
+<p>Schuhe“, erzählt sie in einem Zeitungsinterview. Jeder kleinwüchsige Mensch hat unterschiedliche</p>
+<p>Proportionen und es war schwierig, einheitliche Größe festzulegen. Sema Gedik hat deshalb zuerst</p>
+<p>viele Menschen vermessen und mit diesen Daten dann eigene Konfektionsgrößen für Kleinwüchsige</p>
+<p>erstellt. Bis heute arbeitet sie eng mit ihren Kunden zusammen und entwickelt ihre Maßtabellen</p>
+<p>weiter, um das Angebot immer mehr zu erweitern und zu verbessern. Mit ihrem Unternehmen hat</p>
+<p>Sema Gedik einen entscheidenden Beitrag zur Integration geleistet: Erstmals ist es Menschen mit</p>
+<p>Kleinwuchs möglich, passende modische Klamotten ganz einfach im Online-Shop zu bestellen. Ihre</p>
+<p>Kollektion konnte die Designerin sogar schon auf der Berliner Modewoche präsentieren – natürlich mit</p>
+<p>kleinwüchsigen Models auf dem Laufsteg.</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Ergänzen Sie sinngemäß. Die richtigen Informationen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Kleinwüchsige sind alle, die höchstens ___ sind.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Kleinwuchs gehört zu ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Häufig werden Kleinwüchsige wegen ihrer Größe ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Obwohl Kleinwüchsige so groß wie Kinder sind, haben sie ___ Maße.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Kleinwüchsige könnten ihre Kleider nähen lassen, aber das ist ___.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Sema Gediks Firma spielt eine große Rolle bei der ___ der Kleinwüchsigen in die Gesellschaft. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2022-Spo-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">1,40 Meter groß NESPREJEMLJIVO:</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans"> Behinderungen Liliputaner</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans"> diskriminiert Attraktion, präsentieren</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">M221-251-1-4</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans"> (zu) teuer für reiche Leute, umsonst</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans"> Integration Lage, Mode, Konfektionsgröße,</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die Fragen. Die richtigen Informationen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Wo suchten Kleinwüchsige oft nach Kleidungsstücken? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Was wollte Sema Gedik mit ihrer Modemarke erreichen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Was musste Sema Gedik tun, um ihre Maßtabellen zu erstellen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Wer hilft ihr, die Kollektion zu entwickeln? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Wo kann man Sema Gediks Kleider kaufen? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Wo haben Models Sema Gediks Mode zur Schau gestellt? ___ (6 Punkte) Prazna stran OBRNITE LIST.</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2022-Spo-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans"> In der Kinderabteilung. Freizeitpark, Modelabel</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans"> Die benachteiligte Situation der pritlikave osebe.</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">Viele Menschen vermessen. NESPREJEMLJIVO: alles neu</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans"> Ihre Kunden. Menschen</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans"> Im Online-Shop.</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">Auf der Berliner Modewoche. NESPREJEMLJIVO: In Berlin, auf</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

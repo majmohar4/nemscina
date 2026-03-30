@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Jesenski izpitni rok 2016</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Jesenski izpitni rok 2016
+</nav>
+
+<h1>Jesenski izpitni rok 2016</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Jesenski izpitni rok 2016 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>die Texte 0 bis 6. – Menschen des Monats</h3>
+<p><em>Lesen Sie</em></p>
+<p>0.</p>
+<p>Ihren ersten Hit hatte Nina Hagen 1974 in der DDR. 1976 emigrierte sie in den Westen und wurde &quot;die</p>
+<p>Mutter des deutschen Punk&quot;. Ihre Markenzeichen sind schrille Klamotten, bunte Frisuren – und ihre</p>
+<p>Stimme. Mal singt sie wie in der Oper, mal quietscht sie wie ein Autoreifen. Auf ihrer Tournee</p>
+<p>&quot;Irgendwo auf der Welt&quot; singt Nina Hagen Schlager der Swing Ära.</p>
+<p>1.</p>
+<p>Bei Nena geht alles ein bisschen schneller. Mit 19 machte sie die erste Platte, mit 23 war sie ein</p>
+<p>Weltstar. Nun, mit 50, ist sie schon zweifache Oma. Wahrscheinlich werden auch ihre Enkelkinder</p>
+<p>später auf Parties zu Liedern ihrer Großmutter tanzen. Bis heute werden Nena-Lieder in Diskos und</p>
+<p>Radios gespielt. Ihr größter Erfolg ist das Lied &quot;99 Luftballons&quot;. Das naive Friedenslied wurde 1983</p>
+<p>zum Welthit und die damals punkige Nena war auf einmal überall.</p>
+<p>2.</p>
+<p>Xavier Naidoo glaubt, das Mittel gegen Depression gefunden zu haben: Singen. Was der Mannheimer</p>
+<p>gerade macht, ist die überraschendste Deutschland-Tournee eines Popstars. Er singt in Imbissbuden</p>
+<p>und vor Kneipen, immer ohne Werbung und Ankündigung. Naidoo parkt einfach seinen Tourbus, holt</p>
+<p>die Instrumente raus und beginnt zu singen. &quot;Er will in der aktuellen Wirtschaftskrise den Menschen</p>
+<p>Mut machen&quot;, sagt sein Management.</p>
+<p>3.</p>
+<p>Ihr Lachen ist gewaltig wie ein Erdbeben, schrieb eine Zeitung über Hella von Sinnen, eigentlich Hella</p>
+<p>Kemper. Nun wird die Kölnerin 50 Jahre alt. Sie ist bekannt für ihren derben Humor und gehört</p>
+<p>inzwischen zu den deutschen Komödiantinnen mit dem größten Erfolg. Vor 20 Jahren startete sie auf</p>
+<p>RTL die Show &quot;Alles nichts oder!?&quot;, in der sie auch über ihre Homosexualität scherzte. Inzwischen</p>
+<p>kann man sich das Fernsehen ohne Hella von Sinnen kaum mehr vorstellen.</p>
+<p>4.</p>
+<p>Joachim Löw hat den Job, von dem fast jeder Mann und auch manche Frau in Deutschland träumt.</p>
+<p>Wer steht im Tor? Mit welcher Taktik soll die Mannschaft spielen? Der Trainer der</p>
+<p>Fußballnationalmannschaft kann diese Fragen entscheiden. Auf Joachim Löw liegen, wenn gerade</p>
+<p>eine Fußballweltmeisterschaft stattfindet, noch mehr Blicke als sonst. &quot;Da geht man in die Geschichte</p>
+<p>ein&quot;, sagt Löw, denn fast alle &quot;Jogi&quot; nennen.</p>
+<p>5.</p>
+<p>Lange lebte der WM-Organisationschef Franz Beckenbauer nur für den Fußball. Jetzt soll das anders</p>
+<p>werden. Erstes Signal: Schon während der Fußballweltmeisterschaft 2006 hat der damals</p>
+<p>sechzigjährige Franz die mehr als zwanzig Jahre jüngere Heidi Burmeister geheiratet. Franz</p>
+<p>Beckenbauer will sich nun mehr um die gemeinsamen Kinder Joel Maximilian und Francesca Antonie</p>
+<p>kümmern.</p>
+<p>6.</p>
+<p>Wer von Angela Merkel nicht genug bekommt, kann jeden Samstag einen Video-Podcast kostenlos</p>
+<p>herunterladen (www.bundeskanzlerin.de). Jede Rede ist zwei bis drei Minuten lang. Bis jetzt war es in</p>
+<p>Deutschland so, dass der Kanzler nur zu Silvester im Fernsehen zu seinen Bürgern gesprochen hat.</p>
+<p>&quot;Wenn Sie mich fragen, ist das toll. Auch ich habe Freude daran&quot;, sagt Merkel. Manche Menschen</p>
+<p>finden das sehr komisch und publizieren nun auch lustige Merkel-Videos im Internet.</p>
+<p>(Nach Deutsch Perfekt, 2/2009, 3/2010, 8/2006, 11/2006)</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+</div>
+<div class="text-block">
+<h3>Mobbing? Doch nicht hier! – Laut aktueller Studien ist fast jeder dritte</h3>
+<p><em>Lesen Sie.</em></p>
+<p>Schüler in Deutschland bereits einmal Opfer</p>
+<p>einer Mobbingattacke geworden. Wie weit die</p>
+<p>geht, bleibt offen. Sicher ist, dass es meist</p>
+<p>ziemlich harmlos beginnt. Autorin Kirsten Boie</p>
+<p>wurde durch ihre Kinder und deren Freunde</p>
+<p>auf das Thema Mobbing aufmerksam gemacht</p>
+<p>und war überrascht, wie wenig man oft</p>
+<p>dagegen tun kann. Erwachsene nehmen die</p>
+<p>Situation zu Beginn meist nicht ernst und die</p>
+<p>Polizei kann erst in härteren Fällen eingreifen.</p>
+<p>In ihrem neuen Hörbuch &quot;Nicht Chicago. Nicht</p>
+<p>hier.&quot; spricht sie über den typischen Weg eines</p>
+<p>Mobbingfalls.</p>
+<p>Die Geschichte von Niklas und Karl endet</p>
+<p>ohne Happy-End oder mögliche</p>
+<p>Niklas ist gerade dreizehn Jahre alt, als ein</p>
+<p>Problemlösung. In der Realität ist das leider</p>
+<p>neuer Mitschüler in seine Klasse kommt. Die</p>
+<p>ein häufiger Fall und im Hörbuch wirkt das</p>
+<p>Lehrerin will auf jeden Fall, dass sich Niklas</p>
+<p>unglückliche Ende sehr dramatisch. Auf zwei</p>
+<p>mit dem Neuen anfreundet. Nachdem Niklas</p>
+<p>CDs und innerhalb von 100 Minuten wird die</p>
+<p>und Karl ein gemeinsames Geschichtsreferat</p>
+<p>Geschichte von Niklas mit zwei Sprechern</p>
+<p>gemacht haben, sind alle der Meinung, dass</p>
+<p>erzählt. Die Sprache ist knapp und kurz, es</p>
+<p>die beiden gut zusammen arbeiten können.</p>
+<p>gibt viel gute Musik und die Atmosphäre ist</p>
+<p>Doch keiner weiß, wie die wirkliche Beziehung</p>
+<p>spannend.</p>
+<p>der beiden aussieht.</p>
+<p>Die Autorin selbst, die im Hörbuch auch einen</p>
+<p>Anfangs bewundert Niklas Karl. Karl ist anders</p>
+<p>Kommentar gibt, erklärt: &quot;Die meisten</p>
+<p>als die Jungs, die er bisher kennt und es macht</p>
+<p>Menschen denken, dass Mobbing ein Thema</p>
+<p>ihn ein wenig stolz, als dieser mit zu ihm nach</p>
+<p>von Großstädten ist, doch Mobbing kann</p>
+<p>Hause kommt. Doch dann beginnt der Ärger.</p>
+<p>jederzeit und überall geschehen.&quot; Auch Kritiker</p>
+<p>Eine CD verschwindet, der ausgeliehene CD-</p>
+<p>finden, dass das Thema im Hörbuch sehr</p>
+<p>Player des Vaters wird nicht mehr</p>
+<p>aktuell ist und gelungen behandelt wird. Man</p>
+<p>zurückgebracht und auf einmal fehlen auch</p>
+<p>erfährt bereits zu Beginn, dass der neue</p>
+<p>noch das Handy und Niklas‘ kleiner Hase.</p>
+<p>Mitschüler nicht so harmlos sein wird, wie es</p>
+<p>zunächst scheint. Nachdem man den neuen</p>
+<p>Zuerst findet Niklas das, was passiert ist, gar</p>
+<p>Mitschüler etwas näher kennen gelernt hat,</p>
+<p>nicht so schlimm. Als Karl ihm die Schuld für</p>
+<p>kann man dann Schritt für Schritt miterleben,</p>
+<p>alles in die Schuhe schiebt, versucht er sich zu</p>
+<p>wie seine Taten immer schlimmer und</p>
+<p>wehren und die Mobbingattacken beginnen. Es</p>
+<p>gemeiner werden. Man sieht, wie aggressiv</p>
+<p>wird immer schlimmer. Als er schließlich seine</p>
+<p>und gefährlich Karl mit der Zeit wird. Die Lage</p>
+<p>Eltern um Hilfe bittet, glauben sie ihm zuerst</p>
+<p>von Niklas wird immer hoffnungsloser. Die</p>
+<p>kein Wort und auch die Lehrerin hält alles für</p>
+<p>Schikanen und Hänseleien beginnen so, wie</p>
+<p>ein Werk seiner Fantasie. Erst als Niklas</p>
+<p>wir sie alle schon einmal miterlebt haben und</p>
+<p>zusammengeschlagen wird und der</p>
+<p>das ist das Schreckliche daran.</p>
+<p>Telefonterror auch die Nerven der Eltern</p>
+<p>strapaziert, bekommt er die Unterstützung (Nach www.yaez.de, 1/2011)</p>
+<p>seiner Eltern – leider erfolglos.</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Entscheiden Sie, ob folgende Behauptungen richtig (R) oder falsch (F) sind, und markieren Sie
+jeweils den entsprechenden Buchstaben ().</p>
+<div class="question-item"><span class="q-num">1.</span> Kirsten Boie war Opfer einer Mobbingattacke.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Karls Eltern wollen, dass er und Niklas Freunde werden.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Am Anfang arbeiten Niklas und Karl zusammen für die Schule.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Zuerst gefällt es Niklas, dass Karl ihn besucht.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Die Lehrerin glaubt von Anfang an, dass Niklas Probleme mit Karl hat.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Nach einiger Zeit beginnen die Eltern Niklas zu glauben. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2016-Jes-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">R</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die folgenden Fragen. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Wann mischt sich die Polizei in Mobbing-Attacken ein? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Welche Beziehung hat Niklas am Anfang zu Karl? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Wie verhalten sich die Eltern von Niklas zuerst, wenn er Hilfe braucht? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Wie endet die Freundschaft von Karl und Niklas? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Wie lange dauert das Hörbuch? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Wie ist die Stimmung im Hörbuch? ___ (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2016-Jes-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">Sie greift in härteren Fällen ein.</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans"> Er bewundert ihn.</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">Sie glauben ihm kein Wort.</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">M162-251-1-4</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">100 Minuten.</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans"> Spannend.</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>

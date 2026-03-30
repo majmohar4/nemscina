@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nemščina – Spomladanski izpitni rok 2014</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+
+:root {
+  --bg: #faf9f6;
+  --text: #1a1a1a;
+  --accent: #2d5a8e;
+  --border: #c4c4c4;
+  --light-bg: #f0eeea;
+  --answer-bg: #fff;
+  --solution-bg: #e8f0e8;
+  --task-label: #6b4c2a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Navigation ── */
+nav.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--border);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+nav.site-nav a { color: var(--accent); text-decoration: none; }
+nav.site-nav a:hover { text-decoration: underline; }
+nav.site-nav .sep { color: var(--border); }
+
+/* ── Page title ── */
+h1 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+}
+
+/* ── Index year grid ── */
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin: 1.5rem 0 3rem;
+}
+.year-card {
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+  font-family: 'Source Sans 3', sans-serif;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.year-card:hover { background: #e4e0d8; border-color: var(--accent); }
+.year-card .year { font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.year-card .session { font-size: 0.8rem; color: #666; margin-top: 0.1rem; }
+.year-card .badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  background: var(--solution-bg);
+  color: #2a6e2a;
+  border-radius: 3px;
+  padding: 0.1rem 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Exam sections ── */
+.exam-section { margin-bottom: 3.5rem; }
+
+.exam-header {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+/* ── Reading text ── */
+.text-block {
+  background: var(--light-bg);
+  border-left: 4px solid var(--accent);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 4px 4px 0;
+}
+.text-block h3 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  color: var(--accent);
+}
+.text-block p { margin-bottom: 0.6rem; font-size: 0.95rem; }
+.text-block p:last-child { margin-bottom: 0; }
+
+/* ── Task / Aufgabe ── */
+.aufgabe { margin-bottom: 2rem; }
+.aufgabe-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--task-label);
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background: #f5efe8;
+  border-radius: 3px;
+  display: inline-block;
+}
+.aufgabe-instruction {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+/* ── Questions ── */
+.question-item {
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.question-item .q-num {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 0.3rem;
+}
+.answer-line {
+  border-bottom: 1.5px solid var(--border);
+  min-height: 2rem;
+  margin: 0.3rem 0 0.8rem;
+}
+
+/* ── Solutions reveal ── */
+.solutions-toggle {
+  margin: 1.5rem 0 0;
+}
+.solutions-toggle button {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  color: #1a4a1a;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.solutions-toggle button:hover { background: #d0e8d0; }
+.solutions-box {
+  display: none;
+  margin-top: 1rem;
+  background: var(--solution-bg);
+  border: 1px solid #9bbc9b;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+}
+.solutions-box.open { display: block; }
+.solutions-box h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a4a1a;
+  margin-bottom: 0.6rem;
+}
+.solution-row {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  align-items: baseline;
+}
+.solution-row .sol-num {
+  font-weight: 700;
+  color: #2a6e2a;
+  min-width: 1.5rem;
+  flex-shrink: 0;
+}
+.solution-row .sol-ans { color: #1a1a1a; }
+
+/* ── Section divider ── */
+hr.section-break {
+  border: none;
+  border-top: 2px dashed var(--border);
+  margin: 2.5rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  body { padding: 1rem 1rem; }
+  .year-grid { grid-template-columns: repeat(2, 1fr); }
+  .text-block { padding: 1rem 1rem; }
+  h1 { font-size: 1.3rem; }
+}
+@media (max-width: 380px) {
+  .year-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { padding: 1cm; max-width: 100%; font-size: 11pt; }
+  .exam-section { page-break-before: always; }
+  nav.site-nav, .solutions-toggle button { display: none; }
+  .solutions-box { display: block !important; }
+}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <a href="index.html">🏠 Domov</a>
+  <span class="sep">›</span> Spomladanski izpitni rok 2014
+</nav>
+
+<h1>Spomladanski izpitni rok 2014</h1>
+<p class="subtitle">Nemščina · Splošna matura · Izpitna pola 1A · Osnovna raven<br>
+Vir: RIC – Državni izpitni center</p>
+
+<div class="exam-section">
+<div class="exam-header">Spomladanski izpitni rok 2014 · Izpitna pola 1A · Osnovna raven</div>
+<div class="text-block">
+<h3>Neue Freundschaften durch Mentorenprogramme</h3>
+<p><em>Lesen Sie.</em></p>
+<p>Die 21-jährige Erika aus der Slowakei und ihre verstanden hat“, erklärt Pia ihre Strategie.</p>
+<p>Mentorin Pia lernten sich durch das „Wenn ich Pia sehe, weiß ich sofort, dass ich</p>
+<p>Mentorenprogramm an der Universität jetzt Deutsch sprechen muss“, lacht Erika.</p>
+<p>Bielefeld kennen. Pia arbeitet im International</p>
+<p>Office der Uni und durfte deshalb vor allen Konversationen effektiver als Sprachkurs</p>
+<p>anderen einen Blick auf die</p>
+<p>Incomings des nächsten Semesters - Wenn man die fröhlichen jungen</p>
+<p>darunter auch Erika - werfen. Die Frauen erlebt, käme man nie auf die</p>
+<p>Entscheidung, die sympathische Idee, dass diese beiden sich jemals</p>
+<p>Slowakin zu betreuen, fiel spontan: mit einem Buch in die Bibliothek</p>
+<p>„Auf dem Foto hat sie so schön verziehen würden, um stur und</p>
+<p>gelacht“, erinnert sich die 24-Jährige. trocken Deutsch zu pauken. Dieser</p>
+<p>Eindruck trügt nicht, denn tatsächlich</p>
+<p>„Rotkäppchen” verstehen sich auf kam das Deutschtraining bei den</p>
+<p>Anhieb beiden Studentinnen eher nebenbei.</p>
+<p>Erika und Pia trafen sich oft zum</p>
+<p>Dieser erste Eindruck hat sich bestätigt. Bummeln und Kochen oder bereisten</p>
+<p>Obwohl die beiden aus völlig unterschiedlichen Deutschland. Im August eroberten sie zum</p>
+<p>Studiengängen kommen – Pia studiert Deutsch Beispiel Norddeutschland – Pias Heimat.</p>
+<p>als Fremdsprache und Erika Mathematik – sind Erika findet die Gespräche und Aktivitäten mit</p>
+<p>sie sich ziemlich ähnlich. Erika und Pia waren Pia viel nützlicher, als den Deutschkurs, den</p>
+<p>von Anfang an ein Herz und eine Seele. Fragt sie besuchen musste. Die ersten Erfolge</p>
+<p>man sie über ihre gemeinsame Zeit, sprudelt bemerkte Erika, als sie im Kino war: „Ich habe</p>
+<p>es nur so aus ihnen heraus. „Erika ist sehr das erste Mal den kompletten Film verstanden</p>
+<p>offen und kommunikativ. Ich hätte es nicht und konnte an den witzigen Stellen mitlachen“,</p>
+<p>besser treffen können“, schwärmt Pia. Was die freut sie sich.</p>
+<p>beiden außerdem verbindet, verrät Erika: „Wir</p>
+<p>haben herausgefunden, dass unsere Für den Master zurück nach Deutschland</p>
+<p>Großmütter uns den gleichen Kosenamen</p>
+<p>gegeben haben, nämlich Piroschka.“ Übersetzt Erika ist stolz, dass sie alle Kurse an der Uni</p>
+<p>heißt das so viel wie „Rotkäppchen“. Vor ihrer bestanden hat, denn alle wurden auf Deutsch</p>
+<p>Ankunft hatte Erika bereits in der Schule unterrichtet. Nach fünf Monaten in der</p>
+<p>Deutsch gelernt, war aber ein bisschen aus der Bundesrepublik musste sie im August erst mal</p>
+<p>Übung. Alle Angst vor zurück in die Slowakei, um ihren Bachelor zu</p>
+<p>Verständigungsproblemen war bereits am beenden. „Ich habe in Deutschland eine ganz</p>
+<p>ersten Tag wie weggefegt: Als sie im April andere Welt kennen gelernt. Die jungen Leute</p>
+<p>nach Deutschland kam, war sie überrascht, hier sind viel aktiver und nicht so verschlossen</p>
+<p>dass sie doch so viel verstehen konnte. Erikas wie zu Hause“, vergleicht sie. Darum steht für</p>
+<p>Ziel war es immer, ausdrücken zu können, was sie jetzt schon fest: „Ich will in Deutschland</p>
+<p>sie will. Und dass sie das auch so schnell wie meinen Master machen.“ Bis dahin muss sie</p>
+<p>möglich schafft, war wiederum das erklärte Ziel aber nicht ganz auf Deutschland verzichten,</p>
+<p>von Pia. „Am Anfang wollte Erika lieber denn Pia wird sie in der Slowakei bald</p>
+<p>Englisch reden. Ich habe aber immer Deutsch besuchen.</p>
+<p>mit ihr gesprochen, auch wenn sie etwas nicht</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 1</div>
+<p class="aufgabe-instruction">Entscheiden Sie, ob folgende Behauptungen richtig (R) oder falsch (F) sind, und markieren Sie
+jeweils den entsprechenden Buchstaben ().</p>
+<div class="question-item"><span class="q-num">1.</span> Pia konnte sich die ausländische Studentin selbst aussuchen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Die beiden haben sich sofort gut verstanden.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Erikas Großmutter hieß „Piroschka“.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Am Anfang kommunizierten die beiden Studentinnen oft auf Englisch.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> In Kursen kann man am erfolgreichsten Fremdsprachen lernen.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Erika meint, dass die jungen Leute in Deutschland sehr offen sind. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2014-Spo-0">
+    <h4>Rešitve – Aufgabe 1</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">R</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">F</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">R</span></div>
+  </div>
+</div>
+</div>
+<div class="text-block">
+<h3>MadC – Weltreisende in Sachen – Graffiti</h3>
+<p><em>Lesen Sie.</em></p>
+<p>Claudia Walde ist ständig in der Luft – oder sie Ein Trend in der aktuellen Graffiti-Szene:</p>
+<p>sprüht. Weltweit. Einen Termin mit ihr zu Wegen des Internets vermischen sich die Stile:</p>
+<p>finden, kommt der Quadratur des Kreises „In London gibt es Leute, die genauso malen</p>
+<p>gleich. Wir treffen uns auf einem Parkplatz wie in Los Angeles,” sagt MadC. Sie findet es</p>
+<p>irgendwo im ostdeutschen Nirgendwo - in der „sehr schade, dass lokale Stile verloren</p>
+<p>Nähe einer Autobahn. Dann folge ich ihr gehen”.</p>
+<p>unauffällig in ihr Atelier: im letzten Winkel eines</p>
+<p>Bauernhofs. Sie bittet darum, den Namen des Claudia Walde besprüht nicht nur Wände,</p>
+<p>Dorfes nicht zu verraten. Sie will ihre Ruhe. sondern auch Leinwände, die sie in Galerien</p>
+<p>In der Szene heißt Claudia einfach nur MadC. verkauft. Sie wollte immer freie Künstlerin sein.</p>
+<p>Sie gilt als die Beste in einer Szene, die von Dafür hat sie im Anschluss an ihr Design-</p>
+<p>Männern dominiert wird. Claudia Walde ist Studium ein gut bezahltes Job-Angebot in</p>
+<p>weltweit die bekannteste aktive Graffiti- London abgelehnt. Sie hätte dort Art Director</p>
+<p>Künstlerin. Sie besprüht Wände von Mexiko werden können. „Innerhalb einer Woche</p>
+<p>bis Russland, von London bis Budapest. Dafür musste ich mich entscheiden”. Sie dachte</p>
+<p>reist sie rund um den Globus. damals: Jetzt oder nie.</p>
+<p>Die Besucher ihres Blogs: Platz eins USA, Von Graffiti-Kunst kann kaum jemand leben.</p>
+<p>gefolgt von Großbritannien. Platz drei: 15 Prozent ihrer Arbeitszeit verbringt sie mit</p>
+<p>Deutschland. Sie denkt global – lebt aber bezahlten Auftragsarbeiten. 60 Prozent sind</p>
+<p>dennoch in Halle in Sachsen-Anhalt. „unbezahlte Wände”. „Ich bin definitiv in erster</p>
+<p>Auch ihr Atelier ist alles andere als glamourös. Linie Graffiti-Sprüherin. Ich kann mir nicht</p>
+<p>Wir blicken über Felder auf die ICE-Trasse vorstellen, die Wand aufzugeben; das ist mein</p>
+<p>Leipzig-Berlin. „Ich nehme ganz selten andere Grundstein.”</p>
+<p>Künstler mit hier hin. Das hier ist mein</p>
+<p>Ruhepol.” Wir ziehen über die Felder in der Nähe ihres</p>
+<p>Da sie ihre Kindheit anfangs in Äthiopien Ateliers - zu ihrer bisher größten Arbeit: eine</p>
+<p>verbrachte, fühlte sie sich als Außenseiterin, Wand ungefähr 700 Quadratmeter groß, also</p>
+<p>als sie mit ihren Eltern nach Deutschland etwa wie ein Handballfeld. Daran hat sie vier</p>
+<p>zurückkehrte. Um dieser Rolle zu entfliehen, Monate gearbeitet. Unentgeltlich. Sie hat keine</p>
+<p>begann sie, den eigenen Namen bekannt zu Erklärung dafür, was sie fasziniert, obwohl sie</p>
+<p>machen. Sie sprühte ihn an Wände: MadC. als Frau, als Sprayerin, als Künstlerin im</p>
+<p>Denn sie wurde schon als Kind „die verrückte dreifachen Sinne in einer Außenseiterrolle lebt.</p>
+<p>Claudia” genannt. Deshalb „MadC”. Mad für „Das ist wie ein Feuer in mir, das mich immer</p>
+<p>verrückt, C für Claudia. wieder vorantreibt.”</p>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 2</div>
+<p class="aufgabe-instruction">Markieren Sie den Buchstaben der richtigen Lösung.</p>
+<div class="question-item"><span class="q-num">1.</span> Claudia Walde A dominiert nicht in der Graffiti-Szene. B ist die bekannteste Graffiti-Sprüherin auf der Welt. C ist die beste in der mexikanischen Graffiti-Szene.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Ihre größten Fans sind A Amerikaner. B Britten. C Deutsche.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Als Kind lebte sie mit den Eltern A auf einem Bauernhof. B in Deutschland und Äthiopien. C in vielen verschiedenen Ländern der Welt.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Die Graffiti-Szene wird allmählich A immer lokaler. B stilistisch verändert. C überall gleich.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Claudia wollte schon immer A Art Direktorin werden. B Designerin werden. C freie Künstlerin werden.</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Als Graffiti-Sprüherin A besprüht sie viele Wände gratis. B hat kein Einkommen. C verdient sie viel Geld. (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2014-Spo-1">
+    <h4>Rešitve – Aufgabe 2</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans">B</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">A</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">B</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">C</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">C</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans">A</span></div>
+  </div>
+</div>
+</div>
+<div class="aufgabe">
+<div class="aufgabe-title">Aufgabe 3</div>
+<p class="aufgabe-instruction">Beantworten Sie kurz die folgenden Fragen. Die richtigen Lösungen finden Sie nur im Text.</p>
+<div class="question-item"><span class="q-num">1.</span> Wo liegt ihr Atelier? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">2.</span> Warum ist ihre Adresse nicht bekannt? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">3.</span> Wie nannte man sie als Kind? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">4.</span> Wie fühlte sie sich nach ihrer Rückkehr nach Deutschland? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">5.</span> Was hat Claudia studiert? ___</div><div class="answer-line"></div>
+<div class="question-item"><span class="q-num">6.</span> Wo steht ihr größtes Graffiti-Kunstwerk? ___ (6 Punkte)</div><div class="answer-line"></div>
+
+<div class="solutions-toggle">
+  <button onclick="toggleSolutions(this)">▼ Pokaži rešitve</button>
+  <div class="solutions-box" id="sol-2014-Spo-2">
+    <h4>Rešitve – Aufgabe 3</h4>
+    <div class="solution-row"><span class="sol-num">1.</span><span class="sol-ans"> Auf einem Bauernhof.</span></div>
+<div class="solution-row"><span class="sol-num">2.</span><span class="sol-ans">Sie will ihre Ruhe.</span></div>
+<div class="solution-row"><span class="sol-num">3.</span><span class="sol-ans">Die verrückte Claudia.</span></div>
+<div class="solution-row"><span class="sol-num">4.</span><span class="sol-ans">Als Außenseiterin.</span></div>
+<div class="solution-row"><span class="sol-num">5.</span><span class="sol-ans">Design.</span></div>
+<div class="solution-row"><span class="sol-num">6.</span><span class="sol-ans"> Auf einem Feld.</span></div>
+  </div>
+</div>
+</div>
+</div>
+
+<script>
+function toggleSolutions(btn) {
+  var box = btn.parentElement.querySelector('.solutions-box');
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = '▼ Pokaži rešitve';
+  } else {
+    box.classList.add('open');
+    btn.textContent = '▲ Skrij rešitve';
+  }
+}
+</script>
+</body>
+</html>
